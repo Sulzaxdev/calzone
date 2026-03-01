@@ -1,7 +1,13 @@
 "use client";
 
+import { useRef } from "react";
 import { motion } from "framer-motion";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { Download, FileText } from "lucide-react";
+import { toPng } from "html-to-image";
+import jsPDF from "jspdf";
+import Image from "next/image";
 
 interface CalculatorCardProps {
     title: string;
@@ -10,22 +16,100 @@ interface CalculatorCardProps {
 }
 
 export function CalculatorCard({ title, description, children }: CalculatorCardProps) {
+    const cardRef = useRef<HTMLDivElement>(null);
+
+    const handleDownloadPdf = async () => {
+        if (!cardRef.current) return;
+
+        try {
+            const dataUrl = await toPng(cardRef.current, {
+                quality: 1.0,
+                backgroundColor: "#ffffff",
+                pixelRatio: 2, // High resolution
+            });
+
+            const pdf = new jsPDF({
+                orientation: "portrait",
+                unit: "px",
+                format: "a4"
+            });
+
+            // A4 dimensions in px at 72 DPI are approx 595 x 842
+            const pdfWidth = pdf.internal.pageSize.getWidth();
+
+            // We need to fetch the image to get its dimensions to maintain aspect ratio
+            const imgProps = pdf.getImageProperties(dataUrl);
+            const pdfHeight = (imgProps.height * pdfWidth) / imgProps.width;
+
+            pdf.addImage(dataUrl, "PNG", 0, 0, pdfWidth, pdfHeight);
+            pdf.save(`${title.replace(/\s+/g, '-').toLowerCase()}-report.pdf`);
+        } catch (error) {
+            console.error("Failed to generate PDF:", error);
+        }
+    };
+
     return (
-        <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, ease: "easeOut" }}
-            className="max-w-xl mx-auto w-full my-8 px-4 sm:px-0"
-        >
-            <Card className="border-t-4 border-t-primary shadow-xl overflow-hidden bg-card/80 backdrop-blur-md">
-                <CardHeader className="text-center space-y-2 pb-6 bg-muted/30">
-                    <CardTitle className="text-2xl sm:text-3xl font-bold tracking-tight">{title}</CardTitle>
-                    <CardDescription className="text-sm sm:text-base text-muted-foreground">{description}</CardDescription>
-                </CardHeader>
-                <CardContent className="pt-6">
-                    {children}
-                </CardContent>
-            </Card>
-        </motion.div>
+        <div className="w-full">
+            {/* FULL BLEED DYNAMIC HERO SECTION WITH IMAGE */}
+            <div className="w-screen relative left-1/2 right-1/2 -mx-[50vw] pt-40 pb-32 mb-16 border-b border-primary/10 dark:border-primary/5 overflow-hidden">
+                <div className="absolute inset-0 z-0">
+                    <Image
+                        src="/heroimage.jpg"
+                        alt="Background"
+                        fill
+                        priority
+                        className="object-cover object-center brightness-[0.3]"
+                    />
+                </div>
+                <div className="container mx-auto px-4 text-center max-w-7xl relative z-10">
+                    <motion.div
+                        initial={{ opacity: 0, y: -20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.5, ease: "easeOut" }}
+                        className="space-y-4"
+                    >
+                        <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-tight text-white drop-shadow-lg">
+                            {title}
+                        </h1>
+                        <p className="text-lg md:text-xl text-white/90 max-w-3xl mx-auto leading-relaxed drop-shadow-md">
+                            {description}
+                        </p>
+                    </motion.div>
+                </div>
+            </div>
+
+            {/* CALCULATOR FORM CARD */}
+            <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, ease: "easeOut", delay: 0.2 }}
+                className="max-w-5xl mx-auto w-full mb-12 px-4 sm:px-0 relative z-10"
+            >
+                <div className="flex justify-between items-end mb-4 px-1">
+                    <span className="text-sm font-semibold text-slate-600 dark:text-slate-300 flex items-center gap-2 bg-white/50 dark:bg-black/20 px-3 py-1.5 rounded-full backdrop-blur-sm border border-slate-200/50 dark:border-slate-700/50">
+                        <FileText className="w-4 h-4 text-primary" />
+                        Calculation Tool
+                    </span>
+                    <Button
+                        variant="outline"
+                        size="sm"
+                        onClick={handleDownloadPdf}
+                        className="flex items-center gap-2 bg-white/80 dark:bg-black/50 backdrop-blur-md hover:bg-primary hover:text-white transition-all shadow-sm border-slate-200 dark:border-slate-800 rounded-full px-4"
+                    >
+                        <Download className="w-4 h-4" />
+                        Export to PDF
+                    </Button>
+                </div>
+
+                <div ref={cardRef} className="rounded-3xl bg-white dark:bg-card border border-slate-200/80 dark:border-border shadow-2xl shadow-primary/5 overflow-hidden p-1 relative">
+                    <Card className="border-0 shadow-none bg-transparent relative z-10">
+                        {/* We removed CardHeader because the title and description are now in the Hero Section above! */}
+                        <CardContent className="pt-8 pb-8 px-4 sm:px-8">
+                            {children}
+                        </CardContent>
+                    </Card>
+                </div>
+            </motion.div>
+        </div>
     );
 }
