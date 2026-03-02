@@ -4,10 +4,13 @@ import { useRef } from "react";
 import { motion } from "framer-motion";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Download, FileText } from "lucide-react";
+import { Download, FileText, ArrowRight, Sparkles } from "lucide-react";
 import { toPng } from "html-to-image";
 import jsPDF from "jspdf";
 import Image from "next/image";
+import { usePathname } from "next/navigation";
+import { allCalculators } from "@/lib/calculators";
+import Link from "next/link";
 
 interface CalculatorCardProps {
     title: string;
@@ -17,6 +20,7 @@ interface CalculatorCardProps {
 
 export function CalculatorCard({ title, description, children }: CalculatorCardProps) {
     const cardRef = useRef<HTMLDivElement>(null);
+    const pathname = usePathname();
 
     const handleDownloadPdf = async () => {
         if (!cardRef.current) return;
@@ -109,6 +113,44 @@ export function CalculatorCard({ title, description, children }: CalculatorCardP
                         </CardContent>
                     </Card>
                 </div>
+
+                {/* GLOBAL RELATED CALCULATORS MODULE */}
+                {pathname && (
+                    <div className="mt-16 border-t border-slate-200 dark:border-slate-800 pt-12 pb-8">
+                        <h3 className="text-2xl font-bold text-slate-800 dark:text-slate-200 mb-6 flex items-center gap-2">
+                            <Sparkles className="w-6 h-6 text-primary" /> Tools You Might Need
+                        </h3>
+                        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                            {(() => {
+                                const currentIndex = allCalculators.findIndex(c => c.href === pathname);
+                                if (currentIndex === -1) return null;
+
+                                // Deterministic sequential interlinking (Great for SEO Crawling)
+                                const related = [
+                                    allCalculators[(currentIndex + 1) % allCalculators.length],
+                                    allCalculators[(currentIndex + 2) % allCalculators.length],
+                                    allCalculators[(currentIndex + 3) % allCalculators.length],
+                                ].filter(Boolean);
+
+                                return related.map(calc => (
+                                    <Link
+                                        key={calc.href}
+                                        href={calc.href}
+                                        className="group bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 p-6 rounded-2xl hover:border-primary/50 hover:shadow-lg transition-all flex flex-col justify-between"
+                                    >
+                                        <div>
+                                            <h4 className="font-bold text-lg mb-2 group-hover:text-primary transition-colors">{calc.name}</h4>
+                                            <p className="text-sm text-slate-500 line-clamp-2">{calc.desc}</p>
+                                        </div>
+                                        <div className="mt-4 flex items-center gap-1 text-primary text-sm font-semibold opacity-0 group-hover:opacity-100 transition-opacity transform translate-x-[-10px] group-hover:translate-x-0">
+                                            Calculate Now <ArrowRight className="w-4 h-4" />
+                                        </div>
+                                    </Link>
+                                ));
+                            })()}
+                        </div>
+                    </div>
+                )}
             </motion.div>
         </div>
     );

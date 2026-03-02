@@ -35,7 +35,7 @@ export const categories = [
         title: "Finance & Driving",
         icon: <Activity className="h-6 w-6 text-primary" />,
         calculators: [
-            { name: "Holiday Budget", href: "/calculators/holiday-calculator-uk", desc: "Estimate your vacation cost" },
+            { name: "Holiday Budget", href: "/holiday-calculator-uk", desc: "Estimate your vacation cost" },
             { name: "Annual Leave", href: "/annual-leave-calculator-uk", desc: "UK statutory holiday entitlement" },
             { name: "Mileage Claim", href: "/mileage-calculator-uk", desc: "Calculate business travel expense" },
             { name: "Road Tax", href: "/road-tax-calculator-uk", desc: "UK Vehicle Excise Duty" },

@@ -91,22 +91,56 @@ export function Footer() {
 
                     {/* Dynamic Calculator Columns */}
                     <div className="lg:col-span-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-2 self-start">
-                        {categories.map((category) => (
-                            <div key={category.title}>
-                                {category.title === "Finance & Driving" ? (
-                                    <Link
-                                        href="/finance-driving"
-                                        className="font-semibold text-slate-800 dark:text-slate-200 py-3 border-b border-slate-200 dark:border-slate-800 text-left hover:text-primary dark:hover:text-primary transition-colors flex items-center gap-2 group mb-4"
-                                    >
-                                        <div className="[&>svg]:w-4 [&>svg]:h-4 text-primary opacity-80 group-hover:opacity-100 transition-opacity">
-                                            {category.icon}
+                        {categories.map((category) => {
+                            const hasLandingPage = category.title === "General Health / Lifestyle" || category.title === "Fitness & Diet" || category.title === "Finance & Driving" || category.title === "Home & Property" || category.title === "Misc & Lifestyle" || category.title === "Sleep";
+                            const getLandingPageUrl = (title: string) => {
+                                if (title === "General Health / Lifestyle") return "/general-health";
+                                if (title === "Fitness & Diet") return "/fitness-diet";
+                                if (title === "Finance & Driving") return "/finance-driving";
+                                if (title === "Home & Property") return "/home-property";
+                                if (title === "Misc & Lifestyle") return "/misc-lifestyle";
+                                return "/sleep";
+                            };
+
+                            return (
+                                <div key={category.title}>
+                                    {hasLandingPage ? (
+                                        <div className="group">
+                                            <Link
+                                                href={getLandingPageUrl(category.title)}
+                                                className="font-semibold text-slate-800 dark:text-slate-200 py-3 border-b border-slate-200 dark:border-slate-800 text-left hover:text-primary dark:hover:text-primary transition-colors flex items-center justify-between"
+                                            >
+                                                <div className="flex items-center gap-2">
+                                                    <div className="[&>svg]:w-4 [&>svg]:h-4 text-primary opacity-80 group-hover:opacity-100 transition-opacity">
+                                                        {category.icon}
+                                                    </div>
+                                                    {category.title}
+                                                </div>
+                                                <span className="text-xs text-primary opacity-0 group-hover:opacity-100 transition-opacity">
+                                                    View Hub
+                                                </span>
+                                            </Link>
+                                            <div className="mt-4">
+                                                <ul className="space-y-4 pb-4 px-2">
+                                                    {category.calculators.map((calc, index) => (
+                                                        <li key={index}>
+                                                            <Link
+                                                                href={calc.href}
+                                                                className="text-[14px] text-slate-500/90 dark:text-slate-400 hover:text-primary dark:hover:text-primary transition-colors line-clamp-1 block"
+                                                            >
+                                                                {calc.name}
+                                                            </Link>
+                                                        </li>
+                                                    ))}
+                                                </ul>
+                                            </div>
                                         </div>
-                                        {category.title}
-                                    </Link>
-                                ) : null}
-                                <FooterCategory category={category} />
-                            </div>
-                        ))}
+                                    ) : (
+                                        <FooterCategory category={category} />
+                                    )}
+                                </div>
+                            );
+                        })}
                     </div>
                 </div>
 

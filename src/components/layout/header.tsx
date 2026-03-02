@@ -61,9 +61,9 @@ export function Header() {
                                 <div className="bg-white/95 dark:bg-slate-950/95 backdrop-blur-xl border border-slate-200 dark:border-slate-800 rounded-2xl shadow-2xl p-6 w-[800px] max-w-[90vw] grid grid-cols-3 gap-6 transform-gpu before:absolute before:-top-2 before:left-1/2 before:-translate-x-1/2 before:border-8 before:border-transparent before:border-b-white/95 dark:before:border-b-slate-950/95">
                                     {categories.map((category) => (
                                         <div key={category.title}>
-                                            {(category.title === "General Health / Lifestyle" || category.title === "Fitness & Diet" || category.title === "Finance & Driving") ? (
+                                            {(category.title === "General Health / Lifestyle" || category.title === "Fitness & Diet" || category.title === "Finance & Driving" || category.title === "Home & Property" || category.title === "Misc & Lifestyle" || category.title === "Sleep") ? (
                                                 <Link
-                                                    href={category.title === "General Health / Lifestyle" ? "/general-health" : category.title === "Fitness & Diet" ? "/fitness-diet" : "/finance-driving"}
+                                                    href={category.title === "General Health / Lifestyle" ? "/general-health" : category.title === "Fitness & Diet" ? "/fitness-diet" : category.title === "Finance & Driving" ? "/finance-driving" : category.title === "Home & Property" ? "/home-property" : category.title === "Misc & Lifestyle" ? "/misc-lifestyle" : "/sleep"}
                                                     className="font-semibold text-slate-800 dark:text-slate-200 mb-3 flex items-center gap-2 border-b border-slate-200 dark:border-slate-800 pb-2 text-sm hover:text-primary transition-colors"
                                                 >
                                                     <div className="[&>svg]:w-4 [&>svg]:h-4">
@@ -95,7 +95,11 @@ export function Header() {
                                                         <Link
                                                             href={
                                                                 category.title === "General Health / Lifestyle" ? "/general-health" :
-                                                                    category.title === "Fitness & Diet" ? "/fitness-diet" : "/"
+                                                                    category.title === "Fitness & Diet" ? "/fitness-diet" :
+                                                                        category.title === "Finance & Driving" ? "/finance-driving" :
+                                                                            category.title === "Home & Property" ? "/home-property" :
+                                                                                category.title === "Misc & Lifestyle" ? "/misc-lifestyle" :
+                                                                                    category.title === "Sleep" ? "/sleep" : "/"
                                                             }
                                                             className="text-xs font-medium text-primary hover:underline"
                                                         >

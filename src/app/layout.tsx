@@ -6,13 +6,17 @@ import { Header } from "@/components/layout/header";
 import { Footer } from "@/components/layout/footer";
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://www.thecalzone.co.uk"),
   title: "CalZone | The Ultimate Health, Fitness & Lifestyle Calculators",
   description: "CalZone offers a comprehensive suite of free, professional, evidence-based medical, health, fitness, financial, and lifestyle calculators.",
   keywords: ["health calculators", "fitness calculators", "BMI calculator", "calorie deficit", "finance calculators", "lifestyle calculators", "CalZone"],
+  alternates: {
+    canonical: '/',
+  },
   openGraph: {
     title: "CalZone | Professional Calculators",
     description: "Explore dozens of health, fitness, finance, and property calculators all in one place.",
-    url: "https://calzone.com",
+    url: "https://www.thecalzone.co.uk",
     siteName: "CalZone",
     images: [
       {

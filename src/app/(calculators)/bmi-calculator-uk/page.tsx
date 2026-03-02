@@ -1,5 +1,6 @@
 import { Activity, Scale, ShieldAlert, BookOpen, AlertCircle, HeartPulse, HelpCircle, TrendingUp, Info, Microscope, Users, History, Brain, Apple, Flame, ChevronRight } from "lucide-react";
 import { BMICalculatorForm } from "./calculator";
+import { CalculatorSchema } from "@/components/seo/calculator-schema";
 
 export const metadata = {
     title: "BMI Calculator UK | Healthy Weight Range & Body Mass Index",
@@ -7,8 +8,33 @@ export const metadata = {
 };
 
 export default function BMIPage() {
+    const bmiFaqs = [
+        {
+            question: "Can BMI be used for children?",
+            answer: "Yes, but interpreted differently. For children and teens, BMI is adjusted for age and gender. It is communicated as a percentile (e.g., 85th percentile), comparing the child to a peer group of the same age and sex."
+        },
+        {
+            question: "Why is BMI still used if it has limitations?",
+            answer: "It remains the primary tool because it is inexpensive, non-invasive, and standardized globally. It allows doctors and researchers to track health trends across millions of people with high reliability."
+        },
+        {
+            question: "Is a BMI of 27 always 'Overweight'?",
+            answer: "Technically yes by WHO standards, but clinically, a doctor will check your blood pressure, lipid profile, and blood sugar. If those are perfect and you have high muscle mass, a 27 BMI may not be a health concern."
+        },
+        {
+            question: "Does BMI account for bone density?",
+            answer: "No. Individuals with high bone density (often athletes or those with specific genetic backgrounds) might weigh more, pushing their BMI higher without necessarily having excess fat."
+        }
+    ];
+
     return (
         <div className="min-h-screen bg-slate-50 dark:bg-slate-950/50 pb-20">
+            <CalculatorSchema
+                title="BMI Calculator UK | Healthy Weight Range & Body Mass Index"
+                description="Calculate your Body Mass Index (BMI) using our expert tool. Deep dive into weight categories, metabolic health, ethnic cut-offs, and fitness optimization."
+                slug="/bmi-calculator-uk"
+                faqs={bmiFaqs}
+            />
             {/* The Interactive Calculator Component */}
             <BMICalculatorForm />
 
