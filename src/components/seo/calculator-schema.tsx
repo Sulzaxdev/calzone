@@ -10,12 +10,13 @@ interface CalculatorSchemaProps {
     description: string;
     slug: string;
     faqs?: FAQ[];
+    isArticle?: boolean;
 }
 
-export function CalculatorSchema({ title, description, slug, faqs }: CalculatorSchemaProps) {
+export function CalculatorSchema({ title, description, slug, faqs, isArticle }: CalculatorSchemaProps) {
     const url = `https://www.thecalzone.co.uk${slug}`;
 
-    const softwareSchema = {
+    const softwareSchema = !isArticle ? {
         "@context": "https://schema.org",
         "@type": "SoftwareApplication",
         "name": title,
@@ -28,7 +29,7 @@ export function CalculatorSchema({ title, description, slug, faqs }: CalculatorS
             "price": "0",
             "priceCurrency": "GBP"
         }
-    };
+    } : null;
 
     const faqSchema = faqs && faqs.length > 0 ? {
         "@context": "https://schema.org",
@@ -45,10 +46,12 @@ export function CalculatorSchema({ title, description, slug, faqs }: CalculatorS
 
     return (
         <>
-            <script
-                type="application/ld+json"
-                dangerouslySetInnerHTML={{ __html: JSON.stringify(softwareSchema) }}
-            />
+            {softwareSchema && (
+                <script
+                    type="application/ld+json"
+                    dangerouslySetInnerHTML={{ __html: JSON.stringify(softwareSchema) }}
+                />
+            )}
             {faqSchema && (
                 <script
                     type="application/ld+json"
