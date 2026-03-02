@@ -7,7 +7,9 @@ import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { Activity } from "lucide-react";
+import { Activity, BookOpen, Calculator, Target, Info, Flame, Scale, TrendingDown, HelpCircle } from "lucide-react";
+import { CalculatorSchema } from "@/components/seo/calculator-schema";
+import { LearnMore } from "@/components/seo/learn-more";
 
 export default function CalorieDeficitCalculator() {
     const [gender, setGender] = useState<"male" | "female">("male");
@@ -60,8 +62,48 @@ export default function CalorieDeficitCalculator() {
         }
     };
 
+    const calorieFaqs = [
+        {
+            question: "How much of a calorie deficit is safe in the UK?",
+            answer: "The NHS recommends a safe and sustainable weight loss rate of 0.5kg to 1kg (1lb to 2lbs) per week. This equates to a daily calorie deficit of around 500 to 1,000 kcal. Going lower than 1,200 calories for women or 1,500 calories for men without medical supervision is generally not advised."
+        },
+        {
+            question: "Should I include exercise calories in my deficit?",
+            answer: "Our calculator uses your general 'Activity Level' to estimate an inclusive Total Daily Energy Expenditure (TDEE). Therefore, you do not need to manually subtract extra calories you burn at the gym—it's already factored in!"
+        },
+        {
+            question: "Is all weight lost in a calorie deficit fat?",
+            answer: "No. Especially in the first few weeks, a significant portion of weight loss is water weight. If your deficit is too large or you don't consume enough protein, you may also lose muscle mass alongside fat."
+        },
+        {
+            question: "Can I eat anything as long as I am in a deficit?",
+            answer: "While thermodynamics dictate that a caloric deficit will result in weight loss regardless of food source, nutrient density matters for your health, energy levels, and body composition. A balanced diet of proteins, fats, and complex carbs is heavily recommended."
+        }
+    ];
+
+    const blogLinks = [
+        {
+            title: "The Ultimate Guide to Calorie Deficits",
+            description: "Learn how to calculate your TDEE, manage macros, and sustain long-term weight loss safely.",
+            href: "/blog/calorie-deficit-guide",
+            category: "Nutrition"
+        },
+        {
+            title: "Understanding BMR vs TDEE",
+            description: "A deep dive into the difference between your resting metabolic rate and your total daily expenditure.",
+            href: "/blog/bmr-vs-tdee",
+            category: "Science"
+        }
+    ];
+
     return (
         <div className="container mx-auto px-4 py-8">
+            <CalculatorSchema
+                title="Calorie Deficit Calculator UK | Safe Weight Loss Planner"
+                description="Calculate your exact daily caloric needs to safely lose weight. Based on the Mifflin-St Jeor equation and UK NHS weekly guidelines."
+                slug="/calorie-deficit-calculator-uk"
+                faqs={calorieFaqs}
+            />
             <CalculatorCard
                 title="Calorie Deficit Calculator"
                 description="Calculate the exact daily calories you need to consume to hit your target weight loss rate."
@@ -190,6 +232,83 @@ export default function CalorieDeficitCalculator() {
                     </div>
                 )}
             </CalculatorCard>
+
+            {/* Massive SEO Content Section */}
+            <section className="mt-16 max-w-4xl mx-auto space-y-12">
+                <div className="bg-white/80 dark:bg-card/50 backdrop-blur-md border border-slate-200 dark:border-slate-800 p-8 md:p-12 rounded-3xl shadow-lg">
+                    <h2 className="text-3xl font-bold text-slate-900 dark:text-slate-100 mb-8 border-b border-slate-200 dark:border-slate-800 pb-4 flex items-center gap-3">
+                        <Flame className="w-8 h-8 text-orange-500" />
+                        The Science of Calorie Deficits
+                    </h2>
+
+                    <div className="space-y-10 text-slate-700 dark:text-slate-300">
+                        <div className="space-y-4">
+                            <h3 className="text-2xl font-bold text-slate-800 dark:text-slate-200 flex items-center gap-2">
+                                <Info className="w-6 h-6 text-blue-500" /> What is a Calorie Deficit?
+                            </h3>
+                            <p className="text-lg leading-relaxed">
+                                A <strong>calorie deficit</strong> occurs when you consume fewer calories from food and drink than your body expends to maintain basic biological functions and physical activity. By depriving the body of this immediate fuel source, it is forced to tap into stored energy reserves (primarily fat) resulting in weight loss.
+                            </p>
+                            <p className="leading-relaxed">
+                                In the UK, the NHS generally recommends creating a deficit of around <strong>500 to 600 kcal a day</strong> to achieve a steady and safe weight loss of around 0.5kg (1lb) a week.
+                            </p>
+                        </div>
+
+                        <div className="bg-slate-50 dark:bg-slate-900/50 p-6 rounded-2xl border border-slate-100 dark:border-slate-800">
+                            <h3 className="text-xl font-bold text-slate-800 dark:text-slate-200 mb-4 flex items-center gap-2">
+                                <Calculator className="w-6 h-6 text-slate-500" /> How It Works
+                            </h3>
+                            <p className="mb-4">Our calculator uses the highly accurate <strong>Mifflin-St Jeor equation</strong> to determine your Basal Metabolic Rate (BMR):</p>
+                            <div className="space-y-3 font-mono text-sm bg-white dark:bg-black p-4 rounded-xl border border-slate-200 dark:border-slate-800 text-slate-600 dark:text-slate-400">
+                                <div>Men = (10 × weight in kg) + (6.25 × height in cm) - (5 × age) + 5</div>
+                                <div>Women = (10 × weight in kg) + (6.25 × height in cm) - (5 × age) - 161</div>
+                            </div>
+                            <p className="mt-4">We then multiply your BMR by your selected <strong>Activity Multiplier</strong> (ranging from 1.2 to 1.9) to find your Total Daily Energy Expenditure (TDEE). Note that 1kg of fat is approximately equal to <strong>7,700 kcal</strong>.</p>
+                        </div>
+
+                        <div className="grid md:grid-cols-2 gap-8 items-start">
+                            <div className="space-y-4">
+                                <h3 className="text-2xl font-bold text-slate-800 dark:text-slate-200 flex items-center gap-2">
+                                    <Target className="w-6 h-6 text-green-500" /> A Real UK Example
+                                </h3>
+                                <p className="leading-relaxed">
+                                    Let's take Sarah from London. She is 35 years old, weighs 75kg, is 165cm tall, and works an office job (sedentary, 1.2 multiplier).
+                                </p>
+                                <ul className="list-disc list-inside space-y-2 text-slate-600 dark:text-slate-400">
+                                    <li>Her BMR is calculated at roughly <strong>1,460 kcal</strong>.</li>
+                                    <li>Her Maintenance TDEE is <strong>1,750 kcal</strong>.</li>
+                                    <li>To lose 0.5kg a week (requiring a 3,850 weekly deficit, or 550 daily), she needs to eat <strong>1,200 kcal</strong> daily.</li>
+                                </ul>
+                            </div>
+                            <div className="space-y-4">
+                                <h3 className="text-2xl font-bold text-slate-800 dark:text-slate-200 flex items-center gap-2">
+                                    <TrendingDown className="w-6 h-6 text-red-500" /> Why It Matters
+                                </h3>
+                                <p className="leading-relaxed">
+                                    Guessing your daily caloric intake is the number one reason diets fail. Without a mathematically calculated target based on your specific age, biometrics, and activity level, you may unknowingly be eating at maintenance. Worse, eating too far below your TDEE can cause muscle loss, nutrient deficiencies, and metabolic adaptation (where your body burns fewer calories to survive).
+                                </p>
+                            </div>
+                        </div>
+
+                        {/* FAQs Section */}
+                        <div className="space-y-6 pt-8 border-t border-slate-200 dark:border-slate-800">
+                            <h3 className="text-2xl font-bold text-slate-800 dark:text-slate-200 flex items-center gap-2">
+                                <HelpCircle className="w-6 h-6 text-blue-500" /> Frequently Asked Questions
+                            </h3>
+                            <div className="grid md:grid-cols-1 gap-6">
+                                {calorieFaqs.map((faq, idx) => (
+                                    <div key={idx} className="p-5 rounded-2xl bg-slate-50 dark:bg-slate-900/30 border border-slate-100 dark:border-slate-800">
+                                        <h5 className="font-bold text-slate-900 dark:text-slate-100 mb-2">{faq.question}</h5>
+                                        <p className="text-sm">{faq.answer}</p>
+                                    </div>
+                                ))}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <LearnMore links={blogLinks} />
+            </section>
         </div>
     );
 }
