@@ -10,6 +10,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Activity, BookOpen, Calculator, Target, Info, Flame, Scale, TrendingDown, HelpCircle } from "lucide-react";
 import { CalculatorSchema } from "@/components/seo/calculator-schema";
 import { LearnMore } from "@/components/seo/learn-more";
+import { FAQAccordion } from "@/components/ui/faq-accordion";
 
 export default function CalorieDeficitCalculator() {
     const [gender, setGender] = useState<"male" | "female">("male");
@@ -290,20 +291,20 @@ export default function CalorieDeficitCalculator() {
                             </div>
                         </div>
 
-                        {/* FAQs Section */}
-                        <div className="space-y-6 pt-8 border-t border-slate-200 dark:border-slate-800">
-                            <h3 className="text-2xl font-bold text-slate-800 dark:text-slate-200 flex items-center gap-2">
-                                <HelpCircle className="w-6 h-6 text-blue-500" /> Frequently Asked Questions
+                        {/* Data Sources & Methodology */}
+                        <div className="space-y-4 pt-8 border-t border-slate-200 dark:border-slate-800">
+                            <h3 className="text-xl font-bold text-slate-800 dark:text-slate-200 flex items-center gap-2">
+                                <BookOpen className="w-5 h-5 text-indigo-500" /> Data Sources & Methodology
                             </h3>
-                            <div className="grid md:grid-cols-1 gap-6">
-                                {calorieFaqs.map((faq, idx) => (
-                                    <div key={idx} className="p-5 rounded-2xl bg-slate-50 dark:bg-slate-900/30 border border-slate-100 dark:border-slate-800">
-                                        <h5 className="font-bold text-slate-900 dark:text-slate-100 mb-2">{faq.question}</h5>
-                                        <p className="text-sm">{faq.answer}</p>
-                                    </div>
-                                ))}
-                            </div>
+                            <ul className="list-disc list-inside text-sm text-slate-600 dark:text-slate-400 space-y-2">
+                                <li><strong>National Health Service (NHS):</strong> Weight loss guidelines and safe deficit thresholds based on official NHS advice.</li>
+                                <li><strong>Mifflin-St Jeor Equation:</strong> Clinical standard for determining Basal Metabolic Rate validated by the Academy of Nutrition and Dietetics.</li>
+                                <li><strong>British Dietetic Association (BDA):</strong> Evidence-based nutrition and sustained caloric intake guidance.</li>
+                            </ul>
                         </div>
+
+                        {/* FAQs Section */}
+                        <FAQAccordion faqs={calorieFaqs} title="Frequently Asked Questions" />
                     </div>
                 </div>
 

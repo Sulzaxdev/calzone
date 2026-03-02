@@ -28,32 +28,28 @@ export function Header() {
     ).slice(0, 5);
 
     return (
-        <header className="absolute top-0 z-100 w-full pt-4 px-4 sm:px-0">
-            <div className="mx-auto w-full md:w-[95%] lg:w-[85%] rounded-[2rem] bg-black/10 dark:bg-black/30 backdrop-blur-md border border-white/20 px-4 sm:px-6 flex h-16 items-center justify-between shadow-[0_8px_32px_0_rgba(31,38,135,0.07)] relative z-100">
+        <header className="sticky top-0 z-100 w-full border-b border-slate-200/50 dark:border-white/10 bg-white/70 dark:bg-[#110e10]/70 backdrop-blur-2xl transition-all">
+            <div className="container mx-auto px-4 sm:px-6 flex h-16 items-center justify-between">
                 <div className="flex items-center gap-2">
                     <Link href="/" className="flex items-center space-x-2 mr-2 md:mr-8">
-                        <div className="relative w-full h-full rounded-xl flex items-center justify-center overflow-hidden drop-shadow-md bg-transparent  ">
+                        <div className="relative w-full h-full flex items-center justify-center overflow-hidden bg-transparent">
                             <Image
                                 src="/logo.png"
                                 alt="CalZone Logo"
-                                width={152}
-                                height={52}
-                                className="object-contain p-1"
+                                width={130}
+                                height={45}
+                                className="object-contain"
                             />
                         </div>
-
                     </Link>
 
-                    <nav className="hidden xl:flex items-center gap-6 text-sm font-medium">
-
-                        <Link href="/" className="transition-colors hover:text-white/80 text-white font-semibold drop-shadow-md">About us</Link>
-
-
-                        <Link href="/" className="transition-colors hover:text-white/80 text-white font-semibold drop-shadow-md">For clients</Link>
-                        <Link href="/" className="transition-colors hover:text-white/80 text-white font-semibold drop-shadow-md">Career</Link>
-                        {/* Explore Mega Menu Dropdown */}
+                    <nav className="hidden xl:flex items-center gap-8 text-sm font-semibold">
+                       
+                        <Link href="/general-health" className="transition-colors hover:text-primary text-slate-700 dark:text-slate-200">Health Calculators</Link>
+                        <Link href="/finance-driving" className="transition-colors hover:text-primary text-slate-700 dark:text-slate-200">Finance Calculators</Link>
+                         {/* Explore Mega Menu Dropdown */}
                         <div className="relative group">
-                            <button className="flex items-center transition-colors hover:text-white/80 text-white font-semibold drop-shadow-md py-4">
+                            <button className="flex items-center transition-colors hover:text-primary text-slate-700 dark:text-slate-200 py-4">
                                 Explore
                                 <ChevronDown className="ml-1 w-4 h-4 transition-transform group-hover:rotate-180" />
                             </button>
@@ -113,22 +109,24 @@ export function Header() {
                                 </div>
                             </div>
                         </div>
-                        <Link href="/blog" className="transition-colors hover:text-white/80 text-white font-semibold drop-shadow-md">Blog</Link>
+                        <Link href="/blog" className="transition-colors hover:text-primary text-slate-700 dark:text-slate-200">Blog</Link>
+                        <Link href="/about" className="transition-colors hover:text-primary text-slate-700 dark:text-slate-200">About</Link>
+                        <Link href="/disclaimer" className="transition-colors hover:text-primary text-slate-700 dark:text-slate-200">Disclaimer</Link>
                     </nav>
                 </div>
 
                 <div className="flex items-center gap-4">
                     {/* Search Bar */}
                     <div ref={searchRef} className="flex relative items-center">
-                        <div className="absolute left-3 text-white/80 pointer-events-none z-10">
+                        <div className="absolute left-3 text-slate-500 dark:text-slate-400 pointer-events-none z-10">
                             <Search className="w-4 h-4" />
                         </div>
 
                         {/* Auto-suggestion ghost text */}
                         <div className="absolute inset-x-0 inset-y-0 flex items-center pl-9 pr-4 text-sm pointer-events-none select-none z-0 overflow-hidden rounded-full">
-                            <span className="opacity-0 whitespace-pre">{searchQuery}</span>
+                            <span className="opacity-0 whitespace-pre text-transparent">{searchQuery}</span>
                             {searchQuery && filteredCalculators.length > 0 && filteredCalculators[0].name.toLowerCase().startsWith(searchQuery.toLowerCase()) && (
-                                <span className="text-white/40 whitespace-pre">
+                                <span className="text-slate-400 dark:text-slate-500 whitespace-pre">
                                     {filteredCalculators[0].name.slice(searchQuery.length)}
                                 </span>
                             )}
@@ -149,15 +147,12 @@ export function Header() {
                                 }
                             }}
                             onFocus={() => setShowResults(true)}
-                            className="relative z-10 w-32 md:w-48 lg:w-64 h-10 pl-9 pr-4 rounded-full border border-white/20 text-white placeholder:text-white/70 focus:outline-none focus:ring-2 focus:ring-primary/50 transition-all text-sm backdrop-blur-sm shadow-inner bg-transparent"
+                            className="relative z-10 w-36 md:w-56 h-9 pl-9 pr-4 rounded-full border border-slate-200 dark:border-white/10 text-slate-900 dark:text-white placeholder:text-slate-500 dark:placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-primary/50 transition-all text-sm backdrop-blur-sm shadow-inner bg-slate-100/50 dark:bg-black/40 hover:bg-slate-100 dark:hover:bg-black/60 focus:bg-white dark:focus:bg-black/80"
                         />
-
-                        {/* The actual background for the input since input is transparent for ghost text */}
-                        <div className="absolute inset-0 bg-black/20 dark:bg-black/40 rounded-full border border-white/20 backdrop-blur-sm -z-10 pointer-events-none"></div>
 
                         {/* Search Dropdown */}
                         {showResults && searchQuery.length > 0 && (
-                            <div className="absolute top-12 right-0 md:left-0 w-64 md:w-full bg-white/20 dark:bg-black/60 backdrop-blur-xl border border-white/20 rounded-2xl shadow-2xl overflow-hidden py-2 flex flex-col gap-1 z-100 transform-gpu">
+                            <div className="absolute top-12 right-0 md:left-0 w-64 md:w-full bg-white/95 dark:bg-slate-900/95 backdrop-blur-xl border border-slate-200 dark:border-slate-800 rounded-2xl shadow-2xl overflow-hidden py-2 flex flex-col gap-1 z-100 transform-gpu">
                                 {filteredCalculators.length > 0 ? (
                                     filteredCalculators.map(calc => (
                                         <Link
@@ -167,25 +162,25 @@ export function Header() {
                                                 setShowResults(false);
                                                 setSearchQuery("");
                                             }}
-                                            className="px-4 py-2 hover:bg-white/20 dark:hover:bg-white/10 transition-colors text-white text-left block"
+                                            className="px-4 py-2 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors text-slate-800 dark:text-slate-200 text-left block"
                                         >
                                             <p className="text-sm font-semibold">{calc.name}</p>
-                                            <p className="text-xs text-white/70 truncate">{calc.desc}</p>
+                                            <p className="text-xs text-slate-500 dark:text-slate-400 truncate">{calc.desc}</p>
                                         </Link>
                                     ))
                                 ) : (
-                                    <div className="px-4 py-3 text-sm text-white/70 text-center">No calculators found.</div>
+                                    <div className="px-4 py-3 text-sm text-slate-500 dark:text-slate-400 text-center">No calculators found.</div>
                                 )}
                             </div>
                         )}
                     </div>
 
-                    <div className="opacity-80 hover:opacity-100 transition-opacity">
+                    <div className="text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white transition-colors">
                         <ThemeToggle />
                     </div>
 
-                    <Link href="/login" className="opacity-80 hover:opacity-100 transition-opacity flex items-center justify-center bg-white/10 hover:bg-white/20 p-2 rounded-full border border-white/20">
-                        <User className="w-5 h-5 text-white" />
+                    <Link href="/login" className="flex items-center justify-center bg-slate-100 hover:bg-slate-200 dark:bg-white/10 dark:hover:bg-white/20 p-2 rounded-full border border-slate-200 dark:border-white/10 transition-colors">
+                        <User className="w-4 h-4 text-slate-700 dark:text-slate-200" />
                         <span className="sr-only">User</span>
                     </Link>
                 </div>

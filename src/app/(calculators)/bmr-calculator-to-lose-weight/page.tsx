@@ -7,8 +7,11 @@ import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
-import { AlertCircle } from "lucide-react";
+import { AlertCircle, Activity, BookOpen, Flame, Info, Target, TrendingDown, HelpCircle, Calculator } from "lucide-react";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
+import { CalculatorSchema } from "@/components/seo/calculator-schema";
+import { LearnMore } from "@/components/seo/learn-more";
+import { FAQAccordion } from "@/components/ui/faq-accordion";
 
 export default function BMRCalculator() {
     const [unit, setUnit] = useState<"metric" | "imperial">("metric");
@@ -25,6 +28,40 @@ export default function BMRCalculator() {
     const [lbs, setLbs] = useState("");
 
     const [result, setResult] = useState<number | null>(null);
+
+    const bmrFaqs = [
+        {
+            question: "What is BMR?",
+            answer: "Basal Metabolic Rate (BMR) is the number of calories your body needs to accomplish its most basic (basal) life-sustaining functions, such as breathing, circulation, nutrient processing, and cell production."
+        },
+        {
+            question: "How is BMR different from TDEE?",
+            answer: "BMR is just the calories burned at rest. Total Daily Energy Expenditure (TDEE) includes your BMR plus the calories burned through physical activity and digestion (the thermic effect of food)."
+        },
+        {
+            question: "Why use the Mifflin-St Jeor Equation?",
+            answer: "Clinical studies, including those endorsed by the Academy of Nutrition and Dietetics, have found the Mifflin-St Jeor equation to be the most reliable and accurate formula for estimating resting metabolic rate in healthy adults."
+        },
+        {
+            question: "Does BMR decrease with age?",
+            answer: "Yes. As we age, we naturally lose lean muscle mass and hormonal changes occur. This lowers our resting metabolism, which is why calorie needs naturally decrease as we get older."
+        }
+    ];
+
+    const blogLinks = [
+        {
+            title: "Understanding BMR vs TDEE",
+            description: "A deep dive into the difference between your resting metabolic rate and your total daily expenditure.",
+            href: "/blog/bmr-vs-tdee",
+            category: "Science"
+        },
+        {
+            title: "The Ultimate Guide to Calorie Deficits",
+            description: "Learn how to calculate your TDEE, manage macros, and sustain long-term weight loss safely.",
+            href: "/blog/calorie-deficit-guide",
+            category: "Nutrition"
+        }
+    ];
 
     const calculateBMR = (e: React.FormEvent) => {
         e.preventDefault();
@@ -49,6 +86,12 @@ export default function BMRCalculator() {
 
     return (
         <div className="container mx-auto px-4 py-8">
+            <CalculatorSchema
+                title="BMR Calculator UK | Basal Metabolic Rate"
+                description="Calculate your Basal Metabolic Rate (BMR) using the clinical standard Mifflin-St Jeor equation."
+                slug="/bmr-calculator-to-lose-weight"
+                faqs={bmrFaqs}
+            />
             <CalculatorCard
                 title="BMR Calculator"
                 description="Calculate your Basal Metabolic Rate (BMR) - the number of calories your body needs to accomplish its most basic (basal) life-sustaining functions."
@@ -177,6 +220,59 @@ export default function BMRCalculator() {
                     </div>
                 )}
             </CalculatorCard>
+
+            {/* Massive SEO Content Section */}
+            <section className="mt-16 max-w-4xl mx-auto space-y-12">
+                <div className="bg-white/80 dark:bg-card/50 backdrop-blur-md border border-slate-200 dark:border-slate-800 p-8 md:p-12 rounded-3xl shadow-lg">
+                    <h2 className="text-3xl font-bold text-slate-900 dark:text-slate-100 mb-8 border-b border-slate-200 dark:border-slate-800 pb-4 flex items-center gap-3">
+                        <Flame className="w-8 h-8 text-orange-500" />
+                        Understanding Your Basal Metabolic Rate (BMR)
+                    </h2>
+
+                    <div className="space-y-10 text-slate-700 dark:text-slate-300">
+                        <div className="space-y-4">
+                            <h3 className="text-2xl font-bold text-slate-800 dark:text-slate-200 flex items-center gap-2">
+                                <Info className="w-6 h-6 text-blue-500" /> What is Basal Metabolic Rate?
+                            </h3>
+                            <p className="text-lg leading-relaxed">
+                                Your <strong>Basal Metabolic Rate (BMR)</strong> represents the absolute minimum number of calories your body requires to perform its most fundamental life-sustaining functions while at complete rest. This includes breathing, circulation, cell production, and nutrient processing.
+                            </p>
+                            <p className="leading-relaxed">
+                                In almost all humans, BMR accounts for the vast majority (about 60% to 75%) of your Total Daily Energy Expenditure (TDEE). Knowing this number is the critical first step before building any weight loss, maintenance, or muscle-building nutritional plan.
+                            </p>
+                        </div>
+
+                        <div className="bg-slate-50 dark:bg-slate-900/50 p-6 rounded-2xl border border-slate-100 dark:border-slate-800">
+                            <h3 className="text-xl font-bold text-slate-800 dark:text-slate-200 mb-4 flex items-center gap-2">
+                                <Calculator className="w-6 h-6 text-slate-500" /> How It Works (The Formula)
+                            </h3>
+                            <p className="mb-4">Our calculator uses the <strong>Mifflin-St Jeor equation</strong>, widely regarded by the Academy of Nutrition and Dietetics as the most accurate predictive equation for healthy adults:</p>
+                            <div className="space-y-3 font-mono text-sm bg-white dark:bg-black p-4 rounded-xl border border-slate-200 dark:border-slate-800 text-slate-600 dark:text-slate-400">
+                                <div>Men = (10 × weight in kg) + (6.25 × height in cm) - (5 × age) + 5</div>
+                                <div>Women = (10 × weight in kg) + (6.25 × height in cm) - (5 × age) - 161</div>
+                            </div>
+                            <p className="mt-4">This formula takes into account your biological sex, age, height, and weight to closely estimate your resting caloric burn. Note that having a high amount of lean muscle mass will result in a slightly higher actual BMR than predicted.</p>
+                        </div>
+
+                        {/* Data Sources & Methodology */}
+                        <div className="space-y-4 pt-8 border-t border-slate-200 dark:border-slate-800">
+                            <h3 className="text-xl font-bold text-slate-800 dark:text-slate-200 flex items-center gap-2">
+                                <BookOpen className="w-5 h-5 text-indigo-500" /> Data Sources & Methodology
+                            </h3>
+                            <ul className="list-disc list-inside text-sm text-slate-600 dark:text-slate-400 space-y-2">
+                                <li><strong>Academy of Nutrition and Dietetics:</strong> Endorsement of the Mifflin-St Jeor equation for basal metabolism.</li>
+                                <li><strong>National Health Service (NHS):</strong> Guidelines on resting metabolism and safe caloric intake baselines.</li>
+                                <li><strong>Scientific Validation:</strong> Formula published by M.D. Mifflin and S.T. St Jeor in the American Journal of Clinical Nutrition.</li>
+                            </ul>
+                        </div>
+
+                        {/* FAQs Section */}
+                        <FAQAccordion faqs={bmrFaqs} title="Frequently Asked Questions (BMR)" />
+                    </div>
+                </div>
+
+                <LearnMore links={blogLinks} />
+            </section>
         </div>
     );
 }

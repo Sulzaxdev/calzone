@@ -1,6 +1,7 @@
 import { Activity, Scale, ShieldAlert, BookOpen, AlertCircle, HeartPulse, HelpCircle, TrendingUp, Info, Microscope, Users, History, Brain, Apple, Flame, ChevronRight } from "lucide-react";
 import { BMICalculatorForm } from "./calculator";
 import { CalculatorSchema } from "@/components/seo/calculator-schema";
+import { FAQAccordion } from "@/components/ui/faq-accordion";
 
 export const metadata = {
     title: "BMI Calculator UK | Healthy Weight Range & Body Mass Index",
@@ -82,7 +83,7 @@ export default function BMIPage() {
                         {/* Categories Table */}
                         <div className="space-y-4">
                             <h3 className="text-2xl font-bold text-slate-800 dark:text-slate-200 flex items-center gap-2">
-                                <Scale className="w-6 h-6 text-green-500" /> Official WHO BMI Categories for Adults
+                                <Scale className="w-6 h-6 text-green-500" /> Official UK NHS & WHO BMI Categories for Adults
                             </h3>
                             <div className="overflow-hidden rounded-2xl border border-slate-200 dark:border-slate-800">
                                 <table className="w-full text-left border-collapse">
@@ -244,34 +245,20 @@ export default function BMIPage() {
                             </div>
                         </div>
 
-                        {/* FAQ Section */}
-                        <div className="space-y-6 pt-8 border-t border-slate-200 dark:border-slate-800">
-                            <h3 className="text-2xl font-bold text-slate-800 dark:text-slate-200 flex items-center gap-2">
-                                <HelpCircle className="w-6 h-6 text-blue-500" /> Frequently Asked Questions (BMI)
+                        {/* Data Sources & Methodology */}
+                        <div className="space-y-4 pt-8 border-t border-slate-200 dark:border-slate-800">
+                            <h3 className="text-xl font-bold text-slate-800 dark:text-slate-200 flex items-center gap-2">
+                                <BookOpen className="w-5 h-5 text-indigo-500" /> Data Sources & Methodology
                             </h3>
-                            <div className="grid md:grid-cols-2 gap-8">
-                                <div className="space-y-4">
-                                    <div className="p-5 rounded-2xl bg-slate-50 dark:bg-slate-900/30 border border-slate-100 dark:border-slate-800">
-                                        <h5 className="font-bold text-slate-900 dark:text-slate-100 mb-2">Can BMI be used for children?</h5>
-                                        <p className="text-sm">Yes, but interpreted differently. For children and teens, BMI is adjusted for age and gender. It is communicated as a <strong>percentile</strong> (e.g., 85th percentile), comparing the child to a peer group of the same age and sex.</p>
-                                    </div>
-                                    <div className="p-5 rounded-2xl bg-slate-50 dark:bg-slate-900/30 border border-slate-100 dark:border-slate-800">
-                                        <h5 className="font-bold text-slate-900 dark:text-slate-100 mb-2">Why is BMI still used if it has limitations?</h5>
-                                        <p className="text-sm">It remains the primary tool because it is inexpensive, non-invasive, and standardized globally. It allows doctors and researchers to track health trends across millions of people with high reliability.</p>
-                                    </div>
-                                </div>
-                                <div className="space-y-4">
-                                    <div className="p-5 rounded-2xl bg-slate-50 dark:bg-slate-900/30 border border-slate-100 dark:border-slate-800">
-                                        <h5 className="font-bold text-slate-900 dark:text-slate-100 mb-2">Is a BMI of 27 always "Overweight"?</h5>
-                                        <p className="text-sm">Technically yes by WHO standards, but clinically, a doctor will check your blood pressure, lipid profile, and blood sugar. If those are perfect and you have high muscle mass, a 27 BMI may not be a health concern.</p>
-                                    </div>
-                                    <div className="p-5 rounded-2xl bg-slate-50 dark:bg-slate-900/30 border border-slate-100 dark:border-slate-800">
-                                        <h5 className="font-bold text-slate-900 dark:text-slate-100 mb-2">Does BMI account for bone density?</h5>
-                                        <p className="text-sm">No. Individuals with high bone density (often athletes or those with specific genetic backgrounds) might weigh more, pushing their BMI higher without necessarily having excess fat.</p>
-                                    </div>
-                                </div>
-                            </div>
+                            <ul className="list-disc list-inside text-sm text-slate-600 dark:text-slate-400 space-y-2">
+                                <li><strong>National Health Service (NHS):</strong> BMI guidelines and ethnic risk adjustments are based on official NHS clinical guidelines.</li>
+                                <li><strong>World Health Organization (WHO):</strong> Global classification system for adult weight (Quetelet Index standard).</li>
+                                <li><strong>Public Health England:</strong> Adult obesity data and statistical methodology applied to population health.</li>
+                            </ul>
                         </div>
+
+                        {/* FAQ Accordion */}
+                        <FAQAccordion faqs={bmiFaqs} title="Frequently Asked Questions (BMI)" />
 
                         {/* Recent Health Trends Placeholder for more content */}
                         <div className="space-y-6">
