@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Script from "next/script";
 import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
 import { Header } from "@/components/layout/header";
@@ -28,6 +29,9 @@ export const metadata: Metadata = {
     title: "CalZone | Free Health & Fitness Calculators",
     description: "Calculate BMI, BMR, Calorie Deficit, UK Taxes, Car Costs, and much more on CalZone.",
     images: ["/heroimage.jpg"],
+  },
+  verification: {
+    google: "f-oWBmjAAp2whf_9EsUKqoPOVVsoZJZMplxIHyuMmcY",
   }
 };
 
@@ -54,6 +58,20 @@ export default function RootLayout({
           </main>
           <Footer />
         </ThemeProvider>
+
+        <Script
+          src="https://www.googletagmanager.com/gtag/js?id=G-YE0RFNZFM4"
+          strategy="afterInteractive"
+        />
+        <Script id="google-analytics" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+
+            gtag('config', 'G-YE0RFNZFM4');
+          `}
+        </Script>
       </body>
     </html>
   );
