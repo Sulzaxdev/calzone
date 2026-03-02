@@ -50,7 +50,17 @@ export default function Home() {
                 <div className="p-2.5 bg-primary/10 rounded-xl">
                   {category.icon}
                 </div>
-                <h2 className="text-2xl font-bold tracking-tight">{category.title}</h2>
+                {(category.title === "General Health / Lifestyle" || category.title === "Fitness & Diet") ? (
+                  <Link
+                    href={category.title === "General Health / Lifestyle" ? "/general-health" : "/fitness-diet"}
+                    className="group flex items-center gap-2"
+                  >
+                    <h2 className="text-2xl font-bold tracking-tight group-hover:text-primary transition-colors">{category.title}</h2>
+                    <ChevronRight className="w-5 h-5 text-primary opacity-0 group-hover:opacity-100 group-hover:translate-x-1 transition-all" />
+                  </Link>
+                ) : (
+                  <h2 className="text-2xl font-bold tracking-tight">{category.title}</h2>
+                )}
               </div>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">

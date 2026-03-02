@@ -36,7 +36,7 @@ export default function ChildGrowthPage() {
                                     <li><strong>Gender:</strong> Growth charts are specifically calibrated for Boys and Girls separately.</li>
                                     <li><strong>Height & Weight:</strong> Tracks primary physical development metrics.</li>
                                 </ul>
-                                <Link href="/calculators/child-bmi" className="inline-flex items-center gap-2 text-sm font-bold text-primary hover:underline group">
+                                <Link href="/calculators/child-bmi-calculator" className="inline-flex items-center gap-2 text-sm font-bold text-primary hover:underline group">
                                     Try specialized Child BMI Calculator <TrendingUp className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                                 </Link>
                             </div>

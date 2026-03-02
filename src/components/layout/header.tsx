@@ -51,12 +51,24 @@ export function Header() {
                                 <div className="bg-white/95 dark:bg-slate-950/95 backdrop-blur-xl border border-slate-200 dark:border-slate-800 rounded-2xl shadow-2xl p-6 w-[800px] max-w-[90vw] grid grid-cols-3 gap-6 transform-gpu before:absolute before:-top-2 before:left-1/2 before:-translate-x-1/2 before:border-8 before:border-transparent before:border-b-white/95 dark:before:border-b-slate-950/95">
                                     {categories.map((category) => (
                                         <div key={category.title}>
-                                            <h3 className="font-semibold text-slate-800 dark:text-slate-200 mb-3 flex items-center gap-2 border-b border-slate-200 dark:border-slate-800 pb-2 text-sm">
-                                                <div className="[&>svg]:w-4 [&>svg]:h-4">
-                                                    {category.icon}
-                                                </div>
-                                                {category.title}
-                                            </h3>
+                                            {(category.title === "General Health / Lifestyle" || category.title === "Fitness & Diet") ? (
+                                                <Link
+                                                    href={category.title === "General Health / Lifestyle" ? "/general-health" : "/fitness-diet"}
+                                                    className="font-semibold text-slate-800 dark:text-slate-200 mb-3 flex items-center gap-2 border-b border-slate-200 dark:border-slate-800 pb-2 text-sm hover:text-primary transition-colors"
+                                                >
+                                                    <div className="[&>svg]:w-4 [&>svg]:h-4">
+                                                        {category.icon}
+                                                    </div>
+                                                    {category.title}
+                                                </Link>
+                                            ) : (
+                                                <h3 className="font-semibold text-slate-800 dark:text-slate-200 mb-3 flex items-center gap-2 border-b border-slate-200 dark:border-slate-800 pb-2 text-sm">
+                                                    <div className="[&>svg]:w-4 [&>svg]:h-4">
+                                                        {category.icon}
+                                                    </div>
+                                                    {category.title}
+                                                </h3>
+                                            )}
                                             <ul className="space-y-2">
                                                 {category.calculators.slice(0, 5).map((calc, index) => (
                                                     <li key={index}>
@@ -70,7 +82,13 @@ export function Header() {
                                                 ))}
                                                 {category.calculators.length > 5 && (
                                                     <li>
-                                                        <Link href="/" className="text-xs font-medium text-primary hover:underline">
+                                                        <Link
+                                                            href={
+                                                                category.title === "General Health / Lifestyle" ? "/general-health" :
+                                                                    category.title === "Fitness & Diet" ? "/fitness-diet" : "/"
+                                                            }
+                                                            className="text-xs font-medium text-primary hover:underline"
+                                                        >
                                                             + {category.calculators.length - 5} more
                                                         </Link>
                                                     </li>
