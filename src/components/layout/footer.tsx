@@ -2,6 +2,7 @@
 
 import { useState, type ReactNode } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { categories } from "@/lib/calculators";
 import { Github, Twitter, Linkedin, ChevronDown } from "lucide-react";
 
@@ -57,9 +58,16 @@ export function Footer() {
                     {/* Brand & Mission Column */}
                     <div className="lg:col-span-4 space-y-6">
                         <Link href="/" className="inline-block">
-                            <h2 className="text-3xl font-extrabold tracking-tight text-slate-900 dark:text-white flex items-center gap-2">
-                                <span className="bg-primary/10 text-primary p-2 rounded-xl">◧</span>
-                                CalZone.
+                            <h2 className="text-3xl font-extrabold tracking-tight text-slate-900 dark:text-white flex items-center gap-4">
+                                <div className="relative w-full h-full rounded-xl flex items-center justify-center overflow-hidden drop-shadow-md bg-transparent">
+                                    <Image
+                                        src="/logo.png"
+                                        alt="CalZone Logo"
+                                        width={182}
+                                        height={182}
+                                        className="object-contain"
+                                    />
+                                </div>
                             </h2>
                         </Link>
                         <p className="text-slate-600 dark:text-slate-400 leading-relaxed pr-8">
@@ -84,7 +92,20 @@ export function Footer() {
                     {/* Dynamic Calculator Columns */}
                     <div className="lg:col-span-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-2 self-start">
                         {categories.map((category) => (
-                            <FooterCategory key={category.title} category={category} />
+                            <div key={category.title}>
+                                {category.title === "Finance & Driving" ? (
+                                    <Link
+                                        href="/finance-driving"
+                                        className="font-semibold text-slate-800 dark:text-slate-200 py-3 border-b border-slate-200 dark:border-slate-800 text-left hover:text-primary dark:hover:text-primary transition-colors flex items-center gap-2 group mb-4"
+                                    >
+                                        <div className="[&>svg]:w-4 [&>svg]:h-4 text-primary opacity-80 group-hover:opacity-100 transition-opacity">
+                                            {category.icon}
+                                        </div>
+                                        {category.title}
+                                    </Link>
+                                ) : null}
+                                <FooterCategory category={category} />
+                            </div>
                         ))}
                     </div>
                 </div>
@@ -98,6 +119,7 @@ export function Footer() {
                     </div>
 
                     <div className="flex items-center gap-6 font-medium">
+                        <Link href="/blog" className="hover:text-primary transition-colors">Blog</Link>
                         <Link href="#" className="hover:text-primary transition-colors">Privacy Policy</Link>
                         <Link href="#" className="hover:text-primary transition-colors">Terms of Service</Link>
                         <Link href="#" className="hover:text-primary transition-colors">Contact</Link>

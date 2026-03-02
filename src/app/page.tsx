@@ -41,6 +41,92 @@ export default function Home() {
         </div>
       </section>
 
+      {/* --- DETAILED STATS & INTELLIGENCE SECTION --- */}
+      <section className="container mx-auto px-4 mb-24">
+        <div className="bg-slate-50 dark:bg-slate-900/40 rounded-[3rem] border border-slate-200 dark:border-slate-800 p-8 md:p-16 overflow-hidden relative">
+          <div className="grid lg:grid-cols-2 gap-16 items-center relative z-10">
+            <div>
+              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 text-primary text-xs font-bold mb-8 uppercase tracking-widest border border-primary/20">
+                <Activity className="w-4 h-4" />
+                Scale & Precision v4.0
+              </div>
+              <h2 className="text-4xl md:text-6xl font-extrabold text-slate-900 dark:text-slate-100 mb-8 leading-[1.1] tracking-tight">
+                Empowering Decisions with <br />
+                <span className="text-primary">1,000+ Intelligence Models.</span>
+              </h2>
+              <div className="space-y-6 text-slate-600 dark:text-slate-400 text-lg leading-relaxed mb-12">
+                <p>
+                  CalZone isn't just a collection of tools; it's a massive ecosystem of curated algorithms. We've integrated over 1,000 specialized calculators across 40+ biological and financial domains.
+                </p>
+                <p>
+                  Our engine processes complex data points—from statutory UK tax codes and real-world fuel indices to advanced biometric markers—delivering clinical precision in milliseconds.
+                </p>
+              </div>
+
+              <div className="grid grid-cols-2 gap-4 sm:gap-8">
+                <div className="group">
+                  <div className="text-4xl font-extrabold text-slate-900 dark:text-white mb-2 group-hover:text-primary transition-colors">40+</div>
+                  <div className="text-sm font-bold text-slate-400 uppercase tracking-widest">Logic Categories</div>
+                </div>
+                <div className="group">
+                  <div className="text-4xl font-extrabold text-slate-900 dark:text-white mb-2 group-hover:text-primary transition-colors">24/7</div>
+                  <div className="text-sm font-bold text-slate-400 uppercase tracking-widest">Live API Sync</div>
+                </div>
+              </div>
+            </div>
+
+            <div className="grid sm:grid-cols-2 gap-6 relative">
+              {/* Decorative elements */}
+              <div className="absolute -inset-10 bg-primary/5 blur-3xl rounded-full z-0 opacity-50"></div>
+
+              <div className="bg-white dark:bg-slate-950 p-8 rounded-[2rem] border border-slate-200 dark:border-slate-800 shadow-xl relative z-10 hover:-translate-y-2 transition-transform h-fit">
+                <div className="w-12 h-12 rounded-2xl bg-amber-500/10 flex items-center justify-center text-amber-500 mb-6">
+                  <Scale className="w-6 h-6" />
+                </div>
+                <h3 className="text-xl font-bold text-slate-900 dark:text-white mb-4">Statutory Compliance</h3>
+                <p className="text-slate-500 dark:text-slate-400 text-sm leading-relaxed">
+                  Real-time synchronization with HMRC, IRS, and EU fiscal guidelines for 2024-2025.
+                </p>
+              </div>
+
+              <div className="bg-white dark:bg-slate-950 p-8 rounded-[2rem] border border-slate-200 dark:border-slate-800 shadow-xl relative z-10 hover:-translate-y-2 transition-transform mt-8 sm:mt-16 h-fit">
+                <div className="w-12 h-12 rounded-2xl bg-primary/10 flex items-center justify-center text-primary mb-6">
+                  <Heart className="w-6 h-6" />
+                </div>
+                <h3 className="text-xl font-bold text-slate-900 dark:text-white mb-4">Biometric IQ</h3>
+                <p className="text-slate-500 dark:text-slate-400 text-sm leading-relaxed">
+                  Advanced metabolic modeling for precision fitness and nutritional intelligence tracking.
+                </p>
+              </div>
+
+              <div className="bg-white dark:bg-slate-950 p-8 rounded-[2rem] border border-slate-200 dark:border-slate-800 shadow-xl relative z-10 hover:-translate-y-2 transition-transform h-fit sm:-mt-16">
+                <div className="w-12 h-12 rounded-2xl bg-emerald-500/10 flex items-center justify-center text-emerald-500 mb-6">
+                  <Droplets className="w-6 h-6" />
+                </div>
+                <h3 className="text-xl font-bold text-slate-900 dark:text-white mb-4">Live Index Tracking</h3>
+                <p className="text-slate-500 dark:text-slate-400 text-sm leading-relaxed">
+                  Automatic calibration with global fuel prices and inflation data for accurate cost forecasting.
+                </p>
+              </div>
+
+              <div className="bg-white dark:bg-slate-950 p-8 rounded-[2rem] border border-slate-200 dark:border-slate-800 shadow-xl relative z-10 hover:-translate-y-2 transition-transform h-fit">
+                <div className="w-12 h-12 rounded-2xl bg-blue-500/10 flex items-center justify-center text-blue-500 mb-6">
+                  <Baby className="w-6 h-6" />
+                </div>
+                <h3 className="text-xl font-bold text-slate-900 dark:text-white mb-4">Precision Life Cycle</h3>
+                <p className="text-slate-500 dark:text-slate-400 text-sm leading-relaxed">
+                  Calculators tailored for every stage of life, from growth percentiles to retirement planning.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          {/* Background Decorative Blobs */}
+          <div className="absolute top-0 right-0 w-[50%] h-[50%] bg-linear-to-bl from-primary/5 to-transparent rounded-full blur-[100px] pointer-events-none"></div>
+          <div className="absolute bottom-0 left-0 w-[50%] h-[50%] bg-linear-to-tr from-primary/5 to-transparent rounded-full blur-[100px] pointer-events-none"></div>
+        </div>
+      </section>
+
       {/* Main Categories Section */}
       <div className="container mx-auto px-4 pb-20">
         <div className="grid gap-12 md:gap-16">

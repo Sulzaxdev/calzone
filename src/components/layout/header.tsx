@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { Search, User, ChevronDown } from "lucide-react";
 import { ThemeToggle } from "@/components/theme-toggle";
 import { useState, useRef, useEffect } from "react";
@@ -31,16 +32,25 @@ export function Header() {
             <div className="mx-auto w-full md:w-[95%] lg:w-[85%] rounded-[2rem] bg-black/10 dark:bg-black/30 backdrop-blur-md border border-white/20 px-4 sm:px-6 flex h-16 items-center justify-between shadow-[0_8px_32px_0_rgba(31,38,135,0.07)] relative z-100">
                 <div className="flex items-center gap-2">
                     <Link href="/" className="flex items-center space-x-2 mr-2 md:mr-8">
-                        <div className="relative w-6 h-6 rounded-full border-2 border-white flex items-center justify-center overflow-hidden drop-shadow-md">
-                            <div className="absolute w-[120%] h-[2px] bg-white transform -rotate-45"></div>
+                        <div className="relative w-full h-full rounded-xl flex items-center justify-center overflow-hidden drop-shadow-md bg-transparent  ">
+                            <Image
+                                src="/logo.png"
+                                alt="CalZone Logo"
+                                width={152}
+                                height={52}
+                                className="object-contain p-1"
+                            />
                         </div>
-                        <span className="font-extrabold text-white tracking-wide text-lg drop-shadow-md hidden sm:inline-block">CalZone.</span>
+
                     </Link>
 
                     <nav className="hidden xl:flex items-center gap-6 text-sm font-medium">
-                        <Link href="/" className="bg-white/20 text-white px-4 py-2 font-semibold shadow-sm rounded-full backdrop-blur-sm border border-white/10 hover:bg-white/30 transition-colors">Home</Link>
+
                         <Link href="/" className="transition-colors hover:text-white/80 text-white font-semibold drop-shadow-md">About us</Link>
 
+
+                        <Link href="/" className="transition-colors hover:text-white/80 text-white font-semibold drop-shadow-md">For clients</Link>
+                        <Link href="/" className="transition-colors hover:text-white/80 text-white font-semibold drop-shadow-md">Career</Link>
                         {/* Explore Mega Menu Dropdown */}
                         <div className="relative group">
                             <button className="flex items-center transition-colors hover:text-white/80 text-white font-semibold drop-shadow-md py-4">
@@ -51,9 +61,9 @@ export function Header() {
                                 <div className="bg-white/95 dark:bg-slate-950/95 backdrop-blur-xl border border-slate-200 dark:border-slate-800 rounded-2xl shadow-2xl p-6 w-[800px] max-w-[90vw] grid grid-cols-3 gap-6 transform-gpu before:absolute before:-top-2 before:left-1/2 before:-translate-x-1/2 before:border-8 before:border-transparent before:border-b-white/95 dark:before:border-b-slate-950/95">
                                     {categories.map((category) => (
                                         <div key={category.title}>
-                                            {(category.title === "General Health / Lifestyle" || category.title === "Fitness & Diet") ? (
+                                            {(category.title === "General Health / Lifestyle" || category.title === "Fitness & Diet" || category.title === "Finance & Driving") ? (
                                                 <Link
-                                                    href={category.title === "General Health / Lifestyle" ? "/general-health" : "/fitness-diet"}
+                                                    href={category.title === "General Health / Lifestyle" ? "/general-health" : category.title === "Fitness & Diet" ? "/fitness-diet" : "/finance-driving"}
                                                     className="font-semibold text-slate-800 dark:text-slate-200 mb-3 flex items-center gap-2 border-b border-slate-200 dark:border-slate-800 pb-2 text-sm hover:text-primary transition-colors"
                                                 >
                                                     <div className="[&>svg]:w-4 [&>svg]:h-4">
@@ -99,9 +109,7 @@ export function Header() {
                                 </div>
                             </div>
                         </div>
-                        <Link href="/" className="transition-colors hover:text-white/80 text-white font-semibold drop-shadow-md">For clients</Link>
-                        <Link href="/" className="transition-colors hover:text-white/80 text-white font-semibold drop-shadow-md">Career</Link>
-                        <Link href="/" className="transition-colors hover:text-white/80 text-white font-semibold drop-shadow-md">Blog</Link>
+                        <Link href="/blog" className="transition-colors hover:text-white/80 text-white font-semibold drop-shadow-md">Blog</Link>
                     </nav>
                 </div>
 
