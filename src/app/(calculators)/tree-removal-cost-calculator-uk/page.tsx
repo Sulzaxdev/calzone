@@ -81,6 +81,7 @@ export default function TreeRemovalCostCalculator() {
         <CalculatorCard
             title="Tree Removal Cost"
             description="Estimate the cost of hiring a tree surgeon (arborist) in the UK to fell and remove a tree."
+            hasResult={!!result}
         >
             <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
                 <div className="space-y-4">

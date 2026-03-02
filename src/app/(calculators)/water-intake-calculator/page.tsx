@@ -101,6 +101,7 @@ export default function WaterIntakeCalculator() {
             <CalculatorCard
                 title="Water Intake Calculator"
                 description="Calculate your daily hydration needs based on your body weight, activity level, and environment."
+                hasResult={!!result}
             >
                 <Tabs defaultValue="metric" onValueChange={(val) => {
                     setUnit(val as "metric" | "imperial");

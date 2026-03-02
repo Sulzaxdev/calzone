@@ -31,6 +31,7 @@ export default function AnnualLeaveCalculator() {
             <CalculatorCard
                 title="UK Annual Leave Calculator"
                 description="Calculate your statutory minimum annual holiday entitlement based on the days you work per week."
+                hasResult={!!result}
             >
                 <form onSubmit={calculateLeave} className="space-y-6">
                     <div className="space-y-2">

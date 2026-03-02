@@ -139,6 +139,7 @@ export function BraSizeCalculatorForm() {
         <CalculatorCard
             title="Bra Size Calculator"
             description="A highly accurate sizing tool calculating UK, US, EU, and AU sizing with Sister-Size and pregnancy adjustments."
+            hasResult={!!result}
         >
             <form onSubmit={handleCalculate} className="space-y-8">
                 {/* Top Toggles */}

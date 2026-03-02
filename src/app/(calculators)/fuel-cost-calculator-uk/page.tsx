@@ -42,6 +42,7 @@ export default function FuelCostCalculator() {
             <CalculatorCard
                 title="Fuel Cost Calculator"
                 description="Calculate how much a journey will cost in fuel based on your vehicle's MPG and current petrol/diesel prices."
+                hasResult={!!result}
             >
                 <form onSubmit={calculateCost} className="space-y-6">
                     <div className="space-y-2">

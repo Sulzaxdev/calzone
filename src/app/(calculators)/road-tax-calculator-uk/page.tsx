@@ -76,6 +76,7 @@ export default function RoadTaxCalculator() {
             <CalculatorCard
                 title="UK Road Tax Calculator"
                 description="Estimate Vehicle Excise Duty (VED) for cars registered after April 2017 (2024/2025 rates)."
+                hasResult={!!result}
             >
                 <form onSubmit={calculateTax} className="space-y-6">
                     <div className="space-y-2">

@@ -95,6 +95,7 @@ export default function BMRCalculator() {
             <CalculatorCard
                 title="BMR Calculator"
                 description="Calculate your Basal Metabolic Rate (BMR) - the number of calories your body needs to accomplish its most basic (basal) life-sustaining functions."
+                hasResult={!!result}
             >
                 <Tabs defaultValue="metric" onValueChange={(val) => {
                     setUnit(val as "metric" | "imperial");

@@ -67,6 +67,7 @@ export default function TattooCostCalculator() {
         <CalculatorCard
             title="Tattoo Cost Estimator"
             description="Calculate rough ink pricing based on UK hourly rates and session length."
+            hasResult={!!result}
         >
             <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
                 <div className="space-y-4">

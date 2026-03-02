@@ -16,9 +16,10 @@ interface CalculatorCardProps {
     title: string;
     description: string;
     children: React.ReactNode;
+    hasResult?: boolean;
 }
 
-export function CalculatorCard({ title, description, children }: CalculatorCardProps) {
+export function CalculatorCard({ title, description, children, hasResult }: CalculatorCardProps) {
     const cardRef = useRef<HTMLDivElement>(null);
     const pathname = usePathname();
 
@@ -94,15 +95,6 @@ export function CalculatorCard({ title, description, children }: CalculatorCardP
                         <FileText className="w-4 h-4 text-primary" />
                         Calculation Tool
                     </span>
-                    <Button
-                        variant="outline"
-                        size="sm"
-                        onClick={handleDownloadPdf}
-                        className="flex items-center gap-2 bg-white/80 dark:bg-black/50 backdrop-blur-md hover:bg-primary hover:text-white transition-all shadow-sm border-slate-200 dark:border-slate-800 rounded-full px-4"
-                    >
-                        <Download className="w-4 h-4" />
-                        Export to PDF
-                    </Button>
                 </div>
 
                 <div ref={cardRef} className="rounded-3xl bg-white dark:bg-card border border-slate-200/80 dark:border-border shadow-2xl shadow-primary/5 overflow-hidden p-1 relative">
@@ -110,6 +102,20 @@ export function CalculatorCard({ title, description, children }: CalculatorCardP
                         {/* We removed CardHeader because the title and description are now in the Hero Section above! */}
                         <CardContent className="pt-8 pb-8 px-4 sm:px-8">
                             {children}
+
+                            {hasResult && (
+                                <div className="mt-12 flex justify-center animate-in fade-in zoom-in duration-500">
+                                    <Button
+                                        variant="outline"
+                                        size="lg"
+                                        onClick={handleDownloadPdf}
+                                        className="flex items-center gap-2 bg-slate-50 dark:bg-slate-900 border-slate-200 dark:border-slate-800 hover:bg-primary hover:text-white hover:border-primary transition-all shadow-md rounded-2xl px-8 h-12 font-bold"
+                                    >
+                                        <Download className="w-5 h-5" />
+                                        Export Detailed Report (PDF)
+                                    </Button>
+                                </div>
+                            )}
                         </CardContent>
                     </Card>
                 </div>

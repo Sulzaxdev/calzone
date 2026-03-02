@@ -55,6 +55,7 @@ export default function RoofCostCalculator() {
             <CalculatorCard
                 title="Roof Replacement Cost Calculator"
                 description="Estimate the cost of replacing your roof in the UK based on area and material type."
+                hasResult={!!result}
             >
                 <form onSubmit={calculateCost} className="space-y-6">
                     <div className="space-y-2">

@@ -127,6 +127,7 @@ export function ChildBMICalculatorForm() {
         <CalculatorCard
             title="Child BMI Calculator"
             description="Calculate BMI-for-age percentile for children and teens (ages 2–20) based on CDC and WHO growth standards."
+            hasResult={!!result}
         >
             <form onSubmit={calculateChildBMI} className="space-y-6">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6 bg-slate-50/50 dark:bg-slate-900/20 p-6 rounded-3xl border border-slate-100 dark:border-slate-800">

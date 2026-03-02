@@ -55,6 +55,7 @@ export default function RemovalCostsCalculator() {
             <CalculatorCard
                 title="House Removal Costs Calculator"
                 description="Estimate the cost of hiring a professional removal firm for your house move in the UK."
+                hasResult={!!result}
             >
                 <form onSubmit={calculateCost} className="space-y-6">
                     <div className="grid grid-cols-2 gap-4">

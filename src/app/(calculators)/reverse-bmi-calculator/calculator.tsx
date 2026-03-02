@@ -83,6 +83,7 @@ export function ReverseBMICalculatorForm() {
         <CalculatorCard
             title="Reverse BMI Calculator"
             description="Find the exact weight you need to reach a specific target BMI (Body Mass Index)."
+            hasResult={!!result}
         >
             <form onSubmit={calculateTargetWeight} className="space-y-6">
                 <div className="bg-slate-50/50 dark:bg-slate-900/20 p-6 rounded-3xl border border-slate-100 dark:border-slate-800">

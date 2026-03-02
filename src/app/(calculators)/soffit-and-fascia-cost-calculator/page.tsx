@@ -70,6 +70,7 @@ export default function SoffitFasciaCostCalculator() {
         <CalculatorCard
             title="Soffit & Fascia Cost Estimator"
             description="Estimate the cost of replacing roofline boards (fascias and soffits) in the UK."
+            hasResult={!!result}
         >
             <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
                 <div className="space-y-4">

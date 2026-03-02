@@ -60,6 +60,7 @@ export default function CarWriteOffCalculator() {
             <CalculatorCard
                 title="Car Insurance Write-Off Estimator"
                 description="Estimate if your vehicle is likely to be declared a total loss by your insurer based on repair costs."
+                hasResult={!!result}
             >
                 <form onSubmit={calculateWriteOff} className="space-y-6">
                     <div className="space-y-2">

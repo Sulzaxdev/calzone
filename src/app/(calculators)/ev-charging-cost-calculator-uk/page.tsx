@@ -72,6 +72,7 @@ export default function EVChargingCostCalculator() {
         <CalculatorCard
             title="EV Charging Cost Calculator"
             description="Estimate how much it costs to charge an electric car in the UK based on battery size and charger type."
+            hasResult={!!result}
         >
             <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
                 <div className="space-y-4">

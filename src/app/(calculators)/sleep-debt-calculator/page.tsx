@@ -91,6 +91,7 @@ export default function SleepDebtCalculator() {
             <CalculatorCard
                 title="Sleep Debt Calculator"
                 description="Track your sleep over the past 7 days to calculate your accumulated sleep debt and understand its impact."
+                hasResult={!!result}
             >
                 <form onSubmit={calculateSleepDebt} className="space-y-6">
                     <div className="space-y-2 pb-4 border-b">

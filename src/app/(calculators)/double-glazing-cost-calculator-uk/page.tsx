@@ -68,6 +68,7 @@ export default function DoubleGlazingCostCalculator() {
         <CalculatorCard
             title="Double Glazing Cost Calculator"
             description="Get a rough estimate for replacing your windows based on UK averages."
+            hasResult={!!result}
         >
             <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
                 <div className="space-y-4">

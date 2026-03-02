@@ -49,6 +49,7 @@ export default function CarInsuranceCalculator() {
             <CalculatorCard
                 title="Car Insurance Estimator"
                 description="Get a rough ball-park figure for comprehensive car insurance based on generic age and value metrics."
+                hasResult={!!result}
             >
                 <form onSubmit={calculateEstimate} className="space-y-6">
                     <div className="grid grid-cols-2 gap-4">

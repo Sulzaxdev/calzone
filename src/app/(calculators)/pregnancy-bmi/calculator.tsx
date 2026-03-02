@@ -94,6 +94,7 @@ export function PregnancyBMIForm() {
         <CalculatorCard
             title="Pregnancy BMI Calculator"
             description="Assess your pre-pregnancy BMI and discover the medically recommended weight gain range for a healthy journey."
+            hasResult={!!result}
         >
             <div className="max-w-3xl mx-auto">
                 <Tabs defaultValue="metric" onValueChange={(val) => {

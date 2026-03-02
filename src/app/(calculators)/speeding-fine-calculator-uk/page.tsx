@@ -105,6 +105,7 @@ export default function SpeedingFineCalculator() {
             <CalculatorCard
                 title="UK Speeding Fine Calculator"
                 description="Estimate the penalty guidelines and fine band if caught speeding in the UK. Values are estimates based on standard magistrates' court guidelines."
+                hasResult={!!result}
             >
                 <form onSubmit={calculateFine} className="space-y-6">
                     <div className="grid grid-cols-2 gap-4">

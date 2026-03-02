@@ -126,6 +126,7 @@ export function ChildGrowthCalculatorForm() {
         <CalculatorCard
             title="Child Growth Estimator"
             description="Estimate height, weight, and BMI percentiles based on simplified generic growth charts. Optionally predict adult height using parental data."
+            hasResult={!!result}
         >
             <form onSubmit={calculateGrowth} className="space-y-8">
                 {/* Top Toggles */}

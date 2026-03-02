@@ -110,6 +110,7 @@ export function BMICalculatorForm() {
         <CalculatorCard
             title="BMI Calculator"
             description="Calculate your Body Mass Index (BMI) using standard medical formulas (Metric or Imperial) to assess your weight status."
+            hasResult={!!result}
         >
             <Tabs defaultValue="metric" onValueChange={(val) => {
                 setUnit(val as "metric" | "imperial");
@@ -234,10 +235,10 @@ export function BMICalculatorForm() {
                         </div>
 
                         <div className={`inline-flex items-center gap-2 px-6 py-2 rounded-full font-bold text-lg mb-8 border transition-all ${result.statusColor === 'green' ? 'bg-green-100 border-green-200 text-green-700 dark:bg-green-900/30 dark:border-green-800' :
-                                result.statusColor === 'yellow' ? 'bg-yellow-100 border-yellow-200 text-yellow-700 dark:bg-yellow-900/30 dark:border-yellow-800' :
-                                    result.statusColor === 'orange' ? 'bg-orange-100 border-orange-200 text-orange-700 dark:bg-orange-900/30 dark:border-orange-800' :
-                                        result.statusColor === 'red' ? 'bg-red-100 border-red-200 text-red-700 dark:bg-red-900/30 dark:border-red-800' :
-                                            'bg-blue-100 border-blue-200 text-blue-700 dark:bg-blue-900/30 dark:border-blue-800'
+                            result.statusColor === 'yellow' ? 'bg-yellow-100 border-yellow-200 text-yellow-700 dark:bg-yellow-900/30 dark:border-yellow-800' :
+                                result.statusColor === 'orange' ? 'bg-orange-100 border-orange-200 text-orange-700 dark:bg-orange-900/30 dark:border-orange-800' :
+                                    result.statusColor === 'red' ? 'bg-red-100 border-red-200 text-red-700 dark:bg-red-900/30 dark:border-red-800' :
+                                        'bg-blue-100 border-blue-200 text-blue-700 dark:bg-blue-900/30 dark:border-blue-800'
                             }`}>
                             {result.category === 'Healthy Weight' && <CheckCircle2 className="w-5 h-5" />}
                             {result.category}

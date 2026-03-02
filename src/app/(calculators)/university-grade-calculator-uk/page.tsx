@@ -71,6 +71,7 @@ export default function UniversityGradeCalculator() {
         <CalculatorCard
             title="UK University Grade Calculator"
             description="Calculate your weighted module average and predict your degree classification."
+            hasResult={!!result}
         >
             <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
 

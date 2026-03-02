@@ -84,6 +84,7 @@ export default function HolidayCalculator() {
             <CalculatorCard
                 title="Holiday Cost Calculator"
                 description="Estimate the total budget required for your next vacation or holiday."
+                hasResult={!!result}
             >
                 <form onSubmit={calculateCost} className="space-y-6">
                     <div className="grid grid-cols-2 gap-4">

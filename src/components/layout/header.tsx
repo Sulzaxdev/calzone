@@ -28,7 +28,7 @@ export function Header() {
     ).slice(0, 5);
 
     return (
-        <header className="sticky top-0 z-100 w-full border-b border-slate-200/50 dark:border-white/10 bg-white/70 dark:bg-[#110e10]/70 backdrop-blur-2xl transition-all">
+        <header className="sticky top-0 z-100 w-full border-b rounded-full p-1 mt-3 border-slate-200/50 dark:border-white/10 bg-white/70 dark:bg-[#110e10]/70 backdrop-blur-2xl transition-all">
             <div className="container mx-auto px-4 sm:px-6 flex h-16 items-center justify-between">
                 <div className="flex items-center gap-2">
                     <Link href="/" className="flex items-center space-x-2 mr-2 md:mr-8">

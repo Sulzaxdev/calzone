@@ -29,6 +29,7 @@ export default function MileageCalculator() {
             <CalculatorCard
                 title="Mileage Reimbursement Calculator"
                 description="Calculate your tax-free mileage claim amount for business travel."
+                hasResult={!!result}
             >
                 <form onSubmit={calculateMileage} className="space-y-6">
                     <div className="space-y-2">

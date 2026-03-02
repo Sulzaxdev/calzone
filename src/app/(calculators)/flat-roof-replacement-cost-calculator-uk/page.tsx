@@ -77,6 +77,7 @@ export default function FlatRoofReplacementCostCalculator() {
         <CalculatorCard
             title="Flat Roof Replacement Cost"
             description="Calculate the average UK cost of replacing a flat roof on an extension or garage."
+            hasResult={!!result}
         >
             <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
                 <div className="space-y-4">

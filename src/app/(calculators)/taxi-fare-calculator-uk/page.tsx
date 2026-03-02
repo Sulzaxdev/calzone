@@ -67,6 +67,7 @@ export default function TaxiFareCalculator() {
         <CalculatorCard
             title="UK Taxi Fare Estimator"
             description="Calculate an estimated cab fare based on distance, tariffs, and potential waiting times."
+            hasResult={!!result}
         >
             <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
                 <div className="space-y-4">

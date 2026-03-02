@@ -50,6 +50,7 @@ export default function BTUCalculator() {
             <CalculatorCard
                 title="BTU Radiator Calculator"
                 description="Calculate the British Thermal Units (BTU) and Watts needed to effectively heat a room."
+                hasResult={!!result}
             >
                 <form onSubmit={calculateBTU} className="space-y-6">
                     <div className="space-y-2">

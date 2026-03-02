@@ -78,6 +78,7 @@ export default function DrinkDriveLimitCalculator() {
         <CalculatorCard
             title="Drink Drive Limit Estimator"
             description="Estimate your Blood Alcohol Concentration (BAC). Crucially: NEVER rely on this to decide if you can drive."
+            hasResult={!!result}
         >
             <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
                 <div className="space-y-4">

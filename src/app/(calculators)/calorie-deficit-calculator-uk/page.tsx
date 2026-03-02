@@ -108,6 +108,7 @@ export default function CalorieDeficitCalculator() {
             <CalculatorCard
                 title="Calorie Deficit Calculator"
                 description="Calculate the exact daily calories you need to consume to hit your target weight loss rate."
+                hasResult={!!result}
             >
                 <form onSubmit={calculateDeficit} className="space-y-6">
                     <div className="grid grid-cols-2 gap-4">

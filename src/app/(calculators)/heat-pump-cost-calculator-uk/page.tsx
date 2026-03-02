@@ -77,6 +77,7 @@ export default function HeatPumpCostCalculator() {
         <CalculatorCard
             title="Heat Pump Cost Calculator"
             description="Estimate the installation cost of a new heat pump in the UK, including potential grants."
+            hasResult={!!result}
         >
             <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
                 <div className="space-y-4">
