@@ -60,6 +60,7 @@ export const categories = [
             { name: "Double Glazing", href: "/double-glazing-cost-calculator-uk", desc: "Estimate new windows cost" },
             { name: "Tree Removal", href: "/tree-removal-cost-calculator-uk", desc: "Estimate tree felling costs" },
             { name: "Soffit & Fascia", href: "/soffit-and-fascia-cost-calculator", desc: "Estimate roofline replacement" },
+            { name: "Mortgage Calculator UK", href: "/mortgage-calculator-uk", desc: "Calculate monthly EMI and total interest" },
         ],
     },
     {
