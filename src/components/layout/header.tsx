@@ -44,10 +44,10 @@ export function Header() {
                     </Link>
 
                     <nav className="hidden xl:flex items-center gap-8 text-sm font-semibold">
-                       
+
                         <Link href="/general-health" className="transition-colors hover:text-primary text-slate-700 dark:text-slate-200">Health Calculators</Link>
                         <Link href="/finance-driving" className="transition-colors hover:text-primary text-slate-700 dark:text-slate-200">Finance Calculators</Link>
-                         {/* Explore Mega Menu Dropdown */}
+                        {/* Explore Mega Menu Dropdown */}
                         <div className="relative group">
                             <button className="flex items-center transition-colors hover:text-primary text-slate-700 dark:text-slate-200 py-4">
                                 Explore
@@ -57,9 +57,9 @@ export function Header() {
                                 <div className="bg-white/95 dark:bg-slate-950/95 backdrop-blur-xl border border-slate-200 dark:border-slate-800 rounded-2xl shadow-2xl p-6 w-[800px] max-w-[90vw] grid grid-cols-3 gap-6 transform-gpu before:absolute before:-top-2 before:left-1/2 before:-translate-x-1/2 before:border-8 before:border-transparent before:border-b-white/95 dark:before:border-b-slate-950/95">
                                     {categories.map((category) => (
                                         <div key={category.title}>
-                                            {(category.title === "General Health / Lifestyle" || category.title === "Fitness & Diet" || category.title === "Finance & Driving" || category.title === "Home & Property" || category.title === "Misc & Lifestyle" || category.title === "Sleep") ? (
+                                            {(category.title === "General Health / Lifestyle" || category.title === "Fitness & Diet" || category.title === "Finance & Driving" || category.title === "Home & Property" || category.title === "Misc & Lifestyle" || category.title === "Sleep" || category.title === "UK Stock Market & Investments") ? (
                                                 <Link
-                                                    href={category.title === "General Health / Lifestyle" ? "/general-health" : category.title === "Fitness & Diet" ? "/fitness-diet" : category.title === "Finance & Driving" ? "/finance-driving" : category.title === "Home & Property" ? "/home-property" : category.title === "Misc & Lifestyle" ? "/misc-lifestyle" : "/sleep"}
+                                                    href={category.title === "General Health / Lifestyle" ? "/general-health" : category.title === "Fitness & Diet" ? "/fitness-diet" : category.title === "Finance & Driving" ? "/finance-driving" : category.title === "Home & Property" ? "/home-property" : category.title === "Misc & Lifestyle" ? "/misc-lifestyle" : category.title === "Sleep" ? "/sleep" : "/uk-stocks-investments"}
                                                     className="font-semibold text-slate-800 dark:text-slate-200 mb-3 flex items-center gap-2 border-b border-slate-200 dark:border-slate-800 pb-2 text-sm hover:text-primary transition-colors"
                                                 >
                                                     <div className="[&>svg]:w-4 [&>svg]:h-4">

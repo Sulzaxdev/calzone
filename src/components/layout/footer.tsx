@@ -92,14 +92,15 @@ export function Footer() {
                     {/* Dynamic Calculator Columns */}
                     <div className="lg:col-span-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-2 self-start">
                         {categories.map((category) => {
-                            const hasLandingPage = category.title === "General Health / Lifestyle" || category.title === "Fitness & Diet" || category.title === "Finance & Driving" || category.title === "Home & Property" || category.title === "Misc & Lifestyle" || category.title === "Sleep";
+                            const hasLandingPage = category.title === "General Health / Lifestyle" || category.title === "Fitness & Diet" || category.title === "Finance & Driving" || category.title === "Home & Property" || category.title === "Misc & Lifestyle" || category.title === "Sleep" || category.title === "UK Stock Market & Investments";
                             const getLandingPageUrl = (title: string) => {
                                 if (title === "General Health / Lifestyle") return "/general-health";
                                 if (title === "Fitness & Diet") return "/fitness-diet";
                                 if (title === "Finance & Driving") return "/finance-driving";
                                 if (title === "Home & Property") return "/home-property";
                                 if (title === "Misc & Lifestyle") return "/misc-lifestyle";
-                                return "/sleep";
+                                if (title === "Sleep") return "/sleep";
+                                return "/uk-stocks-investments";
                             };
 
                             return (

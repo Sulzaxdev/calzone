@@ -17,9 +17,11 @@ interface CalculatorCardProps {
     description: string;
     children: React.ReactNode;
     hasResult?: boolean;
+    icon?: React.ReactNode;
+    heroImage?: string;
 }
 
-export function CalculatorCard({ title, description, children, hasResult }: CalculatorCardProps) {
+export function CalculatorCard({ title, description, children, hasResult, icon, heroImage }: CalculatorCardProps) {
     const cardRef = useRef<HTMLDivElement>(null);
     const pathname = usePathname();
 
@@ -59,7 +61,7 @@ export function CalculatorCard({ title, description, children, hasResult }: Calc
             <div className="w-screen relative left-1/2 right-1/2 -mx-[50vw] pt-40 pb-32 mb-16 border-b border-primary/10 dark:border-primary/5 overflow-hidden">
                 <div className="absolute inset-0 z-0">
                     <Image
-                        src="/heroimage.jpg"
+                        src={heroImage || "/heroimage.jpg"}
                         alt="Background"
                         fill
                         priority
@@ -73,6 +75,13 @@ export function CalculatorCard({ title, description, children, hasResult }: Calc
                         transition={{ duration: 0.5, ease: "easeOut" }}
                         className="space-y-4"
                     >
+                        {icon && (
+                            <div className="flex justify-center mb-6">
+                                <div className="p-4 bg-white/10 rounded-3xl backdrop-blur-md border border-white/20 text-white">
+                                    {icon}
+                                </div>
+                            </div>
+                        )}
                         <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-tight text-white drop-shadow-lg">
                             {title}
                         </h1>

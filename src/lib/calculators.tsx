@@ -1,4 +1,4 @@
-import { Activity, Scale, Coffee, Moon } from "lucide-react";
+import { Activity, Scale, Coffee, Moon, TrendingUp } from "lucide-react";
 
 export const categories = [
     {
@@ -76,6 +76,26 @@ export const categories = [
         calculators: [
             { name: "Epworth Sleepiness", href: "/epworth-sleepiness-scale-calculator", desc: "Daytime sleepiness scale" },
             { name: "Sleep Debt", href: "/sleep-debt-calculator", desc: "Calculate accumulated lost sleep" },
+        ],
+    },
+    {
+        title: "UK Stock Market & Investments",
+        icon: <TrendingUp className="h-6 w-6 text-primary" />,
+        calculators: [
+            { name: "UK Capital Gains Tax (CGT)", href: "/uk-stock-capital-gains-tax-calculator", desc: "Calculate tax on share/investment sales" },
+            { name: "UK Dividend Tax", href: "/uk-dividend-tax-calculator", desc: "Calculate tax on UK dividend income" },
+            { name: "Stamp Duty Calculator (UK Shares)", href: "/uk-shares-stamp-duty-calculator", desc: "Calculate 0.5% SDRT on UK share purchases." },
+            { name: "Share Dealing Fee Calculator", href: "/uk-share-dealing-fee-calculator", desc: "Analyze broker commissions, FX fees, and total trading costs." },
+            { name: "Investment Growth Calculator", href: "/uk-investment-growth-calculator", desc: "Project future wealth using compound interest logic." },
+            { name: "Dividend Yield Calculator", href: "/uk-dividend-yield-calculator", desc: "Calculate annual return % based on payouts and price." },
+            { name: "Stocks & Shares ISA Calculator", href: "/uk-stocks-shares-isa-calculator", desc: "Track ISA allowance and project tax-free growth." },
+            { name: "P/E Ratio Calculator", href: "/uk-pe-ratio-calculator", desc: "Calculate Price-to-Earnings ratio for UK stocks valuation." },
+            { name: "Portfolio Return Calculator", href: "/portfolio-return-calculator-uk", desc: "Calculate weighted annual portfolio performance and CAGR." },
+            { name: "Compound Interest Calculator", href: "/uk-compound-interest-calculator", desc: "Project long-term wealth growth with SIP and compounding frequency." },
+            { name: "Risk & Volatility Calculator", href: "/risk-volatility-calculator-uk", desc: "Calculate Standard Deviation and Beta for UK stocks." },
+            { name: "SIP Calculator", href: "/sip-calculator-uk", desc: "Calculate future value of monthly investments." },
+            { name: "Inflation Adjusted Return", href: "/inflation-adjusted-return-calculator-uk", desc: "Calculate real returns after UK inflation." },
+            { name: "FTSE Index Return", href: "/ftse-index-return-calculator-uk", desc: "Calculate historical CAGR for FTSE 100/250." },
         ],
     },
 ];

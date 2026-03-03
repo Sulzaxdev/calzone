@@ -97,9 +97,9 @@ export default function Home() {
                 <div className="p-2.5 bg-primary/10 rounded-xl">
                   {category.icon}
                 </div>
-                {(category.title === "General Health / Lifestyle" || category.title === "Fitness & Diet") ? (
+                {(category.title === "General Health / Lifestyle" || category.title === "Fitness & Diet" || category.title === "UK Stock Market & Investments") ? (
                   <Link
-                    href={category.title === "General Health / Lifestyle" ? "/general-health" : "/fitness-diet"}
+                    href={category.title === "General Health / Lifestyle" ? "/general-health" : category.title === "Fitness & Diet" ? "/fitness-diet" : "/uk-stocks-investments"}
                     className="group flex items-center gap-2"
                   >
                     <h2 className="text-2xl font-bold tracking-tight group-hover:text-primary transition-colors">{category.title}</h2>
