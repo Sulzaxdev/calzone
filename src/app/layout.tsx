@@ -8,8 +8,8 @@ import { Footer } from "@/components/layout/footer";
 export const metadata: Metadata = {
   metadataBase: new URL("https://www.thecalzone.co.uk"),
   title: "CalZone | The Ultimate UK Health, Fitness & Financial Calculators",
-  description: "CalZone offers a comprehensive suite of free, professional UK medical, health, fitness, financial (FTSE, SIP, CGT), and lifestyle calculators.",
-  keywords: ["UK health calculators", "FTSE return calculator", "SIP calculator UK", "UK tax calculators", "BMI calculator UK", "calorie deficit", "finance calculators UK", "lifestyle calculators", "CalZone"],
+  description: "CalZone offers a comprehensive suite of free, professional UK medical, health, fitness, property (Mortgage calculators), financial (FTSE, SIP, CGT), and lifestyle calculators.",
+  keywords: ["mortgage calculator UK", "property calculators", "UK health calculators", "FTSE return calculator", "SIP calculator UK", "UK tax calculators", "BMI calculator UK", "calorie deficit", "finance calculators UK", "lifestyle calculators", "CalZone"],
   alternates: {
     canonical: '/',
   },

@@ -4,8 +4,75 @@ import Link from "next/link";
 import Image from "next/image";
 import { Search, User, ChevronDown } from "lucide-react";
 import { ThemeToggle } from "@/components/theme-toggle";
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect, ReactNode } from "react";
 import { allCalculators, categories } from "@/lib/calculators";
+
+interface CategoryProp {
+    title: string;
+    icon: ReactNode;
+    calculators: { name: string; href: string; desc: string }[];
+}
+
+function HeaderCategoryDropdown({ category, isLandingPage, landingPageUrl }: { category: CategoryProp, isLandingPage: boolean, landingPageUrl: string }) {
+    const [isOpen, setIsOpen] = useState(false);
+
+    return (
+        <div>
+            {isLandingPage ? (
+                <div className="flex items-center justify-between mb-3 border-b border-slate-200 dark:border-slate-800 pb-2 group">
+                    <Link
+                        href={landingPageUrl}
+                        className="font-semibold text-slate-800 dark:text-slate-200 flex items-center gap-2 text-sm hover:text-primary transition-colors"
+                    >
+                        <div className="[&>svg]:w-4 [&>svg]:h-4">
+                            {category.icon}
+                        </div>
+                        {category.title}
+                    </Link>
+                    <button
+                        onClick={(e) => { e.preventDefault(); e.stopPropagation(); setIsOpen(!isOpen); }}
+                        className="text-slate-400 hover:text-primary p-1 bg-slate-100 dark:bg-slate-800 rounded-md ml-2"
+                        aria-label="Toggle calculators list"
+                    >
+                        <ChevronDown className={`w-4 h-4 transition-transform duration-300 ${isOpen ? "rotate-180" : ""}`} />
+                    </button>
+                </div>
+            ) : (
+                <h3 className="font-semibold text-slate-800 dark:text-slate-200 mb-3 flex items-center gap-2 border-b border-slate-200 dark:border-slate-800 pb-2 text-sm">
+                    <div className="[&>svg]:w-4 [&>svg]:h-4">
+                        {category.icon}
+                    </div>
+                    {category.title}
+                </h3>
+            )}
+
+            <div className={`overflow-hidden transition-all duration-300 ease-in-out ${(!isLandingPage || isOpen) ? "max-h-[800px] opacity-100" : "max-h-0 opacity-0"}`}>
+                <ul className="space-y-2">
+                    {category.calculators.slice(0, 5).map((calc, index) => (
+                        <li key={index}>
+                            <Link
+                                href={calc.href}
+                                className="text-xs text-slate-500 dark:text-slate-400 hover:text-primary dark:hover:text-primary transition-colors line-clamp-1"
+                            >
+                                {calc.name}
+                            </Link>
+                        </li>
+                    ))}
+                    {category.calculators.length > 5 && (
+                        <li>
+                            <Link
+                                href={isLandingPage ? landingPageUrl : "/"}
+                                className="text-xs font-medium text-primary hover:underline"
+                            >
+                                + {category.calculators.length - 5} more
+                            </Link>
+                        </li>
+                    )}
+                </ul>
+            </div>
+        </div>
+    );
+}
 
 export function Header() {
     const [searchQuery, setSearchQuery] = useState("");
@@ -55,57 +122,14 @@ export function Header() {
                             </button>
                             <div className="absolute top-full left-1/2 -translate-x-1/2 hidden group-hover:block pt-2">
                                 <div className="bg-white/95 dark:bg-slate-950/95 backdrop-blur-xl border border-slate-200 dark:border-slate-800 rounded-2xl shadow-2xl p-6 w-[800px] max-w-[90vw] grid grid-cols-3 gap-6 transform-gpu before:absolute before:-top-2 before:left-1/2 before:-translate-x-1/2 before:border-8 before:border-transparent before:border-b-white/95 dark:before:border-b-slate-950/95">
-                                    {categories.map((category) => (
-                                        <div key={category.title}>
-                                            {(category.title === "General Health / Lifestyle" || category.title === "Fitness & Diet" || category.title === "Finance & Driving" || category.title === "Home & Property" || category.title === "Misc & Lifestyle" || category.title === "Sleep" || category.title === "UK Stock Market & Investments") ? (
-                                                <Link
-                                                    href={category.title === "General Health / Lifestyle" ? "/general-health" : category.title === "Fitness & Diet" ? "/fitness-diet" : category.title === "Finance & Driving" ? "/finance-driving" : category.title === "Home & Property" ? "/home-property" : category.title === "Misc & Lifestyle" ? "/misc-lifestyle" : category.title === "Sleep" ? "/sleep" : "/uk-stocks-investments"}
-                                                    className="font-semibold text-slate-800 dark:text-slate-200 mb-3 flex items-center gap-2 border-b border-slate-200 dark:border-slate-800 pb-2 text-sm hover:text-primary transition-colors"
-                                                >
-                                                    <div className="[&>svg]:w-4 [&>svg]:h-4">
-                                                        {category.icon}
-                                                    </div>
-                                                    {category.title}
-                                                </Link>
-                                            ) : (
-                                                <h3 className="font-semibold text-slate-800 dark:text-slate-200 mb-3 flex items-center gap-2 border-b border-slate-200 dark:border-slate-800 pb-2 text-sm">
-                                                    <div className="[&>svg]:w-4 [&>svg]:h-4">
-                                                        {category.icon}
-                                                    </div>
-                                                    {category.title}
-                                                </h3>
-                                            )}
-                                            <ul className="space-y-2">
-                                                {category.calculators.slice(0, 5).map((calc, index) => (
-                                                    <li key={index}>
-                                                        <Link
-                                                            href={calc.href}
-                                                            className="text-xs text-slate-500 dark:text-slate-400 hover:text-primary dark:hover:text-primary transition-colors line-clamp-1"
-                                                        >
-                                                            {calc.name}
-                                                        </Link>
-                                                    </li>
-                                                ))}
-                                                {category.calculators.length > 5 && (
-                                                    <li>
-                                                        <Link
-                                                            href={
-                                                                category.title === "General Health / Lifestyle" ? "/general-health" :
-                                                                    category.title === "Fitness & Diet" ? "/fitness-diet" :
-                                                                        category.title === "Finance & Driving" ? "/finance-driving" :
-                                                                            category.title === "Home & Property" ? "/home-property" :
-                                                                                category.title === "Misc & Lifestyle" ? "/misc-lifestyle" :
-                                                                                    category.title === "Sleep" ? "/sleep" : "/"
-                                                            }
-                                                            className="text-xs font-medium text-primary hover:underline"
-                                                        >
-                                                            + {category.calculators.length - 5} more
-                                                        </Link>
-                                                    </li>
-                                                )}
-                                            </ul>
-                                        </div>
-                                    ))}
+                                    {categories.map((category) => {
+                                        const isLandingPage = (category.title === "General Health / Lifestyle" || category.title === "Fitness & Diet" || category.title === "Finance & Driving" || category.title === "Home & Property" || category.title === "Misc & Lifestyle" || category.title === "Sleep" || category.title === "UK Stock Market & Investments");
+                                        const landingPageUrl = category.title === "General Health / Lifestyle" ? "/general-health" : category.title === "Fitness & Diet" ? "/fitness-diet" : category.title === "Finance & Driving" ? "/finance-driving" : category.title === "Home & Property" ? "/home-property" : category.title === "Misc & Lifestyle" ? "/misc-lifestyle" : category.title === "Sleep" ? "/sleep" : "/uk-stocks-investments";
+
+                                        return (
+                                            <HeaderCategoryDropdown key={category.title} category={category} isLandingPage={isLandingPage} landingPageUrl={landingPageUrl} />
+                                        );
+                                    })}
                                 </div>
                             </div>
                         </div>

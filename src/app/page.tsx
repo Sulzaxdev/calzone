@@ -4,7 +4,7 @@ import { Activity, Scale, Heart, Baby, Droplets, ChevronRight } from "lucide-rea
 
 import Image from "next/image";
 
-import { categories } from "@/lib/calculators";
+import { categories, allCalculators } from "@/lib/calculators";
 
 export default function Home() {
 
@@ -84,6 +84,33 @@ export default function Home() {
             <p className="text-slate-500 dark:text-slate-400 text-sm leading-relaxed">
               Calculators tailored for every stage of life, from growth percentiles to sophisticated retirement planning.
             </p>
+          </div>
+        </div>
+      </section>
+
+      {/* --- TOP CALCULATORS MARQUEE --- */}
+      <section className="w-full overflow-hidden py-10 mb-16 border-y border-slate-200/60 dark:border-slate-800/60 bg-slate-50/50 dark:bg-slate-900/20 relative flex flex-col items-center">
+        <div className="absolute inset-y-0 left-0 w-24 bg-linear-to-r from-background to-transparent z-10 pointer-events-none"></div>
+        <div className="absolute inset-y-0 right-0 w-24 bg-linear-to-l from-background to-transparent z-10 pointer-events-none"></div>
+
+        <h3 className="text-sm font-bold tracking-widest uppercase text-slate-400 dark:text-slate-500 mb-6 flex items-center gap-2">
+          Trending Calculators
+        </h3>
+
+        {/* Marquee Container */}
+        <div className="w-full flex">
+          <div className="flex w-max animate-marquee hover:paused gap-4 px-4">
+            {/* Double the list to ensure seamless looping */}
+            {[...allCalculators.slice(0, 12), ...allCalculators.slice(0, 12)].map((calc, i) => (
+              <Link
+                key={`${calc.name}-${i}`}
+                href={calc.href}
+                className="flex flex-col justify-center px-6 py-4 bg-white dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-2xl min-w-[280px] hover:border-primary/50 hover:shadow-lg hover:shadow-primary/5 transition-all group"
+              >
+                <span className="font-semibold text-slate-800 dark:text-slate-200 group-hover:text-primary transition-colors text-base line-clamp-1">{calc.name}</span>
+                <span className="text-xs text-slate-500 dark:text-slate-400 mt-1 line-clamp-1">{calc.desc}</span>
+              </Link>
+            ))}
           </div>
         </div>
       </section>

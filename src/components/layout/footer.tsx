@@ -121,20 +121,6 @@ export function Footer() {
                                                     View Hub
                                                 </span>
                                             </Link>
-                                            <div className="mt-4">
-                                                <ul className="space-y-4 pb-4 px-2">
-                                                    {category.calculators.map((calc, index) => (
-                                                        <li key={index}>
-                                                            <Link
-                                                                href={calc.href}
-                                                                className="text-[14px] text-slate-500/90 dark:text-slate-400 hover:text-primary dark:hover:text-primary transition-colors line-clamp-1 block"
-                                                            >
-                                                                {calc.name}
-                                                            </Link>
-                                                        </li>
-                                                    ))}
-                                                </ul>
-                                            </div>
                                         </div>
                                     ) : (
                                         <FooterCategory category={category} />

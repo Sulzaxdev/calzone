@@ -61,12 +61,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
             changeFrequency: 'weekly',
             priority: 0.8,
         },
-        {
-            url: `${baseUrl}/uk-stocks-investments`,
-            lastModified: new Date(),
-            changeFrequency: 'weekly',
-            priority: 0.8,
-        },
     ];
 
     // Dynamic calculater routes
