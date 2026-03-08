@@ -6,8 +6,11 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { AlertCircle, RotateCcw, CheckCircle2, TrendingUp, Info } from "lucide-react";
+import { AlertCircle, RotateCcw, CheckCircle2, TrendingUp, Info, Download } from "lucide-react";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
+import React, { useRef } from "react";
+import html2canvas from "html2canvas";
+import jsPDF from "jspdf";
 
 export function BMICalculatorForm() {
     const [unit, setUnit] = useState<"metric" | "imperial">("metric");
@@ -23,6 +26,40 @@ export function BMICalculatorForm() {
 
     const [error, setError] = useState("");
     const [result, setResult] = useState<any>(null);
+
+    const [isExporting, setIsExporting] = useState(false);
+    const calculatorRef = useRef<HTMLDivElement>(null);
+
+    const exportPDF = async () => {
+        if (!calculatorRef.current) return;
+        setIsExporting(true);
+
+        try {
+            await new Promise((resolve) => setTimeout(resolve, 100));
+            const canvas = await html2canvas(calculatorRef.current, {
+                scale: 2,
+                backgroundColor: "#ffffff",
+                windowWidth: calculatorRef.current.scrollWidth,
+                windowHeight: calculatorRef.current.scrollHeight,
+            });
+            const imgData = canvas.toDataURL("image/png");
+            const pdf = new jsPDF("p", "mm", "a4");
+            const pdfWidth = pdf.internal.pageSize.getWidth();
+            const pdfHeight = (canvas.height * pdfWidth) / canvas.width;
+
+            pdf.setFontSize(20);
+            pdf.text("BMI Calculation Report", 15, 15);
+            pdf.setFontSize(10);
+            pdf.setTextColor(100);
+            pdf.text(`Generated on: ${new Date().toLocaleDateString()}`, 15, 22);
+            pdf.addImage(imgData, "PNG", 15, 30, pdfWidth - 30, pdfHeight - 30);
+            pdf.save("BMI-Calculation.pdf");
+        } catch (err) {
+            console.error("Failed to export", err);
+        } finally {
+            setIsExporting(false);
+        }
+    };
 
     const calculateBMI = (e: React.FormEvent) => {
         e.preventDefault();
@@ -214,7 +251,10 @@ export function BMICalculatorForm() {
             {/* RESULTS RENDERING */}
             {result && (
                 <div className="mt-10 animate-in slide-in-from-bottom-4 duration-500">
-                    <div className="p-8 rounded-3xl bg-linear-to-br from-slate-50 to-blue-50 dark:from-slate-900/50 dark:to-blue-900/20 border border-slate-200 dark:border-slate-800 text-center relative overflow-hidden">
+                    <div
+                        ref={calculatorRef}
+                        className="p-8 rounded-3xl bg-linear-to-br from-slate-50 to-blue-50 dark:from-slate-900/50 dark:to-blue-900/20 border border-slate-200 dark:border-slate-800 text-center relative overflow-hidden"
+                    >
 
                         <div className="absolute top-4 right-4">
                             <TooltipProvider>
@@ -284,6 +324,21 @@ export function BMICalculatorForm() {
                                 <span>40+</span>
                             </div>
                         </div>
+                    </div>
+
+                    <div className="flex justify-end pt-4">
+                        <button
+                            onClick={exportPDF}
+                            disabled={isExporting}
+                            className="inline-flex items-center gap-2 px-6 py-3 bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300 text-sm font-bold rounded-2xl transition-colors disabled:opacity-50 shadow-sm"
+                        >
+                            {isExporting ? (
+                                <div className="w-4 h-4 border-2 border-slate-400 border-t-transparent shrink-0 rounded-full animate-spin"></div>
+                            ) : (
+                                <Download className="w-4 h-4" />
+                            )}
+                            Export Result to PDF
+                        </button>
                     </div>
                 </div>
             )}

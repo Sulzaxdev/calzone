@@ -141,9 +141,9 @@ export function Footer() {
 
                     <div className="flex items-center gap-6 font-medium">
                         <Link href="/blog" className="hover:text-primary transition-colors">Blog</Link>
-                        <Link href="#" className="hover:text-primary transition-colors">Privacy Policy</Link>
-                        <Link href="#" className="hover:text-primary transition-colors">Terms of Service</Link>
-                        <Link href="#" className="hover:text-primary transition-colors">Contact</Link>
+                        <Link href="/privacy-policy" className="hover:text-primary transition-colors">Privacy Policy</Link>
+                        <Link href="/terms-of-service" className="hover:text-primary transition-colors">Terms of Service</Link>
+                        <Link href="/contact-us" className="hover:text-primary transition-colors">Contact</Link>
                     </div>
                 </div>
             </div>

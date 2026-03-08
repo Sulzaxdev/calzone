@@ -1,4 +1,4 @@
-import { Activity, Scale, Coffee, Moon, TrendingUp } from "lucide-react";
+import { Activity, Scale, Coffee, Moon, TrendingUp, Calculator, Hammer } from "lucide-react";
 
 export const categories = [
     {
@@ -35,6 +35,10 @@ export const categories = [
         title: "Finance & Driving",
         icon: <Activity className="h-6 w-6 text-primary" />,
         calculators: [
+            { name: "Salary Calculator", href: "/salary-calculator-uk", desc: "Calculate take-home pay after tax and NI" },
+            { name: "Income Tax Calculator", href: "/income-tax-calculator-uk", desc: "UK Income Tax and National Insurance" },
+            { name: "VAT Calculator", href: "/vat-calculator-uk", desc: "Add or remove UK VAT" },
+            { name: "Redundancy Calculator", href: "/redundancy-calculator-uk", desc: "Calculate Statutory Redundancy Pay (SRP)" },
             { name: "Holiday Budget", href: "/holiday-calculator-uk", desc: "Estimate your vacation cost" },
             { name: "Annual Leave", href: "/annual-leave-calculator-uk", desc: "UK statutory holiday entitlement" },
             { name: "Mileage Claim", href: "/mileage-calculator-uk", desc: "Calculate business travel expense" },
@@ -69,6 +73,20 @@ export const categories = [
         calculators: [
             { name: "Tattoo Cost", href: "/tattoo-cost-calculator-uk", desc: "Estimate UK tattoo pricing" },
             { name: "University Grade", href: "/university-grade-calculator-uk", desc: "Calculate degree classification" },
+        ],
+    },
+    {
+        title: "Maths & Percentages",
+        icon: <Calculator className="h-6 w-6 text-primary" />,
+        calculators: [
+            { name: "Percentage Calculator", href: "/percentage-calculator-uk", desc: "Calculate fractions, differences, and percentage increases" },
+        ],
+    },
+    {
+        title: "Construction & DIY",
+        icon: <Hammer className="h-6 w-6 text-primary" />,
+        calculators: [
+            { name: "Concrete Calculator", href: "/concrete-calculator-uk", desc: "Calculate concrete volume and bags needed" },
         ],
     },
     {

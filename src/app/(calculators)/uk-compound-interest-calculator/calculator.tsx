@@ -10,9 +10,12 @@ import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage, FormDescription } from "@/components/ui/form";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { Calculator, RotateCcw, TrendingUp, Info, Wallet, Timer, ArrowRight, Layers, Sparkles } from "lucide-react";
+import { Calculator, RotateCcw, TrendingUp, Info, Wallet, Timer, ArrowRight, Layers, Sparkles, Download } from "lucide-react";
 import { CalculatorCard } from "@/components/calculator-card";
 import { Slider } from "@/components/ui/slider";
+import React, { useRef } from "react";
+import html2canvas from "html2canvas";
+import jsPDF from "jspdf";
 
 const formSchema = z.object({
     principal: z.coerce.number().min(0, "Principal cannot be negative"),
@@ -32,6 +35,40 @@ export function CompoundCalculatorForm() {
         totalInterest: number;
         realValue: number;
     } | null>(null);
+
+    const [isExporting, setIsExporting] = useState(false);
+    const calculatorRef = useRef<HTMLDivElement>(null);
+
+    const exportPDF = async () => {
+        if (!calculatorRef.current) return;
+        setIsExporting(true);
+
+        try {
+            await new Promise((resolve) => setTimeout(resolve, 100));
+            const canvas = await html2canvas(calculatorRef.current, {
+                scale: 2,
+                backgroundColor: "#1e293b", // slate-900 bg for dark card
+                windowWidth: calculatorRef.current.scrollWidth,
+                windowHeight: calculatorRef.current.scrollHeight,
+            });
+            const imgData = canvas.toDataURL("image/png");
+            const pdf = new jsPDF("p", "mm", "a4");
+            const pdfWidth = pdf.internal.pageSize.getWidth();
+            const pdfHeight = (canvas.height * pdfWidth) / canvas.width;
+
+            pdf.setFontSize(20);
+            pdf.text("Compound Interest Projection", 15, 15);
+            pdf.setFontSize(10);
+            pdf.setTextColor(100);
+            pdf.text(`Generated on: ${new Date().toLocaleDateString()}`, 15, 22);
+            pdf.addImage(imgData, "PNG", 15, 30, pdfWidth - 30, pdfHeight - 30);
+            pdf.save("Compound-Interest-Projection.pdf");
+        } catch (err) {
+            console.error("Failed to export", err);
+        } finally {
+            setIsExporting(false);
+        }
+    };
 
     const form = useForm<FormValues>({
         resolver: zodResolver(formSchema) as any,
@@ -218,7 +255,10 @@ export function CompoundCalculatorForm() {
                 </div>
 
                 <div className="lg:col-span-2 space-y-6">
-                    <div className={`p-8 rounded-[3rem] transition-all duration-700 border-none relative overflow-hidden h-full flex flex-col justify-center shadow-2xl ${result ? 'bg-slate-900 text-white translate-y-0 opacity-100' : 'bg-slate-50 dark:bg-slate-900/40 text-slate-300 translate-y-4 opacity-70'}`}>
+                    <div
+                        ref={calculatorRef}
+                        className={`p-8 rounded-[3rem] transition-all duration-700 border-none relative overflow-hidden h-full flex flex-col justify-center shadow-2xl ${result ? 'bg-slate-900 text-white translate-y-0 opacity-100' : 'bg-slate-50 dark:bg-slate-900/40 text-slate-300 translate-y-4 opacity-70'}`}
+                    >
                         {result ? (
                             <div className="relative z-10 space-y-10 animate-in fade-in zoom-in duration-700">
                                 <div className="text-center group">
@@ -271,6 +311,25 @@ export function CompoundCalculatorForm() {
                         )}
                         <div className="absolute -bottom-40 -left-40 w-96 h-96 bg-primary/10 rounded-full blur-[100px]"></div>
                     </div>
+
+                    {result && (
+                        <div className="flex justify-end pt-2">
+                            <Button
+                                type="button"
+                                variant="outline"
+                                onClick={exportPDF}
+                                disabled={isExporting}
+                                className="inline-flex items-center gap-2 px-6 py-3 bg-white dark:bg-slate-900 hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-700 dark:text-slate-300 text-sm font-bold rounded-2xl transition-colors disabled:opacity-50 shadow-sm border border-slate-200 dark:border-slate-800"
+                            >
+                                {isExporting ? (
+                                    <div className="w-4 h-4 border-2 border-slate-400 border-t-transparent shrink-0 rounded-full animate-spin"></div>
+                                ) : (
+                                    <Download className="w-4 h-4" />
+                                )}
+                                Export PDF Report
+                            </Button>
+                        </div>
+                    )}
                 </div>
             </div>
         </CalculatorCard>
