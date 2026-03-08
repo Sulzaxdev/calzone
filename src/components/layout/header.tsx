@@ -2,9 +2,10 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import { Search, User, ChevronDown } from "lucide-react";
+import { Search, User, ChevronDown, Menu, X } from "lucide-react";
 import { ThemeToggle } from "@/components/theme-toggle";
 import { useState, useRef, useEffect, ReactNode } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import { allCalculators, categories } from "@/lib/calculators";
 
 interface CategoryProp {
@@ -77,7 +78,17 @@ function HeaderCategoryDropdown({ category, isLandingPage, landingPageUrl }: { c
 export function Header() {
     const [searchQuery, setSearchQuery] = useState("");
     const [showResults, setShowResults] = useState(false);
+    const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
     const searchRef = useRef<HTMLDivElement>(null);
+
+    // Prevent scrolling when mobile menu is open
+    useEffect(() => {
+        if (isMobileMenuOpen) {
+            document.body.style.overflow = "hidden";
+        } else {
+            document.body.style.overflow = "unset";
+        }
+    }, [isMobileMenuOpen]);
 
     useEffect(() => {
         const handleClickOutside = (event: MouseEvent) => {
@@ -207,8 +218,94 @@ export function Header() {
                         <User className="w-4 h-4 text-slate-700 dark:text-slate-200" />
                         <span className="sr-only">User</span>
                     </Link>
+
+                    {/* Mobile Menu Button */}
+                    <button
+                        onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+                        className="xl:hidden flex items-center justify-center bg-primary text-white p-2 rounded-full shadow-lg shadow-primary/20 hover:scale-105 active:scale-95 transition-all"
+                        aria-label="Toggle Menu"
+                    >
+                        {isMobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+                    </button>
                 </div>
             </div>
+
+            {/* Mobile Menu Drawer */}
+            <AnimatePresence>
+                {isMobileMenuOpen && (
+                    <motion.div
+                        initial={{ opacity: 0, height: 0 }}
+                        animate={{ opacity: 1, height: "auto" }}
+                        exit={{ opacity: 0, height: 0 }}
+                        className="xl:hidden bg-white dark:bg-slate-950 border-t border-slate-200 dark:border-slate-800 overflow-hidden"
+                    >
+                        <nav className="container mx-auto px-4 py-8 flex flex-col gap-6 max-h-[80vh] overflow-y-auto">
+                            <div className="grid grid-cols-1 gap-8">
+                                <div className="space-y-4">
+                                    <h3 className="text-xs font-black uppercase tracking-[0.2em] text-slate-400 dark:text-slate-500 pb-2 border-b border-slate-100 dark:border-slate-800">
+                                        Quick Links
+                                    </h3>
+                                    <div className="flex flex-col gap-3">
+                                        <Link href="/general-health" onClick={() => setIsMobileMenuOpen(false)} className="text-lg font-bold text-slate-900 dark:text-white hover:text-primary transition-colors flex items-center justify-between">
+                                            Health Calculators <ChevronDown className="w-4 h-4 -rotate-90" />
+                                        </Link>
+                                        <Link href="/finance-driving" onClick={() => setIsMobileMenuOpen(false)} className="text-lg font-bold text-slate-900 dark:text-white hover:text-primary transition-colors flex items-center justify-between">
+                                            Finance Calculators <ChevronDown className="w-4 h-4 -rotate-90" />
+                                        </Link>
+                                        <Link href="/blog" onClick={() => setIsMobileMenuOpen(false)} className="text-lg font-bold text-slate-900 dark:text-white hover:text-primary transition-colors flex items-center justify-between">
+                                            Blog <ChevronDown className="w-4 h-4 -rotate-90" />
+                                        </Link>
+                                    </div>
+                                </div>
+
+                                <div className="space-y-4">
+                                    <h3 className="text-xs font-black uppercase tracking-[0.2em] text-slate-400 dark:text-slate-500 pb-2 border-b border-slate-100 dark:border-slate-800">
+                                        All Categories
+                                    </h3>
+                                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-6">
+                                        {categories.map((category) => {
+                                            const isLandingPage = (category.title === "General Health / Lifestyle" || category.title === "Fitness & Diet" || category.title === "Finance & Driving" || category.title === "Home & Property" || category.title === "Misc & Lifestyle" || category.title === "Sleep" || category.title === "UK Stock Market & Investments");
+                                            const landingPageUrl = category.title === "General Health / Lifestyle" ? "/general-health" : category.title === "Fitness & Diet" ? "/fitness-diet" : category.title === "Finance & Driving" ? "/finance-driving" : category.title === "Home & Property" ? "/home-property" : category.title === "Misc & Lifestyle" ? "/misc-lifestyle" : category.title === "Sleep" ? "/sleep" : "/uk-stocks-investments";
+
+                                            return (
+                                                <div key={category.title} className="space-y-3">
+                                                    <Link
+                                                        href={isLandingPage ? landingPageUrl : "#"}
+                                                        onClick={() => setIsMobileMenuOpen(false)}
+                                                        className="font-bold text-slate-900 dark:text-white flex items-center gap-2 hover:text-primary transition-colors"
+                                                    >
+                                                        <span className="[&>svg]:w-4 [&>svg]:h-4 text-primary">{category.icon}</span>
+                                                        {category.title}
+                                                    </Link>
+                                                    <ul className="pl-6 space-y-2 border-l border-slate-100 dark:border-slate-900">
+                                                        {category.calculators.slice(0, 3).map((calc, i) => (
+                                                            <li key={i}>
+                                                                <Link
+                                                                    href={calc.href}
+                                                                    onClick={() => setIsMobileMenuOpen(false)}
+                                                                    className="text-sm text-slate-500 dark:text-slate-400 hover:text-primary transition-colors line-clamp-1"
+                                                                >
+                                                                    {calc.name}
+                                                                </Link>
+                                                            </li>
+                                                        ))}
+                                                    </ul>
+                                                </div>
+                                            );
+                                        })}
+                                    </div>
+                                </div>
+
+                                <div className="pt-4 border-t border-slate-100 dark:border-slate-800 flex flex-col gap-4 mb-4">
+                                    <Link href="/about" onClick={() => setIsMobileMenuOpen(false)} className="text-sm font-medium text-slate-500 dark:text-slate-400 hover:text-primary transition-colors">About CalZone</Link>
+                                    <Link href="/disclaimer" onClick={() => setIsMobileMenuOpen(false)} className="text-sm font-medium text-slate-500 dark:text-slate-400 hover:text-primary transition-colors">Disclaimer</Link>
+                                    <Link href="/contact-us" onClick={() => setIsMobileMenuOpen(false)} className="text-sm font-medium text-slate-500 dark:text-slate-400 hover:text-primary transition-colors">Contact Us</Link>
+                                </div>
+                            </div>
+                        </nav>
+                    </motion.div>
+                )}
+            </AnimatePresence>
         </header>
     );
 }

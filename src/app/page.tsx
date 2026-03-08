@@ -7,6 +7,9 @@ import Image from "next/image";
 import { categories, allCalculators } from "@/lib/calculators";
 
 import { StatCounter } from "@/components/ui/stat-counter";
+import { FAQAccordion } from "@/components/ui/faq-accordion";
+import { HelpCircle } from "lucide-react";
+
 
 export default function Home() {
 
@@ -297,88 +300,43 @@ export default function Home() {
       </section>
 
 
-      {/* --- TRENDING CALCULATORS (Inspired by input_file_0.png) --- */}
-      <section className="bg-slate-50/50 dark:bg-slate-900/50 py-24 mb-24 border-y border-slate-200/50 dark:border-slate-800/50">
-        <div className="mx-auto px-6 max-w-[1600px]">
-          <h3 className="text-center text-[10px] font-black tracking-[0.4em] uppercase text-slate-400 dark:text-slate-500 mb-16 font-serif">
-            Trending Suite
-          </h3>
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-8">
-            {allCalculators.slice(0, 6).map((calc) => (
-              <Link
-                key={calc.href}
-                href={calc.href}
-                className="bg-white dark:bg-slate-950 p-8 rounded-[2rem] shadow-sm hover:shadow-2xl hover:shadow-slate-200/50 dark:hover:shadow-none transition-all border border-slate-100 dark:border-slate-800 group h-full flex flex-col justify-center text-center hover:-translate-y-1"
-              >
-                <div className="font-bold text-slate-800 dark:text-slate-200 text-lg mb-2 font-serif group-hover:text-blue-600 transition-colors italic">
-                  {calc.name}
-                </div>
-                <div className="text-[11px] text-slate-500 dark:text-slate-400 leading-tight italic font-serif opacity-70">
-                  {calc.desc}
-                </div>
-              </Link>
-            ))}
-          </div>
-        </div>
+     
+      {/* --- FAQ SECTION --- */}
+      <section className="container mx-auto px-4 mb-32 max-w-4xl">
+        <FAQAccordion
+          title="Frequently Asked Questions"
+          faqs={[
+            {
+              question: "What is CalZone?",
+              answer: "CalZone is a free UK calculator hub covering everything from health and fitness to finance, property and investments. Whatever you need to work out, there is a tool here for it. No sign-up, no cost, no hassle."
+            },
+            {
+              question: "Can I save or share my calculation results?",
+              answer: "Absolutely. Unlike most calculator websites, CalZone lets you export your results as a PDF in one click. Perfect for sharing with your doctor, mortgage adviser or just keeping for your own records."
+            },
+            {
+              question: "How accurate are the results?",
+              answer: "Very. Every calculator is built on verified UK data sources and updated regularly to reflect the latest rates, tax bands and official guidelines. That said, for major financial or medical decisions, always back your results up with a qualified professional."
+            },
+            {
+              question: "How often are calculators updated?",
+              answer: "Regularly. Whenever tax rates change, HMRC updates its guidelines or NHS benchmarks shift, we update the relevant tools to match. You will always get results based on current UK standards."
+            },
+            {
+              question: "Are CalZone results good enough for professional use?",
+              answer: "Our results are highly accurate and great for planning, budgeting and informed decision-making. However, CalZone is an informational tool, for anything with serious financial, legal or medical consequences, we would always recommend speaking to a qualified professional too."
+            },
+            {
+              question: "Are your calculators built for the UK?",
+              answer: "Yes, and this matters more than people realise. Every tool on CalZone is built specifically for UK users. Our financial calculators follow HMRC guidelines, our health tools align with NHS benchmarks & our driving calculators reflect current UK rates and legislation."
+            }
+          ]}
+        />
       </section>
 
       {/* Main Categories Section */}
-      <div className="mx-auto px-6 pb-40 max-w-[1600px]">
-        <div className="grid gap-32">
-          {categories.map((category) => (
-            <div key={category.title} className="space-y-16">
-              <div className="flex flex-col items-center text-center space-y-6">
-                <div className="text-[10px] font-black tracking-[0.4em] uppercase text-blue-600 dark:text-blue-400 font-serif">
-                  Specialized Modules
-                </div>
-                {(category.title === "General Health / Lifestyle" || category.title === "Fitness & Diet" || category.title === "UK Stock Market & Investments") ? (
-                  <Link
-                    href={category.title === "General Health / Lifestyle" ? "/general-health" : category.title === "Fitness & Diet" ? "/fitness-diet" : "/uk-stocks-investments"}
-                    className="group"
-                  >
-                    <h2 className="text-5xl md:text-6xl font-black tracking-tighter font-serif italic group-hover:text-blue-600 transition-colors text-glass">
-                      {category.title}
-                    </h2>
-                  </Link>
-                ) : (
-                  <h2 className="text-5xl md:text-6xl font-black tracking-tighter font-serif italic text-glass">{category.title}</h2>
-                )}
-                <div className="w-20 h-1 bg-linear-to-r from-blue-600 to-transparent rounded-full opacity-20"></div>
-              </div>
 
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
-                {category.calculators.map((calc) => (
-                  <Link key={calc.name} href={calc.href} className="group h-full">
-                    <div className="bg-white dark:bg-slate-950 border border-slate-100 dark:border-slate-800 rounded-[2.5rem] p-10 h-full transition-all hover:shadow-[0_32px_64px_-16px_rgba(0,0,0,0.08)] dark:hover:shadow-none hover:-translate-y-2 flex flex-col">
-                      <div className="flex items-center justify-between mb-8">
-                        <div className="p-4 bg-slate-50 dark:bg-slate-900 rounded-2xl group-hover:bg-blue-50 dark:group-hover:bg-blue-900/20 transition-colors text-slate-400 group-hover:text-blue-600">
-                          {category.icon}
-                        </div>
-                        <div className="w-10 h-10 rounded-full border border-slate-100 dark:border-slate-800 flex items-center justify-center text-slate-300 group-hover:text-blue-600 group-hover:border-blue-200 transition-all">
-                          <ChevronRight className="w-5 h-5 group-hover:translate-x-0.5 transition-transform" />
-                        </div>
-                      </div>
-                      <h3 className="text-2xl font-bold text-slate-900 dark:text-white mb-4 font-serif italic tracking-tight">
-                        {calc.name}
-                      </h3>
-                      <p className="text-slate-500 dark:text-slate-400 text-sm leading-relaxed mb-8 font-serif italic opacity-70">
-                        {calc.desc}
-                      </p>
-                      <div className="mt-auto pt-8 border-t border-slate-50 dark:border-slate-900 flex items-center justify-between">
-                        <span className="text-[10px] font-black uppercase tracking-[0.25em] text-slate-400 group-hover:text-blue-600 transition-colors">
-                          Access Tool
-                        </span>
-                        <div className="w-2 h-2 rounded-full bg-slate-100 dark:bg-slate-800 group-hover:bg-blue-600 transition-colors"></div>
-                      </div>
-                    </div>
-                  </Link>
-                ))}
-              </div>
-            </div>
-          ))}
-        </div>
-      </div>
+      
     </div >
   );
 }
