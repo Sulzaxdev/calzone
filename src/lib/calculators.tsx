@@ -18,6 +18,9 @@ export const categories = [
             { name: "Frailty Score", href: "/frailty-score-calculator-uk", desc: "Assess physical decline" },
             { name: "Ape Index", href: "/ape-index-calculator", desc: "Arm span vs height ratio" },
             { name: "Visceral Fat", href: "/visceral-fat-calculator", desc: "Estimate hidden belly fat" },
+            { name: "Pregnancy BMI UK", href: "/pregnancy-bmi-calculator-uk", desc: "Healthy weight gain during pregnancy" },
+            { name: "Childcare Cost", href: "/childcare-cost-calculator-uk", desc: "Estimate UK childcare expenses" },
+            { name: "School Age", href: "/school-age-calculator-uk", desc: "Find which school year a child belongs in" },
         ],
     },
     {
@@ -29,10 +32,16 @@ export const categories = [
             { name: "Water Intake", href: "/water-intake-calculator", desc: "Daily hydration needs" },
             { name: "Intermittent Fasting", href: "/intermittent-fasting-calculator", desc: "Eating window planner" },
             { name: "Water Fast", href: "/water-fast-calculator", desc: "Estimate weight loss during fast" },
+            { name: "Breastfeeding Calories", href: "/breastfeeding-calorie-calculator-uk", desc: "Daily caloric needs for nursing" },
+            { name: "Weight Gain", href: "/calorie-calculator-to-gain-weight-uk", desc: "Calories needed to build lean mass" },
+            { name: "Dog Calories", href: "/dog-calorie-calculator-uk", desc: "Daily energy needs for your dog" },
+            { name: "Resting Calories", href: "/resting-calorie-calculator-uk", desc: "Calories burned at rest" },
+            { name: "Rucking Calories", href: "/rucking-calorie-calculator-uk", desc: "Burn rate with a weighted pack" },
+            { name: "Swimming Calories", href: "/swimming-calorie-calculator-uk", desc: "Workout intensity based calorie burn" },
         ],
     },
     {
-        title: "Finance & Driving",
+        title: "Finance",
         icon: <Activity className="h-6 w-6 text-primary" />,
         calculators: [
             { name: "Salary Calculator", href: "/salary-calculator-uk", desc: "Calculate take-home pay after tax and NI" },
@@ -41,6 +50,17 @@ export const categories = [
             { name: "Redundancy Calculator", href: "/redundancy-calculator-uk", desc: "Calculate Statutory Redundancy Pay (SRP)" },
             { name: "Holiday Budget", href: "/holiday-calculator-uk", desc: "Estimate your vacation cost" },
             { name: "Annual Leave", href: "/annual-leave-calculator-uk", desc: "UK statutory holiday entitlement" },
+            { name: "Loan Calculator", href: "/loan-calculator-uk", desc: "Monthly payments and total interest" },
+            { name: "Notice Period", href: "/notice-period-calculator-uk", desc: "Statutory and contractual notice helper" },
+            { name: "Junior Doctor Salary", href: "/junior-doctor-salary-calculator-uk", desc: "Net pay for junior medical staff" },
+            { name: "Electricity Cost", href: "/electricity-cost-calculator-uk", desc: "Calculate appliance running costs" },
+            { name: "Gas Bill", href: "/gas-bill-calculator-uk", desc: "Estimate monthly gas expenditure" },
+        ],
+    },
+    {
+        title: "Automotive",
+        icon: <Activity className="h-6 w-6 text-primary" />,
+        calculators: [
             { name: "Mileage Claim", href: "/mileage-calculator-uk", desc: "Calculate business travel expense" },
             { name: "Road Tax", href: "/road-tax-calculator-uk", desc: "UK Vehicle Excise Duty" },
             { name: "Fuel Cost", href: "/fuel-cost-calculator-uk", desc: "Journey petrol/diesel cost" },
@@ -50,6 +70,13 @@ export const categories = [
             { name: "Drink Drive Limit", href: "/drink-drive-limit-calculator-uk", desc: "Estimate BAC levels" },
             { name: "Taxi Fare", href: "/taxi-fare-calculator-uk", desc: "UK cab fare estimator" },
             { name: "EV Charging Cost", href: "/ev-charging-cost-calculator-uk", desc: "Calculate home/public charging" },
+            { name: "Car Accident Comp", href: "/car-accident-compensation-calculator-uk", desc: "Estimate injury settlement" },
+            { name: "Car Depreciation", href: "/car-depreciation-calculator-uk", desc: "Calculate vehicle value loss" },
+            { name: "Car Tax Refund", href: "/car-tax-refund-calculator-uk", desc: "Estimated VED refund amount" },
+            { name: "Car Towing Cost", href: "/car-towing-cost-calculator-uk", desc: "Estimate vehicle recovery fees" },
+            { name: "Electric vs Petrol", href: "/petrol-vs-electric-car-running-cost-calculator-uk", desc: "Total cost of ownership comparison" },
+            { name: "Used Car Tax", href: "/used-car-tax-calculator-uk", desc: "Calculate VED for older vehicles" },
+            { name: "Journey Cost", href: "/journey-cost-calculator-uk", desc: "Total fuel and toll costs for a trip" },
         ],
     },
     {
@@ -65,6 +92,26 @@ export const categories = [
             { name: "Tree Removal", href: "/tree-removal-cost-calculator-uk", desc: "Estimate tree felling costs" },
             { name: "Soffit & Fascia", href: "/soffit-and-fascia-cost-calculator", desc: "Estimate roofline replacement" },
             { name: "Mortgage Calculator UK", href: "/mortgage-calculator-uk", desc: "Calculate monthly EMI and total interest" },
+            { name: "Architects Fee", href: "/architects-fee-calculator-uk", desc: "Estimate professional design costs" },
+            { name: "Cavity Insulation", href: "/cavity-wall-insulation-cost-calculator-uk", desc: "Save on energy bills with insulation" },
+            { name: "Garage Roof", href: "/garage-roof-replacement-cost-calculator-uk", desc: "Replace felt or metal garage roofs" },
+            { name: "House Extension", href: "/house-extension-cost-calculator-uk", desc: "General guide for extension budgeting" },
+            { name: "House Survey", href: "/house-survey-cost-calculator-uk", desc: "Homeybuyer or structural survey fees" },
+            { name: "Loft Conversion", href: "/loft-conversion-cost-calculator-uk", desc: "Value added vs construction cost" },
+            { name: "Bathroom Reno", href: "/small-bathroom-renovation-cost-calculator-uk", desc: "Budgeting for a compact bathroom refresh" },
+            { name: "Solar Panel Cost", href: "/solar-panel-cost-calculator-uk", desc: "Installation fees and energy savings" },
+        ],
+    },
+    {
+        title: "Construction & DIY",
+        icon: <Hammer className="h-6 w-6 text-primary" />,
+        calculators: [
+            { name: "Concrete Calculator", href: "/concrete-calculator-uk", desc: "Calculate concrete volume and bags needed" },
+            { name: "Garden Wall Cost", href: "/building-garden-wall-cost-calculator-uk", desc: "Estimate bricks and labor for a wall" },
+            { name: "Decking Cost", href: "/decking-cost-calculator-uk", desc: "Materials and labor for garden decking" },
+            { name: "Epoxy Flooring", href: "/epoxy-flooring-cost-calculator-uk", desc: "Cost for resin garage or workshop floors" },
+            { name: "Self-Levelling", href: "/self-levelling-compound-calculator-uk", desc: "Bags needed for floor preparation" },
+            { name: "Tarmac Driveway", href: "/tarmac-driveway-cost-calculator-uk", desc: "Estimate new drive or resurfacing" },
         ],
     },
     {
@@ -73,6 +120,8 @@ export const categories = [
         calculators: [
             { name: "Tattoo Cost", href: "/tattoo-cost-calculator-uk", desc: "Estimate UK tattoo pricing" },
             { name: "University Grade", href: "/university-grade-calculator-uk", desc: "Calculate degree classification" },
+            { name: "Dog Bite Comp", href: "/dog-bite-compensation-calculator-uk", desc: "Estimate animal attack settlement" },
+            { name: "Pet Transport", href: "/pet-transport-cost-calculator-uk", desc: "Estimate animal relocation fees" },
         ],
     },
     {
@@ -80,13 +129,10 @@ export const categories = [
         icon: <Calculator className="h-6 w-6 text-primary" />,
         calculators: [
             { name: "Percentage Calculator", href: "/percentage-calculator-uk", desc: "Calculate fractions, differences, and percentage increases" },
-        ],
-    },
-    {
-        title: "Construction & DIY",
-        icon: <Hammer className="h-6 w-6 text-primary" />,
-        calculators: [
-            { name: "Concrete Calculator", href: "/concrete-calculator-uk", desc: "Calculate concrete volume and bags needed" },
+            { name: "Average Percentage", href: "/average-percentage-calculator-uk", desc: "Find the mean of several percentages" },
+            { name: "Percentage Decrease", href: "/percentage-decrease-calculator-uk", desc: "Calculate reduction from original value" },
+            { name: "Percentage Off", href: "/percentage-off-calculator-uk", desc: "Discount helper for shopping" },
+            { name: "Reverse Percentage", href: "/reverse-percentage-calculator-uk", desc: "Original price before tax or discount" },
         ],
     },
     {

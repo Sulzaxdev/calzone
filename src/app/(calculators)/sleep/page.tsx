@@ -3,6 +3,7 @@ import Image from "next/image";
 import { Card } from "@/components/ui/card";
 import { ChevronRight, Moon, Star, Clock, Brain, Activity, Percent, HeartPulse } from "lucide-react";
 import { categories } from "@/lib/calculators";
+import { BreadcrumbSchema } from "@/components/seo/breadcrumb-schema";
 
 export const metadata = {
     title: "Sleep Optimization Hub | Rest & Recovery Analytics",
@@ -16,6 +17,10 @@ export default function SleepLandingPage() {
 
     return (
         <div className="min-h-screen bg-slate-50 dark:bg-slate-950/20 pb-20 overflow-x-hidden pt-12">
+            <BreadcrumbSchema items={[
+                { name: "Home", item: "/" },
+                { name: "Sleep", item: "/sleep" }
+            ]} />
             {/* --- UNIQUE HERO SECTION --- */}
             <section className="relative w-full min-h-[600px] flex items-center pt-24 pb-16 overflow-hidden">
                 {/* Background Layer */}

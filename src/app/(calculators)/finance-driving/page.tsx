@@ -3,19 +3,24 @@ import Image from "next/image";
 import { Card } from "@/components/ui/card";
 import { ChevronRight, Wallet, Car, TrendingUp, Landmark, ShieldCheck, Zap, Receipt, Percent } from "lucide-react";
 import { categories } from "@/lib/calculators";
+import { BreadcrumbSchema } from "@/components/seo/breadcrumb-schema";
 
 export const metadata = {
-    title: "Finance & Driving Hub | Strategic Wealth & Mobility Intelligence",
-    description: "Master your finances and travel costs with our elite suite of calculators. Precision tools for UK tax, mileage, budgeting, and automotive expenses.",
+    title: "Finance & Wealth Calculators | Strategic Financial Intelligence",
+    description: "Master your finances with our elite suite of calculators. Precision tools for UK tax, salary take-home, budgeting, and loan analytics.",
 };
 
-export default function FinanceDrivingLandingPage() {
-    const category = categories.find(c => c.title === "Finance & Driving");
+export default function FinanceLandingPage() {
+    const category = categories.find(c => c.title === "Finance");
 
     if (!category) return null;
 
     return (
         <div className="min-h-screen bg-slate-50 dark:bg-slate-950/10 pb-20 overflow-x-hidden pt-12">
+            <BreadcrumbSchema items={[
+                { name: "Home", item: "/" },
+                { name: "Finance & Wealth", item: "/finance-driving" }
+            ]} />
             {/* --- UNIQUE HERO SECTION --- */}
             <section className="relative w-full min-h-[600px] flex items-center pt-24 pb-16 overflow-hidden">
                 {/* Background Layer */}

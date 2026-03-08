@@ -1,5 +1,6 @@
 import { MortgageCalculator } from "./calculator";
 import { FAQAccordion } from "@/components/ui/faq-accordion";
+import { BreadcrumbSchema } from "@/components/seo/breadcrumb-schema";
 import { Metadata } from "next";
 import { Home, PoundSterling, Building, ShieldCheck, TrendingDown } from "lucide-react";
 
@@ -35,6 +36,11 @@ export default function MortgageCalculatorPage() {
 
     return (
         <div className="max-w-7xl mx-auto px-4 py-12">
+            <BreadcrumbSchema items={[
+                { name: "Home", item: "/" },
+                { name: "Home & Property", item: "/home-property" },
+                { name: "Mortgage Calculator UK", item: "/mortgage-calculator-uk" }
+            ]} />
             {/* Header Section */}
             <div className="text-center mb-16 space-y-4">
                 <h1 className="text-4xl md:text-6xl font-black tracking-tighter text-slate-900 dark:text-white leading-[1.1]">

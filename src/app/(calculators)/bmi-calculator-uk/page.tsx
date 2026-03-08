@@ -1,6 +1,7 @@
 import { Activity, Scale, ShieldAlert, BookOpen, AlertCircle, HeartPulse, HelpCircle, TrendingUp, Info, Microscope, Users, History, Brain, Apple, Flame, ChevronRight } from "lucide-react";
 import { BMICalculatorForm } from "./calculator";
 import { CalculatorSchema } from "@/components/seo/calculator-schema";
+import { BreadcrumbSchema } from "@/components/seo/breadcrumb-schema";
 import { FAQAccordion } from "@/components/ui/faq-accordion";
 
 export const metadata = {
@@ -30,6 +31,11 @@ export default function BMIPage() {
 
     return (
         <div className="min-h-screen bg-slate-50 dark:bg-slate-950/50 pb-20">
+            <BreadcrumbSchema items={[
+                { name: "Home", item: "/" },
+                { name: "General Health", item: "/general-health" },
+                { name: "BMI Calculator UK", item: "/bmi-calculator-uk" }
+            ]} />
             <CalculatorSchema
                 title="BMI Calculator UK | Healthy Weight Range & Body Mass Index"
                 description="Calculate your Body Mass Index (BMI) using our expert tool. Deep dive into weight categories, metabolic health, ethnic cut-offs, and fitness optimization."

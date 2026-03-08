@@ -3,6 +3,7 @@ import Image from "next/image";
 import { Card } from "@/components/ui/card";
 import { ChevronRight, TrendingUp, BarChart3, PieChart, Landmark, ShieldCheck, Zap, Receipt, Percent, Briefcase } from "lucide-react";
 import { categories } from "@/lib/calculators";
+import { BreadcrumbSchema } from "@/components/seo/breadcrumb-schema";
 
 export const metadata = {
     title: "UK Stock Market & Investment Calculators | Strategic Wealth Intelligence",
@@ -16,6 +17,10 @@ export default function UKStockMarketLandingPage() {
 
     return (
         <div className="min-h-screen bg-slate-50 dark:bg-slate-950/10 pb-20 overflow-x-hidden pt-12">
+            <BreadcrumbSchema items={[
+                { name: "Home", item: "/" },
+                { name: "UK Stock Market & Investments", item: "/uk-stocks-investments" }
+            ]} />
             {/* --- HERO SECTION --- */}
             <section className="relative w-full min-h-[600px] flex items-center pt-24 pb-16 overflow-hidden">
                 {/* Background Layer */}

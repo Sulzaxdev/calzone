@@ -18,6 +18,36 @@ export default function sitemap(): MetadataRoute.Sitemap {
             changeFrequency: 'weekly',
             priority: 0.8,
         },
+        {
+            url: `${baseUrl}/about`,
+            lastModified: new Date(),
+            changeFrequency: 'monthly',
+            priority: 0.5,
+        },
+        {
+            url: `${baseUrl}/contact-us`,
+            lastModified: new Date(),
+            changeFrequency: 'monthly',
+            priority: 0.5,
+        },
+        {
+            url: `${baseUrl}/disclaimer`,
+            lastModified: new Date(),
+            changeFrequency: 'monthly',
+            priority: 0.3,
+        },
+        {
+            url: `${baseUrl}/privacy-policy`,
+            lastModified: new Date(),
+            changeFrequency: 'monthly',
+            priority: 0.3,
+        },
+        {
+            url: `${baseUrl}/terms-of-service`,
+            lastModified: new Date(),
+            changeFrequency: 'monthly',
+            priority: 0.3,
+        },
         // Add Category pages
         {
             url: `${baseUrl}/general-health`,
@@ -38,7 +68,25 @@ export default function sitemap(): MetadataRoute.Sitemap {
             priority: 0.8,
         },
         {
+            url: `${baseUrl}/automotive`,
+            lastModified: new Date(),
+            changeFrequency: 'weekly',
+            priority: 0.8,
+        },
+        {
             url: `${baseUrl}/home-property`,
+            lastModified: new Date(),
+            changeFrequency: 'weekly',
+            priority: 0.8,
+        },
+        {
+            url: `${baseUrl}/construction-diy`,
+            lastModified: new Date(),
+            changeFrequency: 'weekly',
+            priority: 0.8,
+        },
+        {
+            url: `${baseUrl}/maths-percentages`,
             lastModified: new Date(),
             changeFrequency: 'weekly',
             priority: 0.8,
@@ -63,7 +111,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
         },
     ];
 
-    // Dynamic calculater routes
+    // Dynamic calculator routes
     const calculatorRoutes = allCalculators.map((calc) => ({
         url: `${baseUrl}${calc.href}`,
         lastModified: new Date(),

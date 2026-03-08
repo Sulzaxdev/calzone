@@ -11,10 +11,17 @@ import { FAQAccordion } from "@/components/ui/faq-accordion";
 import { HelpCircle } from "lucide-react";
 
 
+import { OrganizationSchema } from "@/components/seo/organization-schema";
+import { WebSiteSchema } from "@/components/seo/website-schema";
+import { BreadcrumbSchema } from "@/components/seo/breadcrumb-schema";
+
 export default function Home() {
 
   return (
     <div className="animate-in fade-in duration-700">
+      <OrganizationSchema />
+      <WebSiteSchema />
+      <BreadcrumbSchema items={[{ name: "Home", item: "/" }]} />
 
 
       {/* --- REFINED HERO SECTION --- */}
@@ -141,97 +148,163 @@ export default function Home() {
                 id: "finance",
                 title: "Finance",
                 icon: <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><line x1="12" y1="1" x2="12" y2="23"></line><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg>,
+                href: "/finance-driving", // Kept as finance-driving for now or update to /finance
                 links: [
-                  { name: "Mortgage Calculator", href: "/mortgage-calculator-uk" },
-                  { name: "Tax Calculator", href: "#" },
-                  { name: "Salary Calculator", href: "#" },
+                  { name: "Salary Calculator", href: "/salary-calculator-uk" },
+                  { name: "Income Tax", href: "/income-tax-calculator-uk" },
                   { name: "VAT Calculator", href: "/vat-calculator-uk" },
-                  { name: "Loan Calculator", href: "#" },
-                  { name: "Compound Interest", href: "/uk-compound-interest-calculator" }
+                  { name: "Redundancy Pay", href: "/redundancy-calculator-uk" },
+                  { name: "Loan Calculator", href: "/loan-calculator-uk" },
+                  { name: "Electricity Cost", href: "/electricity-cost-calculator-uk" }
                 ]
-              },
-              {
-                id: "construction",
-                title: "Construction",
-                icon: <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>,
-                links: ["Concrete Mix Calculator", "Sand & Cement", "House Extension Cost", "Fencing Cost", "Beam Deflection", "Loft Insulation"]
               },
               {
                 id: "automotive",
                 title: "Automotive",
-                icon: <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><rect width="18" height="18" x="3" y="3" rx="2"></rect><circle cx="8.5" cy="8.5" r="1.5"></circle><circle cx="15.5" cy="8.5" r="1.5"></circle><path d="M8 15h.01"></path><path d="M16 15h.01"></path></svg>,
-                links: ["Road Tax Calculator", "Car Insurance", "Speeding Fine", "Mileage Calculator", "EV Charging Cost", "PCP Calculator"]
+                href: "/automotive",
+                icon: <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M19 17h2c.6 0 1-.4 1-1v-3c0-.9-.7-1.7-1.5-1.9C18.7 10.6 16 10 16 10s-1.3-1.4-2.2-2.3c-.5-.4-1.1-.7-1.8-.7H5c-.6 0-1.1.4-1.4.9l-1.4 2.9C2.1 11.1 2 11.5 2 12v4c0 .6.4 1 1 1h2"></path><circle cx="7" cy="17" r="2"></circle><circle cx="17" cy="17" r="2"></circle></svg>,
+                links: [
+                  { name: "Mileage Claim", href: "/mileage-calculator-uk" },
+                  { name: "Road Tax", href: "/road-tax-calculator-uk" },
+                  { name: "Fuel Cost", href: "/fuel-cost-calculator-uk" },
+                  { name: "Speeding Fine", href: "/speeding-fine-calculator-uk" },
+                  { name: "Car Insurance", href: "/car-insurance-calculator-uk" },
+                  { name: "EV Charging", href: "/ev-charging-cost-calculator-uk" }
+                ]
+              },
+              {
+                id: "property",
+                title: "Home & Property",
+                href: "/home-property",
+                icon: <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>,
+                links: [
+                  { name: "Mortgage Calculator", href: "/mortgage-calculator-uk" },
+                  { name: "House Survey", href: "/house-survey-cost-calculator-uk" },
+                  { name: "Solar Panel Cost", href: "/solar-panel-cost-calculator-uk" },
+                  { name: "Heat Pump Cost", href: "/heat-pump-cost-calculator-uk" },
+                  { name: "Bathroom Reno", href: "/small-bathroom-renovation-cost-calculator-uk" },
+                  { name: "Roof Replacement", href: "/roof-replacement-cost-calculator-uk" }
+                ]
+              },
+              {
+                id: "construction",
+                title: "Construction & DIY",
+                href: "/construction-diy",
+                icon: <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.77 3.77z"></path></svg>,
+                links: [
+                  { name: "Concrete Calculator", href: "/concrete-calculator-uk" },
+                  { name: "Garden Wall Cost", href: "/building-garden-wall-cost-calculator-uk" },
+                  { name: "Decking Cost", href: "/decking-cost-calculator-uk" },
+                  { name: "Epoxy Flooring", href: "/epoxy-flooring-cost-calculator-uk" },
+                  { name: "Self-Levelling", href: "/self-levelling-compound-calculator-uk" },
+                  { name: "Tarmac Driveway", href: "/tarmac-driveway-cost-calculator-uk" }
+                ]
               },
               {
                 id: "maths",
-                title: "Maths",
+                title: "Maths & Percentages",
+                href: "/maths-percentages",
                 icon: <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><line x1="19" y1="5" x2="5" y2="19"></line><circle cx="6.5" cy="6.5" r="2.5"></circle><circle cx="17.5" cy="17.5" r="2.5"></circle></svg>,
-                links: ["Percentage Calculator", "Percentage Off", "Ratio Calculator", "Standard Deviation", "Quadratic Formula", "Matrix Calculator"]
+                links: [
+                  { name: "Percentage Calculator", href: "/percentage-calculator-uk" },
+                  { name: "Average Percentage", href: "/average-percentage-calculator-uk" },
+                  { name: "Percentage Decrease", href: "/percentage-decrease-calculator-uk" },
+                  { name: "Percentage Off", href: "/percentage-off-calculator-uk" },
+                  { name: "Reverse Percentage", href: "/reverse-percentage-calculator-uk" },
+                  { name: "Maths Tools", href: "/maths-percentages" }
+                ]
               },
               {
-                id: "food",
-                title: "Food & Cooking",
-                icon: <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M3 2v7c0 1.1.9 2 2 2h4a2 2 0 0 0 2-2V2"></path><path d="M7 2v20"></path><path d="M21 15V2v0a5 5 0 0 0-5 5v6c0 1.1.9 2 2 2h3Zm0 0v7"></path></svg>,
-                links: ["Turkey Crown Time", "Roast Pork Time", "Gammon Cooking Time", "Goose Cooking Time", "Turkey Defrost Time", "Beef Fillet Time"]
-              },
-              {
-                id: "science",
-                title: "Science",
-                icon: <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M6 3v12a6 6 0 0 0 12 0V3"></path><path d="M6 3h12"></path></svg>,
-                links: ["Earth Curve", "Wavelength Calculator", "Resistor Calculator", "Dilution Calculator", "Second Moment", "Saturn Return"]
+                id: "investments",
+                title: "Stock Market",
+                href: "/uk-stocks-investments",
+                icon: <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M3 3v18h18"></path><path d="m19 9-5 5-4-4-3 3"></path></svg>,
+                links: [
+                  { name: "Capital Gains Tax", href: "/uk-stock-capital-gains-tax-calculator" },
+                  { name: "Dividend Tax", href: "/uk-dividend-tax-calculator" },
+                  { name: "Stamp Duty (Shares)", href: "/uk-shares-stamp-duty-calculator" },
+                  { name: "ISA Calculator", href: "/uk-stocks-shares-isa-calculator" },
+                  { name: "Compound Interest", href: "/uk-compound-interest-calculator" },
+                  { name: "Portfolio Return", href: "/portfolio-return-calculator-uk" }
+                ]
               },
               {
                 id: "health",
-                title: "Health & Fitness",
+                title: "Fitness & Diet",
+                href: "/fitness-diet",
                 icon: <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"></path></svg>,
-                links: ["BMI Calculator", "Calorie Maintenance", "Pregnancy Due Date", "Sleep Time", "VO2 Max", "Bra Size"]
+                links: [
+                  { name: "Calorie Deficit", href: "/calorie-deficit-calculator-uk" },
+                  { name: "VO2 Max", href: "/vo2-max-calculator" },
+                  { name: "Water Intake", href: "/water-intake-calculator" },
+                  { name: "Weight Gain", href: "/calorie-calculator-to-gain-weight-uk" },
+                  { name: "Intermittent Fasting", href: "/intermittent-fasting-calculator" },
+                  { name: "Dog Calories", href: "/dog-calorie-calculator-uk" }
+                ]
               },
               {
-                id: "education",
-                title: "Education",
-                icon: <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M22 10v6M2 10l10-5 10 5-10 5z"></path><path d="M6 12v5c3 3 9 3 12 0v-5"></path></svg>,
-                links: ["School Age", "University Grade", "Childcare Cost", "Term Time Salary", "Tariff Point", "Moon Sign"]
+                id: "lifestyle",
+                title: "General Health",
+                href: "/general-health",
+                icon: <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"></path></svg>,
+                links: [
+                  { name: "BMI Calculator", href: "/bmi-calculator-uk" },
+                  { name: "Child Growth", href: "/child-growth-chart-calculator-uk" },
+                  { name: "Life Expectancy", href: "/life-expectancy-calculator-uk" },
+                  { name: "Heart Age", href: "/heart-age-calculator-uk" },
+                  { name: "Bra Size", href: "/bra-size-calculator-uk" },
+                  { name: "Waist-to-Height", href: "/waist-to-height-ratio-calculator" }
+                ]
               },
               {
                 id: "time",
-                title: "Time",
+                title: "Sleep & Recovery",
+                href: "/sleep",
                 icon: <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>,
-                links: ["Time Difference", "Time Duration", "Holiday Calculator", "Annual Leave", "Work Time", "Birthday Calculator"]
+                links: [
+                  { name: "Sleep Debt", href: "/sleep-debt-calculator" },
+                  { name: "Epworth Scale", href: "/epworth-sleepiness-scale-calculator" },
+                  { name: "Annual Leave", href: "/annual-leave-calculator-uk" },
+                  { name: "Holiday Budget", href: "/holiday-calculator-uk" },
+                  { name: "Notice Period", href: "/notice-period-calculator-uk" },
+                  { name: "School Age", href: "/school-age-calculator-uk" }
+                ]
               }
-            ].map((cat) => (
-              <div key={cat.id} className="bg-white dark:bg-slate-950 rounded-[2rem] p-8 md:p-10 border border-slate-100 dark:border-slate-800 shadow-[0_8px_30px_rgb(0,0,0,0.04)] relative overflow-hidden group hover:shadow-[0_20px_40px_rgb(0,0,0,0.08)] dark:hover:shadow-none dark:hover:border-slate-700 transition-all duration-300">
-                {/* Decorative Top Right Circle */}
-                <div className="absolute -top-6 -right-6 w-32 h-32 bg-slate-100/80 dark:bg-slate-800/50 rounded-full transition-transform group-hover:scale-110 duration-500"></div>
+            ]
+              .map((cat) => (
+                <div key={cat.id} className="bg-white dark:bg-slate-950 rounded-[2rem] p-8 md:p-10 border border-slate-100 dark:border-slate-800 shadow-[0_8px_30px_rgb(0,0,0,0.04)] relative overflow-hidden group hover:shadow-[0_20px_40px_rgb(0,0,0,0.08)] dark:hover:shadow-none dark:hover:border-slate-700 transition-all duration-300">
+                  {/* Decorative Top Right Circle */}
+                  <div className="absolute -top-6 -right-6 w-32 h-32 bg-slate-100/80 dark:bg-slate-800/50 rounded-full transition-transform group-hover:scale-110 duration-500"></div>
 
-                <div className="flex items-center gap-4 mb-8 relative z-10">
-                  <div className="w-14 h-14 bg-[#1e5eb8] rounded-2xl flex items-center justify-center text-white shadow-md shadow-blue-500/20 group-hover:bg-[#164a93] transition-colors">
-                    {cat.icon}
+                  <div className="flex items-center gap-4 mb-8 relative z-10">
+                    <div className="w-14 h-14 bg-[#1e5eb8] rounded-2xl flex items-center justify-center text-white shadow-md shadow-blue-500/20 group-hover:bg-[#164a93] transition-colors">
+                      {cat.icon}
+                    </div>
+                    <h3 className="text-2xl font-black text-slate-900 dark:text-white tracking-tight">{cat.title}</h3>
                   </div>
-                  <h3 className="text-2xl font-black text-slate-900 dark:text-white tracking-tight">{cat.title}</h3>
-                </div>
 
-                <ul className="space-y-4 mb-10 relative z-10">
-                  {cat.links.map((linkObj, idx) => (
-                    <li key={idx}>
-                      <Link
-                        href={typeof linkObj === 'string' ? '#' : linkObj.href}
-                        className="flex items-center gap-3 text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-blue-400 transition-colors group/link text-[15px] font-medium tracking-tight"
-                      >
-                        <span className="text-slate-400 dark:text-slate-500 transition-transform">→</span>
-                        {typeof linkObj === 'string' ? linkObj : linkObj.name}
-                      </Link>
-                    </li>
-                  ))}
-                </ul>
+                  <ul className="space-y-4 mb-10 relative z-10">
+                    {cat.links.map((linkObj, idx) => (
+                      <li key={idx}>
+                        <Link
+                          href={typeof linkObj === 'string' ? '#' : linkObj.href}
+                          className="flex items-center gap-3 text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-blue-400 transition-colors group/link text-[15px] font-medium tracking-tight"
+                        >
+                          <span className="text-slate-400 dark:text-slate-500 transition-transform">→</span>
+                          {typeof linkObj === 'string' ? linkObj : linkObj.name}
+                        </Link>
+                      </li>
+                    ))}
+                  </ul>
 
-                <div className="relative z-10 w-full">
-                  <Link href="#" className="inline-flex items-center gap-1 text-[13px] font-bold text-[#1e5eb8] dark:text-blue-400 hover:text-[#164a93] dark:hover:text-blue-300 transition-colors tracking-tight">
-                    View all {cat.title} calculators
-                    <span className="translate-x-0 group-hover:translate-x-1 transition-transform">→</span>
-                  </Link>
+                  <div className="relative z-10 w-full">
+                    <Link href={cat.href || "#"} className="inline-flex items-center gap-1 text-[13px] font-bold text-[#1e5eb8] dark:text-blue-400 hover:text-[#164a93] dark:hover:text-blue-300 transition-colors tracking-tight">
+                      View all {cat.title} calculators
+                      <span className="translate-x-0 group-hover:translate-x-1 transition-transform">→</span>
+                    </Link>
+                  </div>
                 </div>
-              </div>
-            ))}
+              ))}
           </div>
         </div>
       </section>
@@ -300,7 +373,7 @@ export default function Home() {
       </section>
 
 
-     
+
       {/* --- FAQ SECTION --- */}
       <section className="container mx-auto px-4 mb-32 max-w-4xl">
         <FAQAccordion
@@ -336,7 +409,7 @@ export default function Home() {
 
       {/* Main Categories Section */}
 
-      
+
     </div >
   );
 }

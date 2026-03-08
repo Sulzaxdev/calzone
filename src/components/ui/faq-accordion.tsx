@@ -18,8 +18,25 @@ export interface FAQAccordionProps {
 }
 
 export function FAQAccordion({ faqs, title = "Frequently Asked Questions" }: FAQAccordionProps) {
+    const faqSchema = {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": faqs.map(faq => ({
+            "@type": "Question",
+            "name": faq.question,
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": typeof faq.answer === 'string' ? faq.answer : "" // Only strings are valid for JSON-LD text
+            }
+        })).filter(f => f.acceptedAnswer.text !== "")
+    };
+
     return (
         <div className="space-y-6 pt-8 border-t border-slate-200 dark:border-slate-800 w-full mb-12">
+            <script
+                type="application/ld+json"
+                dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
+            />
             <h3 className="text-2xl font-bold text-slate-800 dark:text-slate-200 flex items-center gap-2">
                 <HelpCircle className="w-6 h-6 text-blue-500" /> {title}
             </h3>
