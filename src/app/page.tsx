@@ -14,6 +14,8 @@ import { HelpCircle } from "lucide-react";
 import { OrganizationSchema } from "@/components/seo/organization-schema";
 import { WebSiteSchema } from "@/components/seo/website-schema";
 import { BreadcrumbSchema } from "@/components/seo/breadcrumb-schema";
+import { ProductSchema } from "@/components/seo/product-schema";
+import { FAQSchema } from "@/components/seo/faq-schema";
 
 export default function Home() {
 
@@ -21,6 +23,8 @@ export default function Home() {
     <div className="animate-in fade-in duration-700">
       <OrganizationSchema />
       <WebSiteSchema />
+      <ProductSchema />
+      <FAQSchema />
       <BreadcrumbSchema items={[{ name: "Home", item: "/" }]} />
 
 
