@@ -3,11 +3,16 @@ import { FAQAccordion } from "@/components/ui/faq-accordion";
 import { BreadcrumbSchema } from "@/components/seo/breadcrumb-schema";
 import { Metadata } from "next";
 import { Home, PoundSterling, Building, ShieldCheck, TrendingDown } from "lucide-react";
+import { CalculatorSchema } from "@/components/seo/calculator-schema";
+import { RelatedTools } from "@/components/layout/related-tools";
 
 export const metadata: Metadata = {
     title: "Mortgage Calculator UK: Monthly Repayment & EMI Estimator",
     description: "Calculate your monthly mortgage payments in the UK. Estimate EMI, total interest, and property affordability with our free Mortgage Calculator.",
     keywords: "Mortgage Calculator UK, Home Loan Calculator, Monthly Mortgage Payment Calculator, EMI Mortgage Calculator, UK Mortgage Repayment Calculator, Fixed vs Variable Mortgage, Mortgage Interest Calculator, Buy to Let Mortgage Calculator, First Time Buyer Mortgage Calculator, How much mortgage can I afford UK, How to calculate mortgage payments UK, 25 year mortgage calculator UK, Mortgage with 5% deposit UK, Bank of England base rate impact on mortgage",
+    alternates: {
+        canonical: "/mortgage-calculator-uk"
+    }
 };
 
 export default function MortgageCalculatorPage() {
@@ -41,6 +46,12 @@ export default function MortgageCalculatorPage() {
                 { name: "Home & Property", item: "/home-property" },
                 { name: "Mortgage Calculator UK", item: "/mortgage-calculator-uk" }
             ]} />
+            <CalculatorSchema
+                title="Mortgage Calculator UK: Monthly Repayment & EMI Estimator"
+                description="Calculate your monthly mortgage payments in the UK. Estimate EMI, total interest, and property affordability with our free Mortgage Calculator."
+                slug="/mortgage-calculator-uk"
+                faqs={faqs}
+            />
             {/* Header Section */}
             <div className="text-center mb-16 space-y-4">
                 <h1 className="text-4xl md:text-6xl font-black tracking-tighter text-slate-900 dark:text-white leading-[1.1]">
@@ -177,6 +188,7 @@ export default function MortgageCalculatorPage() {
                 </div>
                 <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-primary/10 rounded-full blur-[120px] -mr-64 -mt-64"></div>
             </div>
+            <RelatedTools currentCategory="Home & Property" currentSlug="/mortgage-calculator-uk" />
         </div>
     );
 }

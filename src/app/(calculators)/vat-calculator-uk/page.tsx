@@ -5,6 +5,9 @@ import { Calculator, Download, Plus, Minus, Info, CheckCircle2, FileText, PieCha
 import html2canvas from "html2canvas";
 import jsPDF from "jspdf";
 import Link from "next/link";
+import { BreadcrumbSchema } from "@/components/seo/breadcrumb-schema";
+import { CalculatorSchema } from "@/components/seo/calculator-schema";
+import { RelatedTools } from "@/components/layout/related-tools";
 
 export default function VATCalculator() {
     const [netAmount, setNetAmount] = useState<string>("");
@@ -120,6 +123,16 @@ export default function VATCalculator() {
 
     return (
         <div className="min-h-screen bg-slate-50 dark:bg-slate-900 pb-20">
+            <BreadcrumbSchema items={[
+                { name: "Home", item: "/" },
+                { name: "Finance", item: "/finance-driving" },
+                { name: "VAT Calculator", item: "/vat-calculator-uk" }
+            ]} />
+            <CalculatorSchema
+                title="VAT Calculator UK | Add or Remove UK Value Added Tax"
+                description="Instantly add or remove Value Added Tax from any amount. Select current UK rates (20%, 5%, or 0%) to find gross, net, and total tax amounts instantly."
+                slug="/vat-calculator-uk"
+            />
             {/* Post-Header Spacer */}
             <div className="h-20 bg-white dark:bg-slate-950"></div>
 
@@ -405,6 +418,7 @@ export default function VATCalculator() {
                     </div>
                 </article>
             </div>
+            <RelatedTools currentCategory="Finance" currentSlug="/vat-calculator-uk" />
         </div>
     );
 }

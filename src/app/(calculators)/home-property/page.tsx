@@ -5,9 +5,15 @@ import { ChevronRight, Home, Wrench, Thermometer, Hammer, PaintBucket, Layers, Z
 import { categories } from "@/lib/calculators";
 import { BreadcrumbSchema } from "@/components/seo/breadcrumb-schema";
 
-export const metadata = {
+import { Metadata } from "next";
+import { CalculatorSchema } from "@/components/seo/calculator-schema";
+
+export const metadata: Metadata = {
     title: "Home & Property Hub | UK Renovation & Utility Analytics",
     description: "Master your property plans and renovation budgets with our premium calculators. Precision tools for roofing, heating, glazing, and general home improvement.",
+    alternates: {
+        canonical: "/home-property"
+    }
 };
 
 export default function HomePropertyLandingPage() {
@@ -21,6 +27,12 @@ export default function HomePropertyLandingPage() {
                 { name: "Home", item: "/" },
                 { name: "Home & Property", item: "/home-property" }
             ]} />
+            <CalculatorSchema
+                title="Home & Property Hub | UK Renovation & Utility Analytics"
+                description="Master your property plans and renovation budgets with our premium calculators. Precision tools for roofing, heating, glazing, and general home improvement."
+                slug="/home-property"
+                isArticle={true}
+            />
             {/* --- UNIQUE HERO SECTION --- */}
             <section className="relative w-full min-h-[600px] flex items-center pt-24 pb-16 overflow-hidden">
                 {/* Background Layer */}

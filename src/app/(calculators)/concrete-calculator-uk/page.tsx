@@ -5,6 +5,9 @@ import { Download, Info, CheckCircle2, FileText, Pickaxe, Package } from "lucide
 import html2canvas from "html2canvas";
 import jsPDF from "jspdf";
 import Link from "next/link";
+import { BreadcrumbSchema } from "@/components/seo/breadcrumb-schema";
+import { CalculatorSchema } from "@/components/seo/calculator-schema";
+import { RelatedTools } from "@/components/layout/related-tools";
 
 export default function ConcreteCalculator() {
     const [length, setLength] = useState<string>("5");
@@ -74,6 +77,16 @@ export default function ConcreteCalculator() {
 
     return (
         <div className="min-h-screen bg-slate-50 dark:bg-slate-900 pb-20">
+            <BreadcrumbSchema items={[
+                { name: "Home", item: "/" },
+                { name: "Construction & DIY", item: "/construction-diy" },
+                { name: "Concrete Calculator", item: "/concrete-calculator-uk" }
+            ]} />
+            <CalculatorSchema
+                title="Concrete Calculator | Volume & Bag Estimator for UK Slabs"
+                description="Calculate exactly how much concrete volume (m³) you need for your slab, patio, or footings. It also estimates the number of premixed bags required."
+                slug="/concrete-calculator-uk"
+            />
             <div className="h-20 bg-white dark:bg-slate-950"></div>
 
             <div className="bg-white dark:bg-slate-950 border-b border-slate-200 dark:border-slate-800 pt-10 pb-16">
@@ -306,6 +319,7 @@ export default function ConcreteCalculator() {
 
                 </article>
             </div>
+            <RelatedTools currentCategory="Construction & DIY" currentSlug="/concrete-calculator-uk" />
         </div>
     );
 }

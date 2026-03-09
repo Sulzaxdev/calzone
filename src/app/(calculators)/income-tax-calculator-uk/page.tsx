@@ -5,6 +5,9 @@ import { Calculator, Download, Info, CheckCircle2, FileText, PieChart, Landmark 
 import html2canvas from "html2canvas";
 import jsPDF from "jspdf";
 import Link from "next/link";
+import { BreadcrumbSchema } from "@/components/seo/breadcrumb-schema";
+import { CalculatorSchema } from "@/components/seo/calculator-schema";
+import { RelatedTools } from "@/components/layout/related-tools";
 
 export default function IncomeTaxCalculator() {
     const [grossIncome, setGrossIncome] = useState<string>("50000");
@@ -99,6 +102,16 @@ export default function IncomeTaxCalculator() {
 
     return (
         <div className="min-h-screen bg-slate-50 dark:bg-slate-900 pb-20">
+            <BreadcrumbSchema items={[
+                { name: "Home", item: "/" },
+                { name: "Finance", item: "/finance-driving" },
+                { name: "Income Tax Calculator", item: "/income-tax-calculator-uk" }
+            ]} />
+            <CalculatorSchema
+                title="UK Income Tax Calculator | HMRC Tax Band Estimator 24/25"
+                description="Discover exactly how much Income Tax you owe to HMRC. Break down your salary into the Basic, Higher, and Additional tax bands."
+                slug="/income-tax-calculator-uk"
+            />
             <div className="h-20 bg-white dark:bg-slate-950"></div>
 
             {/* Hero Section */}
@@ -294,6 +307,7 @@ export default function IncomeTaxCalculator() {
 
                 </article>
             </div>
+            <RelatedTools currentCategory="Finance" currentSlug="/income-tax-calculator-uk" />
         </div>
     );
 }

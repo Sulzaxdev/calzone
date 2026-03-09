@@ -4,9 +4,15 @@ import { CalculatorSchema } from "@/components/seo/calculator-schema";
 import { BreadcrumbSchema } from "@/components/seo/breadcrumb-schema";
 import { FAQAccordion } from "@/components/ui/faq-accordion";
 
-export const metadata = {
+import { Metadata } from "next";
+import { RelatedTools } from "@/components/layout/related-tools";
+
+export const metadata: Metadata = {
     title: "BMI Calculator UK | Healthy Weight Range & Body Mass Index",
     description: "Calculate your Body Mass Index (BMI) using our expert tool. Deep dive into weight categories, metabolic health, ethnic cut-offs, and fitness optimization.",
+    alternates: {
+        canonical: "/bmi-calculator-uk"
+    }
 };
 
 export default function BMIPage() {
@@ -307,6 +313,7 @@ export default function BMIPage() {
                     </div>
                 </div>
             </section>
+            <RelatedTools currentCategory="General Health / Lifestyle" currentSlug="/bmi-calculator-uk" />
         </div>
     );
 }

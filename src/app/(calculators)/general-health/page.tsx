@@ -5,9 +5,15 @@ import { ChevronRight, Heart, Activity, Sparkles, Brain, Timer, ShieldCheck, Zap
 import { categories } from "@/lib/calculators";
 import { BreadcrumbSchema } from "@/components/seo/breadcrumb-schema";
 
-export const metadata = {
+import { Metadata } from "next";
+import { CalculatorSchema } from "@/components/seo/calculator-schema";
+
+export const metadata: Metadata = {
     title: "General Health & Lifestyle Hub | Precision Health Intelligence",
     description: "Access our elite suite of health calculators. Powered by UK medical standards and unique biometric intelligence to track your biological age and wellness journey.",
+    alternates: {
+        canonical: "/general-health"
+    }
 };
 
 export default function GeneralHealthLandingPage() {
@@ -21,6 +27,12 @@ export default function GeneralHealthLandingPage() {
                 { name: "Home", item: "/" },
                 { name: "General Health", item: "/general-health" }
             ]} />
+            <CalculatorSchema
+                title="General Health & Lifestyle Hub | Precision Health Intelligence"
+                description="Access our elite suite of health calculators. Powered by UK medical standards and unique biometric intelligence to track your biological age and wellness journey."
+                slug="/general-health"
+                isArticle={true}
+            />
             {/* --- UNIQUE HERO SECTION --- */}
             <section className="relative w-full min-h-[600px] flex items-center pt-24 pb-16 overflow-hidden">
                 {/* Background Layer */}

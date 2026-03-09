@@ -1,11 +1,17 @@
 import { Trees, Ruler, Hammer, Layers } from "lucide-react";
 import { DeckingCostCalculator } from "./calculator";
 import { CalculatorSchema } from "@/components/seo/calculator-schema";
+import { BreadcrumbSchema } from "@/components/seo/breadcrumb-schema";
+import { RelatedTools } from "@/components/layout/related-tools";
 import { FAQAccordion } from "@/components/ui/faq-accordion";
+import { Metadata } from "next";
 
-export const metadata = {
+export const metadata: Metadata = {
     title: "Decking Cost Calculator UK 2026 | Composite vs Softwood Prices",
     description: "Calculate how much it costs to build garden decking in the UK. Compare the prices of softwood pine, hardwood, and composite boards including carpenter labour.",
+    alternates: {
+        canonical: "/decking-cost-calculator-uk"
+    }
 };
 
 export default function DeckingCostPage() {
@@ -30,6 +36,11 @@ export default function DeckingCostPage() {
 
     return (
         <div className="min-h-screen bg-slate-50 dark:bg-slate-950/50 pb-20">
+            <BreadcrumbSchema items={[
+                { name: "Home", item: "/" },
+                { name: "Home & Property", item: "/home-property" },
+                { name: "Decking Cost Calculator", item: "/decking-cost-calculator-uk" }
+            ]} />
             <CalculatorSchema
                 title="Garden Decking Cost Calculator UK"
                 description="Easily estimate how much a carpenter will charge to build a timber or composite decking structure in your UK garden."
@@ -110,6 +121,7 @@ export default function DeckingCostPage() {
                     <FAQAccordion faqs={faqs} title="Decking Details FAQs" />
                 </section>
             </div>
+            <RelatedTools currentCategory="Home & Property" currentSlug="/decking-cost-calculator-uk" />
         </div>
     );
 }

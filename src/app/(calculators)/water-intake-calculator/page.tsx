@@ -10,6 +10,8 @@ import { AlertCircle, Droplets, BookOpen, Calculator, Target, Info, Flame, Scale
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
 import { CalculatorSchema } from "@/components/seo/calculator-schema";
 import { LearnMore } from "@/components/seo/learn-more";
+import { BreadcrumbSchema } from "@/components/seo/breadcrumb-schema";
+import { RelatedTools } from "@/components/layout/related-tools";
 
 export default function WaterIntakeCalculator() {
     const [unit, setUnit] = useState<"metric" | "imperial">("metric");
@@ -92,6 +94,11 @@ export default function WaterIntakeCalculator() {
 
     return (
         <div className="container mx-auto px-4 py-8">
+            <BreadcrumbSchema items={[
+                { name: "Home", item: "/" },
+                { name: "Fitness & Diet", item: "/fitness-diet" },
+                { name: "Water Intake Calculator", item: "/water-intake-calculator" }
+            ]} />
             <CalculatorSchema
                 title="Water Intake Calculator | Daily Hydration Planner"
                 description="Calculate exactly how much water you should drink daily based on your weight, exercise routine, and local climate."

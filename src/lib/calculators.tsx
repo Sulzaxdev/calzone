@@ -100,6 +100,7 @@ export const categories = [
             { name: "Loft Conversion", href: "/loft-conversion-cost-calculator-uk", desc: "Value added vs construction cost" },
             { name: "Bathroom Reno", href: "/small-bathroom-renovation-cost-calculator-uk", desc: "Budgeting for a compact bathroom refresh" },
             { name: "Solar Panel Cost", href: "/solar-panel-cost-calculator-uk", desc: "Installation fees and energy savings" },
+            { name: "Dormer Cost", href: "/dormer-cost-calculator-uk", desc: "Estimate UK dormer loft conversion costs" },
         ],
     },
     {

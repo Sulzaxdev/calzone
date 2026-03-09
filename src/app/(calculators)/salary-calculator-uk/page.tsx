@@ -5,9 +5,15 @@ import { BreadcrumbSchema } from "@/components/seo/breadcrumb-schema";
 import { CalculatorSchema } from "@/components/seo/calculator-schema";
 import { FAQAccordion } from "@/components/ui/faq-accordion";
 
-export const metadata = {
+import { Metadata } from "next";
+import { RelatedTools } from "@/components/layout/related-tools";
+
+export const metadata: Metadata = {
     title: "Salary Calculator UK | Take-Home Pay & Tax Estimator 24/25",
     description: "Calculate your UK take-home pay with precision. Our expert salary calculator accounts for Income Tax, National Insurance (8%), Pensions, and Student Loans.",
+    alternates: {
+        canonical: "/salary-calculator-uk"
+    }
 };
 
 export default function SalaryCalculatorPage() {
@@ -178,6 +184,7 @@ export default function SalaryCalculatorPage() {
                     <FAQAccordion faqs={salaryFaqs} title="Frequently Asked Questions (Salary)" />
                 </article>
             </div>
+            <RelatedTools currentCategory="Finance" currentSlug="/salary-calculator-uk" />
         </div>
     );
 }

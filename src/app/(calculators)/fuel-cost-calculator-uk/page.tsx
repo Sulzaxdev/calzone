@@ -6,6 +6,9 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
 import { Fuel, FuelIcon } from "lucide-react";
+import { BreadcrumbSchema } from "@/components/seo/breadcrumb-schema";
+import { CalculatorSchema } from "@/components/seo/calculator-schema";
+import { RelatedTools } from "@/components/layout/related-tools";
 
 export default function FuelCostCalculator() {
     const [distance, setDistance] = useState("100");
@@ -39,6 +42,16 @@ export default function FuelCostCalculator() {
 
     return (
         <div className="container mx-auto px-4 py-8">
+            <BreadcrumbSchema items={[
+                { name: "Home", item: "/" },
+                { name: "Automotive", item: "/automotive" },
+                { name: "Fuel Cost Calculator", item: "/fuel-cost-calculator-uk" }
+            ]} />
+            <CalculatorSchema
+                title="Fuel Cost Calculator UK | Journey Price & MPG Estimator"
+                description="Calculate how much a journey will cost in fuel based on your vehicle's MPG and current petrol/diesel prices."
+                slug="/fuel-cost-calculator-uk"
+            />
             <CalculatorCard
                 title="Fuel Cost Calculator"
                 description="Calculate how much a journey will cost in fuel based on your vehicle's MPG and current petrol/diesel prices."
@@ -103,6 +116,7 @@ export default function FuelCostCalculator() {
                     </div>
                 )}
             </CalculatorCard>
+            <RelatedTools currentCategory="Automotive" currentSlug="/fuel-cost-calculator-uk" />
         </div>
     );
 }

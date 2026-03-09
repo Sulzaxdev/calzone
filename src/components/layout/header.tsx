@@ -134,8 +134,34 @@ export function Header() {
                             <div className="absolute top-full left-1/2 -translate-x-1/2 hidden group-hover:block pt-2">
                                 <div className="bg-white/95 dark:bg-slate-950/95 backdrop-blur-xl border border-slate-200 dark:border-slate-800 rounded-2xl shadow-2xl p-6 w-[800px] max-w-[90vw] grid grid-cols-3 gap-6 transform-gpu before:absolute before:-top-2 before:left-1/2 before:-translate-x-1/2 before:border-8 before:border-transparent before:border-b-white/95 dark:before:border-b-slate-950/95">
                                     {categories.map((category) => {
-                                        const isLandingPage = (category.title === "General Health / Lifestyle" || category.title === "Fitness & Diet" || category.title === "Finance & Driving" || category.title === "Home & Property" || category.title === "Misc & Lifestyle" || category.title === "Sleep" || category.title === "UK Stock Market & Investments");
-                                        const landingPageUrl = category.title === "General Health / Lifestyle" ? "/general-health" : category.title === "Fitness & Diet" ? "/fitness-diet" : category.title === "Finance & Driving" ? "/finance-driving" : category.title === "Home & Property" ? "/home-property" : category.title === "Misc & Lifestyle" ? "/misc-lifestyle" : category.title === "Sleep" ? "/sleep" : "/uk-stocks-investments";
+                                        const isLandingPage = [
+                                            "General Health / Lifestyle",
+                                            "Fitness & Diet",
+                                            "Finance",
+                                            "Automotive",
+                                            "Home & Property",
+                                            "Construction & DIY",
+                                            "Misc & Lifestyle",
+                                            "Maths & Percentages",
+                                            "Sleep",
+                                            "UK Stock Market & Investments"
+                                        ].includes(category.title);
+
+                                        const getLandingPageUrl = (title: string) => {
+                                            if (title === "General Health / Lifestyle") return "/general-health";
+                                            if (title === "Fitness & Diet") return "/fitness-diet";
+                                            if (title === "Finance") return "/finance-driving";
+                                            if (title === "Automotive") return "/automotive";
+                                            if (title === "Home & Property") return "/home-property";
+                                            if (title === "Construction & DIY") return "/construction-diy";
+                                            if (title === "Misc & Lifestyle") return "/misc-lifestyle";
+                                            if (title === "Maths & Percentages") return "/maths-percentages";
+                                            if (title === "Sleep") return "/sleep";
+                                            if (title === "UK Stock Market & Investments") return "/uk-stocks-investments";
+                                            return "/";
+                                        };
+
+                                        const landingPageUrl = getLandingPageUrl(category.title);
 
                                         return (
                                             <HeaderCategoryDropdown key={category.title} category={category} isLandingPage={isLandingPage} landingPageUrl={landingPageUrl} />
@@ -264,8 +290,34 @@ export function Header() {
                                     </h3>
                                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-6">
                                         {categories.map((category) => {
-                                            const isLandingPage = (category.title === "General Health / Lifestyle" || category.title === "Fitness & Diet" || category.title === "Finance & Driving" || category.title === "Home & Property" || category.title === "Misc & Lifestyle" || category.title === "Sleep" || category.title === "UK Stock Market & Investments");
-                                            const landingPageUrl = category.title === "General Health / Lifestyle" ? "/general-health" : category.title === "Fitness & Diet" ? "/fitness-diet" : category.title === "Finance & Driving" ? "/finance-driving" : category.title === "Home & Property" ? "/home-property" : category.title === "Misc & Lifestyle" ? "/misc-lifestyle" : category.title === "Sleep" ? "/sleep" : "/uk-stocks-investments";
+                                            const isLandingPage = [
+                                                "General Health / Lifestyle",
+                                                "Fitness & Diet",
+                                                "Finance",
+                                                "Automotive",
+                                                "Home & Property",
+                                                "Construction & DIY",
+                                                "Misc & Lifestyle",
+                                                "Maths & Percentages",
+                                                "Sleep",
+                                                "UK Stock Market & Investments"
+                                            ].includes(category.title);
+
+                                            const getLandingPageUrl = (title: string) => {
+                                                if (title === "General Health / Lifestyle") return "/general-health";
+                                                if (title === "Fitness & Diet") return "/fitness-diet";
+                                                if (title === "Finance") return "/finance-driving";
+                                                if (title === "Automotive") return "/automotive";
+                                                if (title === "Home & Property") return "/home-property";
+                                                if (title === "Construction & DIY") return "/construction-diy";
+                                                if (title === "Misc & Lifestyle") return "/misc-lifestyle";
+                                                if (title === "Maths & Percentages") return "/maths-percentages";
+                                                if (title === "Sleep") return "/sleep";
+                                                if (title === "UK Stock Market & Investments") return "/uk-stocks-investments";
+                                                return "/";
+                                            };
+
+                                            const landingPageUrl = getLandingPageUrl(category.title);
 
                                             return (
                                                 <div key={category.title} className="space-y-3">

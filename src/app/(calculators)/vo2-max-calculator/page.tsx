@@ -12,11 +12,17 @@ import {
     HelpCircle
 } from "lucide-react";
 import { FAQAccordion } from "@/components/ui/faq-accordion";
+import { BreadcrumbSchema } from "@/components/seo/breadcrumb-schema";
+import { CalculatorSchema } from "@/components/seo/calculator-schema";
+import { RelatedTools } from "@/components/layout/related-tools";
 
 export const metadata: Metadata = {
     title: "VO2 Max Calculator UK | Estimate Fitness with Rockport & Cooper Tests",
     description: "Free VO2 Max Calculator for UK users. Estimate your maximal oxygen uptake using the Rockport 1-Mile Walk or Cooper 12-Minute Run tests. Track your cardiovascular fitness level.",
     keywords: ["VO2 Max Calculator", "VO2 Max Test UK", "Rockport Walking Test", "Cooper Run Test", "Cardiovascular Fitness", "Fitness Level Estimation"],
+    alternates: {
+        canonical: "/vo2-max-calculator"
+    }
 };
 
 export default function VO2MaxCalculatorPage() {
@@ -45,6 +51,17 @@ export default function VO2MaxCalculatorPage() {
 
     return (
         <div className="max-w-4xl mx-auto px-4 py-12 lg:py-20">
+            <BreadcrumbSchema items={[
+                { name: "Home", item: "/" },
+                { name: "Fitness & Diet", item: "/fitness-diet" },
+                { name: "VO2 Max Calculator", item: "/vo2-max-calculator" }
+            ]} />
+            <CalculatorSchema
+                title="VO2 Max Calculator UK | Estimate Fitness with Rockport & Cooper Tests"
+                description="Free VO2 Max Calculator for UK users. Estimate your maximal oxygen uptake using the Rockport 1-Mile Walk or Cooper 12-Minute Run tests."
+                slug="/vo2-max-calculator"
+                faqs={faqs}
+            />
             {/* Hero Section */}
             <div className="text-center mb-16">
                 <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-blue-50 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 font-bold text-sm mb-6 border border-blue-100 dark:border-blue-800 animate-fade-in">
@@ -223,6 +240,7 @@ export default function VO2MaxCalculatorPage() {
                 </p>
                 <p className="font-bold text-primary uppercase tracking-widest text-sm">— Calzone Health Methodology</p>
             </div>
+            <RelatedTools currentCategory="Fitness & Diet" currentSlug="/vo2-max-calculator" />
         </div>
     );
 }

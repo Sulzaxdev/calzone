@@ -1,11 +1,17 @@
 import { BrickWall, Pickaxe, Ruler } from "lucide-react";
 import { BuildingGardenWallCostCalculator } from "./calculator";
 import { CalculatorSchema } from "@/components/seo/calculator-schema";
+import { BreadcrumbSchema } from "@/components/seo/breadcrumb-schema";
+import { RelatedTools } from "@/components/layout/related-tools";
 import { FAQAccordion } from "@/components/ui/faq-accordion";
+import { Metadata } from "next";
 
-export const metadata = {
+export const metadata: Metadata = {
     title: "Building Garden Wall Cost Calculator UK 2026",
     description: "Estimate the cost of building a brick, blockwork, or stone garden wall in the UK. Includes labour (bricklayers), materials, and concrete foundations.",
+    alternates: {
+        canonical: "/building-garden-wall-cost-calculator-uk"
+    }
 };
 
 export default function BuildingGardenWallCostPage() {
@@ -30,6 +36,11 @@ export default function BuildingGardenWallCostPage() {
 
     return (
         <div className="min-h-screen bg-slate-50 dark:bg-slate-950/50 pb-20">
+            <BreadcrumbSchema items={[
+                { name: "Home", item: "/" },
+                { name: "Home & Property", item: "/home-property" },
+                { name: "Garden Wall Cost Calculator", item: "/building-garden-wall-cost-calculator-uk" }
+            ]} />
             <CalculatorSchema
                 title="Building Garden Wall Cost Calculator UK"
                 description="Easily estimate how much it costs to build a masonry garden boundary wall based on exact brick counts, foundation requirements, and UK labour rates."
@@ -112,6 +123,7 @@ export default function BuildingGardenWallCostPage() {
                     <FAQAccordion faqs={faqs} title="Bricklaying FAQs" />
                 </section>
             </div>
+            <RelatedTools currentCategory="Home & Property" currentSlug="/building-garden-wall-cost-calculator-uk" />
         </div>
     );
 }

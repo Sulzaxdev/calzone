@@ -11,6 +11,8 @@ import { Activity, BookOpen, Calculator, Target, Info, Flame, Scale, TrendingDow
 import { CalculatorSchema } from "@/components/seo/calculator-schema";
 import { LearnMore } from "@/components/seo/learn-more";
 import { FAQAccordion } from "@/components/ui/faq-accordion";
+import { BreadcrumbSchema } from "@/components/seo/breadcrumb-schema";
+import { RelatedTools } from "@/components/layout/related-tools";
 
 export default function CalorieDeficitCalculator() {
     const [gender, setGender] = useState<"male" | "female">("male");
@@ -99,6 +101,11 @@ export default function CalorieDeficitCalculator() {
 
     return (
         <div className="container mx-auto px-4 py-8">
+            <BreadcrumbSchema items={[
+                { name: "Home", item: "/" },
+                { name: "Fitness & Diet", item: "/fitness-diet" },
+                { name: "Calorie Deficit Calculator", item: "/calorie-deficit-calculator-uk" }
+            ]} />
             <CalculatorSchema
                 title="Calorie Deficit Calculator UK | Safe Weight Loss Planner"
                 description="Calculate your exact daily caloric needs to safely lose weight. Based on the Mifflin-St Jeor equation and UK NHS weekly guidelines."
@@ -311,6 +318,7 @@ export default function CalorieDeficitCalculator() {
 
                 <LearnMore links={blogLinks} />
             </section>
+            <RelatedTools currentCategory="Fitness & Diet" currentSlug="/calorie-deficit-calculator-uk" />
         </div>
     );
 }

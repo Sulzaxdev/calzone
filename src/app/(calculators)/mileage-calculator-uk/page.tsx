@@ -8,6 +8,9 @@ import { Button } from "@/components/ui/button";
 import { Car, Download } from "lucide-react";
 import html2canvas from "html2canvas";
 import jsPDF from "jspdf";
+import { BreadcrumbSchema } from "@/components/seo/breadcrumb-schema";
+import { CalculatorSchema } from "@/components/seo/calculator-schema";
+import { RelatedTools } from "@/components/layout/related-tools";
 
 export default function MileageCalculator() {
     const [miles, setMiles] = useState("");
@@ -62,6 +65,16 @@ export default function MileageCalculator() {
 
     return (
         <div className="min-h-screen bg-slate-50 dark:bg-slate-900 pb-20">
+            <BreadcrumbSchema items={[
+                { name: "Home", item: "/" },
+                { name: "Automotive", item: "/automotive" },
+                { name: "Mileage Calculator", item: "/mileage-calculator-uk" }
+            ]} />
+            <CalculatorSchema
+                title="Mileage Reimbursement Calculator | HMRC AMAP Claim Estimator"
+                description="Calculate your tax-free mileage claim amount for business travel using official HMRC AMAP rates. Support for cars, vans, motorcycles, and bicycles."
+                slug="/mileage-calculator-uk"
+            />
             <div className="h-20 bg-white dark:bg-slate-950"></div>
 
             <div className="bg-white dark:bg-slate-950 border-b border-slate-200 dark:border-slate-800 pt-10 pb-16">
@@ -190,6 +203,7 @@ export default function MileageCalculator() {
                     </article>
                 </div>
             </div>
+            <RelatedTools currentCategory="Automotive" currentSlug="/mileage-calculator-uk" />
         </div>
     );
 }
