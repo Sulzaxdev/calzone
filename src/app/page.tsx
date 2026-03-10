@@ -24,7 +24,6 @@ export default function Home() {
       <OrganizationSchema />
       <WebSiteSchema />
       <ProductSchema />
-      <FAQSchema />
       <BreadcrumbSchema items={[{ name: "Home", item: "/" }]} />
 
 

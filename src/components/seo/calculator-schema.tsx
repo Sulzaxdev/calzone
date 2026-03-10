@@ -1,3 +1,4 @@
+import { FAQSchema } from './faq-schema';
 import React from 'react';
 
 type FAQ = {
@@ -31,19 +32,6 @@ export function CalculatorSchema({ title, description, slug, faqs, isArticle }: 
         }
     } : null;
 
-    const faqSchema = faqs && faqs.length > 0 ? {
-        "@context": "https://schema.org",
-        "@type": "FAQPage",
-        "mainEntity": faqs.map(faq => ({
-            "@type": "Question",
-            "name": faq.question,
-            "acceptedAnswer": {
-                "@type": "Answer",
-                "text": faq.answer
-            }
-        }))
-    } : null;
-
     return (
         <>
             {softwareSchema && (
@@ -52,12 +40,7 @@ export function CalculatorSchema({ title, description, slug, faqs, isArticle }: 
                     dangerouslySetInnerHTML={{ __html: JSON.stringify(softwareSchema) }}
                 />
             )}
-            {faqSchema && (
-                <script
-                    type="application/ld+json"
-                    dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
-                />
-            )}
+            {faqs && faqs.length > 0 && <FAQSchema items={faqs} />}
         </>
     );
 }
