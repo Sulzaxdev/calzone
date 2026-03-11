@@ -7,6 +7,10 @@ import { Footer } from "@/components/layout/footer";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://www.thecalzone.co.uk"),
+  applicationName: "CalZone",
+  appleWebApp: {
+    title: "CalZone",
+  },
   title: "CalZone | Specialist Calculator Hub For UK",
   description: "Trusted by 100,000+ UK users. Explore 1,000+ free calculators for health, finance, property, solar energy, and home renovations. Accurate results built on verified UK data, export results as PDF.",
   keywords: [

@@ -5,6 +5,7 @@ export function WebSiteSchema() {
         "@context": "https://schema.org",
         "@type": "WebSite",
         "name": "CalZone",
+        "alternateName": ["CalZone UK", "thecalzone.co.uk"],
         "url": "https://www.thecalzone.co.uk",
         "potentialAction": {
             "@type": "SearchAction",
