@@ -243,7 +243,7 @@ export function CompoundCalculatorForm() {
                             </div>
 
                             <div className="flex gap-4 pt-4 border-t border-slate-100 dark:border-slate-800">
-                                <Button type="submit" className="flex-1 rounded-2xl h-14 text-lg font-black uppercase tracking-tighter shadow-xl shadow-primary/20 hover:scale-[1.02] transition-all">
+                                <Button onClick={() => window.print()} type="submit" className="flex-1 rounded-2xl h-14 text-lg font-black uppercase tracking-tighter shadow-xl shadow-primary/20 hover:scale-[1.02] transition-all">
                                     Project Growth
                                 </Button>
                                 <Button type="button" variant="outline" onClick={resetForm} className="w-14 h-14 rounded-2xl border-slate-200 dark:border-slate-800">

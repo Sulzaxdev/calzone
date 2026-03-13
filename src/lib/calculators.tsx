@@ -22,6 +22,7 @@ export const categories = [
             { name: "Childcare Cost", href: "/childcare-cost-calculator-uk", desc: "Estimate UK childcare expenses" },
             { name: "Pregnancy Due Date", href: "/pregnancy-due-date-calculator-uk", desc: "Calculate your estimated delivery date" },
             { name: "School Age", href: "/school-age-calculator-uk", desc: "Find which school year a child belongs in" },
+            { name: "Hair Transplant Graft", href: "/hair-transplant-graft-calculator-uk", desc: "Estimate complete UK/Turkey costs" },
         ],
     },
     {
@@ -37,8 +38,10 @@ export const categories = [
             { name: "Weight Gain", href: "/calorie-calculator-to-gain-weight-uk", desc: "Calories needed to build lean mass" },
             { name: "Dog Calories", href: "/dog-calorie-calculator-uk", desc: "Daily energy needs for your dog" },
             { name: "Resting Calories", href: "/resting-calorie-calculator-uk", desc: "Calories burned at rest" },
+            { name: "BMI Calculator UK", href: "/bmi-calculator-uk", desc: "Body mass index and healthy weight" },
+            { name: "Dental Implant Cost", href: "/dental-implant-cost-calculator-uk", desc: "UK dental treatment price guide" },
             { name: "Rucking Calories", href: "/rucking-calorie-calculator-uk", desc: "Burn rate with a weighted pack" },
-            { name: "TDEE Calculator", href: "/tdee-calculator-uk", desc: "Total daily energy expenditure limits" },
+            { name: "TDEE Calculator", href: "/tdee-calculator-uk", desc: "Daily energy expenditure and calories" },
             { name: "Swimming Calories", href: "/swimming-calorie-calculator-uk", desc: "Workout intensity based calorie burn" },
         ],
     },
@@ -55,8 +58,12 @@ export const categories = [
             { name: "Loan Calculator", href: "/loan-calculator-uk", desc: "Monthly payments and total interest" },
             { name: "Notice Period", href: "/notice-period-calculator-uk", desc: "Statutory and contractual notice helper" },
             { name: "Junior Doctor Salary", href: "/junior-doctor-salary-calculator-uk", desc: "Net pay for junior medical staff" },
+            { name: "Equity Release", href: "/equity-release-calculator-uk", desc: "Unlock tax-free cash from your property" },
+            { name: "Pension Drawdown", href: "/pension-drawdown-calculator-uk", desc: "Retirement pot projection" },
             { name: "Electricity Cost", href: "/electricity-cost-calculator-uk", desc: "Calculate appliance running costs" },
             { name: "Gas Bill", href: "/gas-bill-calculator-uk", desc: "Estimate monthly gas expenditure" },
+            { name: "Corporation Tax", href: "/corporation-tax-calculator-uk", desc: "Calculate your limited company tax bill" },
+            { name: "Capital Gains Tax", href: "/capital-gains-tax-calculator-uk", desc: "Calculate UK CGT on property & shares" },
         ],
     },
     {
@@ -79,6 +86,7 @@ export const categories = [
             { name: "Electric vs Petrol", href: "/petrol-vs-electric-car-running-cost-calculator-uk", desc: "Total cost of ownership comparison" },
             { name: "Used Car Tax", href: "/used-car-tax-calculator-uk", desc: "Calculate VED for older vehicles" },
             { name: "Journey Cost", href: "/journey-cost-calculator-uk", desc: "Total fuel and toll costs for a trip" },
+            { name: "PCP Car Finance", href: "/pcp-car-finance-calculator-uk", desc: "Estimate monthly payments & balloon" },
         ],
     },
     {
@@ -164,6 +172,16 @@ export const categories = [
             { name: "SIP Calculator", href: "/sip-calculator-uk", desc: "Calculate future value of monthly investments." },
             { name: "Inflation Adjusted Return", href: "/inflation-adjusted-return-calculator-uk", desc: "Calculate real returns after UK inflation." },
             { name: "FTSE Index Return", href: "/ftse-index-return-calculator-uk", desc: "Calculate historical CAGR for FTSE 100/250." },
+        ],
+    },
+    {
+        title: "Legal & Professional",
+        icon: <Scale className="h-6 w-6 text-primary" />,
+        calculators: [
+            { name: "Inheritance Tax", href: "/inheritance-tax-calculator-uk", desc: "Estimate potential IHT payout" },
+            { name: "Unfair Dismissal", href: "/unfair-dismissal-calculator-uk", desc: "Basic Award statutory estimator" },
+            { name: "Personal Injury Comp", href: "/personal-injury-compensation-calculator-uk", desc: "Accident claim & JCG estimator" },
+            { name: "Care Home Fees", href: "/care-home-fees-calculator-uk", desc: "Capital limits & funding means test" }
         ],
     },
 ];

@@ -1,4 +1,4 @@
-﻿import Link from "next/link";
+import Link from "next/link";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Activity, Scale, Heart, Baby, Droplets, ChevronRight } from "lucide-react";
 
@@ -158,6 +158,7 @@ export default function Home() {
                   { name: "VAT Calculator", href: "/vat-calculator-uk" },
                   { name: "Redundancy Pay", href: "/redundancy-calculator-uk" },
                   { name: "Loan Calculator", href: "/loan-calculator-uk" },
+                  { name: "Equity Release", href: "/equity-release-calculator-uk" },
                   { name: "Electricity Cost", href: "/electricity-cost-calculator-uk" }
                 ]
               },
