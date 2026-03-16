@@ -9,10 +9,56 @@ import { Button } from "@/components/ui/button";
 import { calculateCorporationTax } from "@/lib/corporation-tax-logic";
 import { Building2, Receipt, PoundSterling, Download, AlertCircle, Percent } from "lucide-react";
 
+import html2canvas from "html2canvas";
+import jsPDF from "jspdf";
+
 export function CorporationTaxCalculatorForm() {
     const [grossProfit, setGrossProfit] = useState<number>(120000);
     const [allowableExpenses, setAllowableExpenses] = useState<number>(35000);
     const [result, setResult] = useState<any>(null);
+    const [isExporting, setIsExporting] = useState(false);
+    const calculatorRef = React.useRef<HTMLDivElement>(null);
+
+    const exportPDF = async () => {
+        if (!calculatorRef.current) return;
+        setIsExporting(true);
+
+        const exportButton = calculatorRef.current.parentNode?.querySelector('button[onClick*="exportPDF"]');
+        if (exportButton instanceof HTMLElement) exportButton.style.opacity = '0';
+
+        try {
+            await new Promise((resolve) => setTimeout(resolve, 150));
+            const canvas = await html2canvas(calculatorRef.current, {
+                scale: 2,
+                useCORS: true,
+                backgroundColor: "#fffbeb", // amber-50ish
+                windowWidth: calculatorRef.current.scrollWidth,
+                windowHeight: calculatorRef.current.scrollHeight,
+            });
+            const imgData = canvas.toDataURL("image/png");
+            const pdf = new jsPDF("p", "mm", "a4");
+            const pdfWidth = pdf.internal.pageSize.getWidth();
+            
+            pdf.setFontSize(22);
+            pdf.setTextColor(15, 23, 42);
+            pdf.text("Corporation Tax Calculation Report", 15, 20);
+            
+            pdf.setFontSize(10);
+            pdf.setTextColor(100);
+            pdf.text(`Generated on: ${new Date().toLocaleDateString()} at ${new Date().toLocaleTimeString()}`, 15, 28);
+            
+            pdf.setDrawColor(226, 232, 240);
+            pdf.line(15, 32, pdfWidth - 15, 32);
+
+            pdf.addImage(imgData, "PNG", 15, 40, pdfWidth - 30, (canvas.height * (pdfWidth - 30)) / canvas.width);
+            pdf.save("Corporation-Tax-Report.pdf");
+        } catch (error) {
+            console.error("Failed to export", error);
+        } finally {
+            if (exportButton instanceof HTMLElement) exportButton.style.opacity = '1';
+            setIsExporting(false);
+        }
+    };
 
     const handleCalculate = () => {
         const res = calculateCorporationTax(grossProfit, allowableExpenses);
@@ -70,7 +116,10 @@ export function CorporationTaxCalculatorForm() {
                 {/* Results Section */}
                 <div className="space-y-6">
                     {result ? (
-                        <Card className="rounded-[2.5rem] border-2 border-amber-500 bg-amber-50/50 dark:bg-amber-950/20 shadow-2xl relative overflow-hidden animate-in fade-in slide-in-from-bottom-4 duration-500">
+                        <Card 
+                            ref={calculatorRef}
+                            className="rounded-[2.5rem] border-2 border-amber-500 bg-amber-50/50 dark:bg-amber-950/20 shadow-2xl relative overflow-hidden animate-in fade-in slide-in-from-bottom-4 duration-500"
+                        >
                              <div className="absolute -top-10 -right-10 w-40 h-40 bg-amber-500/10 rounded-full blur-2xl pointer-events-none"></div>
                             <CardContent className="p-10 relative z-10 text-center">
                                 <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-amber-500 text-white text-[10px] font-black uppercase tracking-widest mb-6 border border-amber-400">
@@ -87,7 +136,7 @@ export function CorporationTaxCalculatorForm() {
                                     
                                     <div className="flex justify-between items-center text-sm">
                                         <span className="font-medium text-slate-600 dark:text-slate-400">Taxable Profit</span>
-                                        <span className="font-bold text-slate-900 dark:text-slate-100">£{result.taxableProfit.toLocaleString()}</span>
+                                        <span className="font-bold text-slate-900 dark:text-100">£{result.taxableProfit.toLocaleString()}</span>
                                     </div>
                                     <div className="flex justify-between items-center text-sm text-slate-600 dark:text-slate-400 py-1">
                                         <span className="font-medium flex items-center gap-2">Tax Band Applied</span>
@@ -103,8 +152,17 @@ export function CorporationTaxCalculatorForm() {
 
                                 </div>
 
-                                <Button onClick={() => window.print()} className="w-full h-14 rounded-xl bg-slate-900 dark:bg-white hover:bg-slate-800 text-white dark:text-slate-900 font-bold gap-2">
-                                    <Download className="w-5 h-5" /> Export PDF Summary
+                                <Button 
+                                    onClick={exportPDF} 
+                                    disabled={isExporting}
+                                    className="w-full h-14 rounded-xl bg-slate-900 dark:bg-white hover:bg-slate-800 text-white dark:text-slate-900 font-bold gap-2"
+                                >
+                                    {isExporting ? (
+                                        <div className="w-4 h-4 border-2 border-slate-400 border-t-transparent shrink-0 rounded-full animate-spin"></div>
+                                    ) : (
+                                        <Download className="w-5 h-5" />
+                                    )}
+                                    Export PDF Report
                                 </Button>
                             </CardContent>
                         </Card>

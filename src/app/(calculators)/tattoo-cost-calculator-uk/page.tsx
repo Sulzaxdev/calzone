@@ -9,7 +9,7 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { Info } from "lucide-react";
+import { Info, Paintbrush } from "lucide-react";
 
 const HOURLY_RATES = {
     apprentice: 60,
@@ -68,6 +68,8 @@ export default function TattooCostCalculator() {
             title="Tattoo Cost Estimator"
             description="Calculate rough ink pricing based on UK hourly rates and session length."
             hasResult={!!result}
+            icon={<Paintbrush className="w-6 h-6" />}
+            heroImage="https://images.unsplash.com/photo-1598371839696-5c5bb00bdc28?q=80&w=2071&auto=format&fit=crop"
         >
             <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
                 <div className="space-y-4">
@@ -122,7 +124,7 @@ export default function TattooCostCalculator() {
                     </div>
                 </div>
 
-                <Button type="submit" className="w-full">
+                <Button type="submit" className="w-full" data-pdf-export-ignore>
                     Estimate Tattoo Cost
                 </Button>
             </form>

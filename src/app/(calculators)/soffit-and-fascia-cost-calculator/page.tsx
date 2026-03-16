@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
@@ -9,7 +9,9 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { Info } from "lucide-react";
+import { Info, Download } from "lucide-react";
+import html2canvas from "html2canvas";
+import jsPDF from "jspdf";
 
 // Rough UK cost per meter including installation
 const MATERIAL_COSTS_PER_METER = {
@@ -32,6 +34,8 @@ type ResultData = {
 
 export default function SoffitFasciaCostCalculator() {
     const [result, setResult] = useState<ResultData | null>(null);
+    const [isExporting, setIsExporting] = useState(false);
+    const calculatorRef = useRef<HTMLDivElement>(null);
 
     const { register, handleSubmit, setValue, watch, formState: { errors } } = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
@@ -66,13 +70,67 @@ export default function SoffitFasciaCostCalculator() {
         });
     };
 
+    const exportPDF = async () => {
+        if (!calculatorRef.current) return;
+        setIsExporting(true);
+
+        const exportButton = calculatorRef.current.parentNode?.querySelector('button[onClick*="exportPDF"]');
+        if (exportButton instanceof HTMLElement) exportButton.style.opacity = '0';
+
+        try {
+            await new Promise((resolve) => setTimeout(resolve, 150));
+            const canvas = await html2canvas(calculatorRef.current, {
+                scale: 2,
+                useCORS: true,
+                backgroundColor: "#ffffff",
+                windowWidth: calculatorRef.current.scrollWidth,
+                windowHeight: calculatorRef.current.scrollHeight,
+            });
+            const imgData = canvas.toDataURL("image/png");
+            const pdf = new jsPDF("p", "mm", "a4");
+            const pdfWidth = pdf.internal.pageSize.getWidth();
+            
+            pdf.setFontSize(22);
+            pdf.setTextColor(15, 23, 42);
+            pdf.text("Soffit & Fascia Report", 15, 20);
+            
+            pdf.setFontSize(10);
+            pdf.setTextColor(100);
+            pdf.text(`Generated on: ${new Date().toLocaleDateString()} at ${new Date().toLocaleTimeString()}`, 15, 28);
+            
+            pdf.setDrawColor(226, 232, 240);
+            pdf.line(15, 32, pdfWidth - 15, 32);
+
+            pdf.addImage(imgData, "PNG", 15, 40, pdfWidth - 30, (canvas.height * (pdfWidth - 30)) / canvas.width);
+            pdf.save("soffit-fascia-report.pdf");
+        } catch (error) {
+            console.error("Failed to generate PDF", error);
+        } finally {
+            if (exportButton instanceof HTMLElement) exportButton.style.opacity = '1';
+            setIsExporting(false);
+        }
+    };
+
     return (
-        <CalculatorCard
-            title="Soffit & Fascia Cost Estimator"
-            description="Estimate the cost of replacing roofline boards (fascias and soffits) in the UK."
-            hasResult={!!result}
-        >
-            <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
+        <div ref={calculatorRef} className="relative">
+            <CalculatorCard
+                title="Soffit & Fascia Cost Estimator"
+                description="Estimate the cost of replacing roofline boards (fascias and soffits) in the UK."
+                hasResult={!!result}
+            >
+                <div className="absolute top-4 right-4 z-10">
+                    <Button
+                        onClick={exportPDF}
+                        variant="outline"
+                        size="sm"
+                        disabled={isExporting}
+                        className="flex items-center gap-2"
+                    >
+                        {isExporting ? <div className="w-4 h-4 border-2 border-slate-400 border-t-transparent rounded-full animate-spin"></div> : <Download className="h-4 w-4" />}
+                        Export
+                    </Button>
+                </div>
+                <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
                 <div className="space-y-4">
 
                     <div className="space-y-2">
@@ -151,5 +209,6 @@ export default function SoffitFasciaCostCalculator() {
                 </div>
             )}
         </CalculatorCard>
+        </div>
     );
 }

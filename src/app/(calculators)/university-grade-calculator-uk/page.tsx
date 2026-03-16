@@ -7,7 +7,7 @@ import * as z from "zod";
 import { CalculatorCard } from "@/components/calculator-card";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { Plus, Trash2 } from "lucide-react";
+import { Plus, Trash2, GraduationCap } from "lucide-react";
 
 // Using a dynamic form schema with field arrays
 const formSchema = z.object({
@@ -72,6 +72,8 @@ export default function UniversityGradeCalculator() {
             title="UK University Grade Calculator"
             description="Calculate your weighted module average and predict your degree classification."
             hasResult={!!result}
+            icon={<GraduationCap className="w-6 h-6" />}
+            heroImage="https://images.unsplash.com/photo-1523050853064-850162fdb9f1?q=80&w=2070&auto=format&fit=crop"
         >
             <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
 
@@ -112,6 +114,7 @@ export default function UniversityGradeCalculator() {
                                     type="button"
                                     variant="ghost"
                                     size="icon"
+                                    data-pdf-export-ignore
                                     className="h-8 w-8 text-destructive hover:bg-destructive/10"
                                     onClick={() => remove(index)}
                                     disabled={fields.length === 1}
@@ -126,6 +129,7 @@ export default function UniversityGradeCalculator() {
                         type="button"
                         variant="outline"
                         size="sm"
+                        data-pdf-export-ignore
                         className="w-full mt-2 border-dashed"
                         onClick={() => append({ grade: 60, credits: 20 })}
                     >
@@ -133,7 +137,7 @@ export default function UniversityGradeCalculator() {
                     </Button>
                 </div>
 
-                <Button type="submit" className="w-full">
+                <Button type="submit" className="w-full" data-pdf-export-ignore>
                     Calculate Overall Grade
                 </Button>
             </form>

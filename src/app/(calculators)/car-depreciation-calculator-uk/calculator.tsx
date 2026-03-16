@@ -56,23 +56,45 @@ export function CarDepreciationCalculator() {
     const exportPDF = async () => {
         if (!calculatorRef.current) return;
         setIsExporting(true);
+
+        const ignoreElements = calculatorRef.current.querySelectorAll('[data-pdf-export-ignore]');
+        ignoreElements.forEach(el => {
+            if (el instanceof HTMLElement) el.style.opacity = '0';
+        });
+
         try {
-            await new Promise((resolve) => setTimeout(resolve, 100));
-            const canvas = await html2canvas(calculatorRef.current, { scale: 2, backgroundColor: "#ffffff" });
+            await new Promise((resolve) => setTimeout(resolve, 150));
+            const canvas = await html2canvas(calculatorRef.current, {
+                scale: 2,
+                useCORS: true,
+                backgroundColor: "#ffffff",
+                windowWidth: calculatorRef.current.scrollWidth,
+                windowHeight: calculatorRef.current.scrollHeight,
+            });
+
             const imgData = canvas.toDataURL("image/png");
             const pdf = new jsPDF("p", "mm", "a4");
             const pdfWidth = pdf.internal.pageSize.getWidth();
-            const pdfHeight = (canvas.height * pdfWidth) / canvas.width;
-            pdf.setFontSize(20);
-            pdf.text("Car Depreciation Report", 15, 15);
+
+            pdf.setFontSize(22);
+            pdf.setTextColor(15, 23, 42);
+            pdf.text("Car Depreciation Report", 15, 20);
+            
             pdf.setFontSize(10);
             pdf.setTextColor(100);
-            pdf.text(`Generated on: ${new Date().toLocaleDateString()}`, 15, 22);
-            pdf.addImage(imgData, "PNG", 15, 30, pdfWidth - 30, pdfHeight - 30);
+            pdf.text(`Generated on: ${new Date().toLocaleDateString()} at ${new Date().toLocaleTimeString()} | CalZone.uk`, 15, 28);
+            
+            pdf.setDrawColor(226, 232, 240);
+            pdf.line(15, 32, pdfWidth - 15, 32);
+
+            pdf.addImage(imgData, "PNG", 15, 40, pdfWidth - 30, (canvas.height * (pdfWidth - 30)) / canvas.width);
             pdf.save("car-depreciation-report.pdf");
         } catch (error) {
             console.error("Failed to generate PDF", error);
         } finally {
+            ignoreElements.forEach(el => {
+                if (el instanceof HTMLElement) el.style.opacity = '1';
+            });
             setIsExporting(false);
         }
     };
@@ -92,6 +114,7 @@ export function CarDepreciationCalculator() {
                 <button
                     onClick={exportPDF}
                     disabled={isExporting}
+                    data-pdf-export-ignore
                     className="inline-flex items-center gap-2 px-4 py-2 bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300 text-sm font-semibold rounded-xl transition-colors disabled:opacity-50"
                 >
                     {isExporting ? <div className="w-4 h-4 border-2 border-slate-400 border-t-transparent rounded-full animate-spin"></div> : <Download className="w-4 h-4" />}
@@ -128,14 +151,14 @@ export function CarDepreciationCalculator() {
                 <div className="mt-10 bg-slate-50 dark:bg-slate-900/50 rounded-2xl p-6 sm:p-8 border border-slate-100 dark:border-slate-800 relative z-10">
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
                         <div className="bg-white dark:bg-slate-950 p-6 rounded-2xl border border-slate-200 dark:border-slate-800 text-center">
-                            <span className="block text-slate-500 dark:text-slate-400 text-xs font-bold uppercase mb-2 flex justify-center items-center gap-2">
+                            <span className="text-slate-500 dark:text-slate-400 text-xs font-bold uppercase mb-2 flex justify-center items-center gap-2">
                                 <CarFront className="w-4 h-4" /> Estimated Value in {yearsToKeep} Years
                             </span>
                             <span className="text-4xl lg:text-5xl font-black text-slate-900 dark:text-white">£{results.finalValue}</span>
                         </div>
 
                         <div className="bg-red-50 dark:bg-red-900/10 p-6 rounded-2xl border border-red-100 dark:border-red-900/30 text-center">
-                            <span className="block text-red-600 dark:text-red-400 text-xs font-bold uppercase mb-2 flex justify-center items-center gap-2">
+                            <span className="text-red-600 dark:text-red-400 text-xs font-bold uppercase mb-2 flex justify-center items-center gap-2">
                                 <TrendingDown className="w-4 h-4" /> Total Money Lost
                             </span>
                             <span className="text-4xl lg:text-5xl font-black text-red-600 dark:text-red-500">-£{results.totalLost}</span>

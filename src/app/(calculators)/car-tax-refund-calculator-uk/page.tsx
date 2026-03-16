@@ -44,10 +44,14 @@ export default function CarTaxRefundCalculator() {
         if (!calculatorRef.current) return;
         setIsExporting(true);
 
+        const exportButton = calculatorRef.current.querySelector('button[onClick*="exportPDF"]');
+        if (exportButton instanceof HTMLElement) exportButton.style.opacity = '0';
+
         try {
-            await new Promise((resolve) => setTimeout(resolve, 100));
+            await new Promise((resolve) => setTimeout(resolve, 150));
             const canvas = await html2canvas(calculatorRef.current, {
                 scale: 2,
+                useCORS: true,
                 backgroundColor: "#ffffff",
                 windowWidth: calculatorRef.current.scrollWidth,
                 windowHeight: calculatorRef.current.scrollHeight,
@@ -55,20 +59,25 @@ export default function CarTaxRefundCalculator() {
 
             const imgData = canvas.toDataURL("image/png");
             const pdf = new jsPDF("p", "mm", "a4");
-
             const pdfWidth = pdf.internal.pageSize.getWidth();
-            const pdfHeight = (canvas.height * pdfWidth) / canvas.width;
 
-            pdf.setFontSize(20);
-            pdf.text("UK Car Tax Refund Estimate", 15, 15);
+            pdf.setFontSize(22);
+            pdf.setTextColor(15, 23, 42);
+            pdf.text("UK Car Tax Refund Estimate", 15, 20);
+            
             pdf.setFontSize(10);
             pdf.setTextColor(100);
-            pdf.text(`Generated on: ${new Date().toLocaleDateString()}`, 15, 22);
-            pdf.addImage(imgData, "PNG", 15, 30, pdfWidth - 30, pdfHeight - 30);
-            pdf.save("Tax-Refund-Estimate.pdf");
+            pdf.text(`Generated on: ${new Date().toLocaleDateString()} at ${new Date().toLocaleTimeString()} | CalZone.uk`, 15, 28);
+            
+            pdf.setDrawColor(226, 232, 240);
+            pdf.line(15, 32, pdfWidth - 15, 32);
+
+            pdf.addImage(imgData, "PNG", 15, 40, pdfWidth - 30, (canvas.height * (pdfWidth - 30)) / canvas.width);
+            pdf.save("Tax-Refund-Report.pdf");
         } catch (error) {
             console.error("Failed to generate PDF", error);
         } finally {
+            if (exportButton instanceof HTMLElement) exportButton.style.opacity = '1';
             setIsExporting(false);
         }
     };

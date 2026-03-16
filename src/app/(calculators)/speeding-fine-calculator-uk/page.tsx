@@ -167,7 +167,7 @@ export default function SpeedingFineCalculator() {
                         </div>
                     </div>
 
-                    <Button type="submit" variant="destructive" className="w-full text-lg h-12">Calculate Penalty</Button>
+                    <Button type="submit" variant="destructive" className="w-full text-lg h-12" data-pdf-export-ignore>Calculate Penalty</Button>
                 </form>
 
                 {result && (

@@ -32,6 +32,8 @@ export default function AnnualLeaveCalculator() {
                 title="UK Annual Leave Calculator"
                 description="Calculate your statutory minimum annual holiday entitlement based on the days you work per week."
                 hasResult={!!result}
+                icon={<CalendarDays className="h-8 w-8 text-teal-500" />}
+                heroImage="/employment-hero.jpg"
             >
                 <form onSubmit={calculateLeave} className="space-y-6">
                     <div className="space-y-2">
@@ -50,7 +52,7 @@ export default function AnnualLeaveCalculator() {
                         <p className="text-xs text-muted-foreground mt-1">Include part days as fractions (e.g. 4.5).</p>
                     </div>
 
-                    <Button type="submit" className="w-full text-lg h-12">Calculate Entitlement</Button>
+                    <Button type="submit" data-pdf-export-ignore className="w-full text-lg h-12">Calculate Entitlement</Button>
                 </form>
 
                 {result && (

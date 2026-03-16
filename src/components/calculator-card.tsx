@@ -1,11 +1,11 @@
 "use client";
 
-import { useRef } from "react";
+import { useState, useRef } from "react";
 import { motion } from "framer-motion";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Download, FileText, ArrowRight, Sparkles } from "lucide-react";
-import { toPng } from "html-to-image";
+import html2canvas from "html2canvas";
 import jsPDF from "jspdf";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
@@ -23,35 +23,55 @@ interface CalculatorCardProps {
 
 export function CalculatorCard({ title, description, children, hasResult, icon, heroImage }: CalculatorCardProps) {
     const cardRef = useRef<HTMLDivElement>(null);
+    const [isExporting, setIsExporting] = useState(false);
     const pathname = usePathname();
 
     const handleDownloadPdf = async () => {
         if (!cardRef.current) return;
+        setIsExporting(true);
+
+        // Hide the export button and other noise
+        const ignoreElements = cardRef.current.querySelectorAll('[data-pdf-export-ignore]');
+        ignoreElements.forEach(el => {
+            if (el instanceof HTMLElement) el.style.opacity = '0';
+        });
 
         try {
-            const dataUrl = await toPng(cardRef.current, {
-                quality: 1.0,
+            await new Promise((resolve) => setTimeout(resolve, 150));
+            
+            const canvas = await html2canvas(cardRef.current, {
+                scale: 2,
+                useCORS: true,
                 backgroundColor: "#ffffff",
-                pixelRatio: 2, // High resolution
+                windowWidth: cardRef.current.scrollWidth,
+                windowHeight: cardRef.current.scrollHeight,
             });
 
-            const pdf = new jsPDF({
-                orientation: "portrait",
-                unit: "px",
-                format: "a4"
-            });
-
-            // A4 dimensions in px at 72 DPI are approx 595 x 842
+            const imgData = canvas.toDataURL("image/png");
+            const pdf = new jsPDF("p", "mm", "a4");
             const pdfWidth = pdf.internal.pageSize.getWidth();
+            
+            // Professional Header
+            pdf.setFontSize(22);
+            pdf.setTextColor(15, 23, 42);
+            pdf.text(title, 15, 20);
+            
+            pdf.setFontSize(10);
+            pdf.setTextColor(100);
+            pdf.text(`Generated on: ${new Date().toLocaleDateString()} at ${new Date().toLocaleTimeString()} | CalZone.uk`, 15, 28);
+            
+            pdf.setDrawColor(226, 232, 240);
+            pdf.line(15, 32, pdfWidth - 15, 32);
 
-            // We need to fetch the image to get its dimensions to maintain aspect ratio
-            const imgProps = pdf.getImageProperties(dataUrl);
-            const pdfHeight = (imgProps.height * pdfWidth) / imgProps.width;
-
-            pdf.addImage(dataUrl, "PNG", 0, 0, pdfWidth, pdfHeight);
+            pdf.addImage(imgData, "PNG", 15, 40, pdfWidth - 30, (canvas.height * (pdfWidth - 30)) / canvas.width);
             pdf.save(`${title.replace(/\s+/g, '-').toLowerCase()}-report.pdf`);
         } catch (error) {
             console.error("Failed to generate PDF:", error);
+        } finally {
+            ignoreElements.forEach(el => {
+                if (el instanceof HTMLElement) el.style.opacity = '1';
+            });
+            setIsExporting(false);
         }
     };
 
@@ -118,10 +138,12 @@ export function CalculatorCard({ title, description, children, hasResult, icon, 
                                         variant="outline"
                                         size="lg"
                                         onClick={handleDownloadPdf}
-                                        className="flex items-center gap-2 bg-slate-50 dark:bg-slate-900 border-slate-200 dark:border-slate-800 hover:bg-primary hover:text-white hover:border-primary transition-all shadow-md rounded-2xl px-8 h-12 font-bold"
+                                        disabled={isExporting}
+                                        data-pdf-export-ignore
+                                        className="flex items-center gap-2 bg-slate-50 dark:bg-slate-900 border-slate-200 dark:border-slate-800 hover:bg-primary hover:text-white hover:border-primary transition-all shadow-md rounded-2xl px-8 h-12 font-bold disabled:opacity-50"
                                     >
-                                        <Download className="w-5 h-5" />
-                                        Export Detailed Report (PDF)
+                                        {isExporting ? <div className="w-5 h-5 border-2 border-primary border-t-transparent rounded-full animate-spin"></div> : <Download className="w-5 h-5" />}
+                                        {isExporting ? "Generating PDF..." : "Export Detailed Report (PDF)"}
                                     </Button>
                                 </div>
                             )}

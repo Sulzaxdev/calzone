@@ -85,6 +85,8 @@ export default function HolidayCalculator() {
                 title="Holiday Cost Calculator"
                 description="Estimate the total budget required for your next vacation or holiday."
                 hasResult={!!result}
+                icon={<Palmtree className="h-8 w-8 text-sky-500" />}
+                heroImage="/travel-hero.jpg"
             >
                 <form onSubmit={calculateCost} className="space-y-6">
                     <div className="grid grid-cols-2 gap-4">
@@ -158,7 +160,7 @@ export default function HolidayCalculator() {
                         </div>
                     </div>
 
-                    <Button type="submit" className="w-full text-lg h-12">Calculate Holiday Cost</Button>
+                    <Button type="submit" data-pdf-export-ignore className="w-full text-lg h-12">Calculate Holiday Cost</Button>
                 </form>
 
                 {result && (

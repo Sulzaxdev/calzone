@@ -1,7 +1,7 @@
 
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
@@ -9,6 +9,8 @@ import { Button } from "@/components/ui/button";
 import { Slider } from "@/components/ui/slider";
 import { calculatePCP } from "@/lib/pcp-logic";
 import { Calculator, Car, Info, Download, AlertTriangle, ArrowRight } from "lucide-react";
+import html2canvas from "html2canvas";
+import jsPDF from "jspdf";
 
 export function PCPCalculatorForm() {
     const [carPrice, setCarPrice] = useState<number>(25000);
@@ -19,6 +21,50 @@ export function PCPCalculatorForm() {
     const [apr, setApr] = useState<number>(7.9);
     
     const [result, setResult] = useState<any>(null);
+    const [isExporting, setIsExporting] = useState(false);
+    const calculatorRef = useRef<HTMLDivElement>(null);
+
+    const exportPDF = async () => {
+        if (!calculatorRef.current) return;
+        setIsExporting(true);
+
+        const exportButton = document.querySelector('button[onClick*="exportPDF"]');
+        if (exportButton instanceof HTMLElement) exportButton.style.opacity = '0';
+
+        try {
+            await new Promise((resolve) => setTimeout(resolve, 150));
+            const canvas = await html2canvas(calculatorRef.current, {
+                scale: 2,
+                useCORS: true,
+                backgroundColor: "#ffffff",
+                windowWidth: calculatorRef.current.scrollWidth,
+                windowHeight: calculatorRef.current.scrollHeight,
+            });
+
+            const imgData = canvas.toDataURL("image/png");
+            const pdf = new jsPDF("p", "mm", "a4");
+            const pdfWidth = pdf.internal.pageSize.getWidth();
+
+            pdf.setFontSize(22);
+            pdf.setTextColor(15, 23, 42);
+            pdf.text("PCP Finance Quote Report", 15, 20);
+            
+            pdf.setFontSize(10);
+            pdf.setTextColor(100);
+            pdf.text(`Generated on: ${new Date().toLocaleDateString()} at ${new Date().toLocaleTimeString()} | CalZone.uk`, 15, 28);
+            
+            pdf.setDrawColor(226, 232, 240);
+            pdf.line(15, 32, pdfWidth - 15, 32);
+
+            pdf.addImage(imgData, "PNG", 15, 40, pdfWidth - 30, (canvas.height * (pdfWidth - 30)) / canvas.width);
+            pdf.save("PCP-Finance-Quote.pdf");
+        } catch (error) {
+            console.error("Failed to generate PDF", error);
+        } finally {
+            if (exportButton instanceof HTMLElement) exportButton.style.opacity = '1';
+            setIsExporting(false);
+        }
+    };
 
     const handleCalculate = () => {
         const res = calculatePCP(carPrice, customerDeposit, dealerContribution, termMonths, gmfv, apr);
@@ -136,7 +182,7 @@ export function PCPCalculatorForm() {
                 {/* Results Section */}
                 <div className="space-y-6">
                     {result ? (
-                        <Card className={`rounded-[2.5rem] border-2 shadow-2xl relative overflow-hidden animate-in fade-in slide-in-from-bottom-4 duration-500 border-sky-500 bg-sky-50/50 dark:bg-sky-950/20`}>
+                        <Card ref={calculatorRef} className={`rounded-[2.5rem] border-2 shadow-2xl relative overflow-hidden animate-in fade-in slide-in-from-bottom-4 duration-500 border-sky-500 bg-sky-50/50 dark:bg-sky-950/20`}>
                              <div className={`absolute -top-10 -right-10 w-40 h-40 rounded-full blur-2xl pointer-events-none bg-sky-500/10`}></div>
                             <CardContent className="p-10 relative z-10 text-center">
                                 <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-sky-500 text-white text-[10px] font-black uppercase tracking-widest mb-6 border border-sky-400">
@@ -147,7 +193,7 @@ export function PCPCalculatorForm() {
                                 <div className="text-6xl md:text-7xl font-black text-sky-600 dark:text-sky-400 mb-2 tracking-tighter">
                                     £{result.monthlyPayment.toFixed(2)}
                                 </div>
-                                <p className="text-sm font-bold text-slate-500 dark:text-slate-400 mb-8 uppercase tracking-widest text-[#94a3b8]">Per month for {termMonths} months</p>
+                                <p className="text-sm font-bold text-slate-500 dark:text-slate-400 mb-8 uppercase tracking-widest">Per month for {termMonths} months</p>
 
                                 <div className="bg-white dark:bg-slate-900 rounded-3xl border border-sky-100 dark:border-sky-900/40 p-6 mb-8 text-left space-y-4">
                                     <h4 className="text-[10px] font-black text-slate-400 uppercase tracking-widest border-b border-slate-100 dark:border-slate-800 pb-2">The True Cost of Finance</h4>
@@ -175,10 +221,12 @@ export function PCPCalculatorForm() {
                                 </div>
 
                                  <Button 
-                                    onClick={() => window.print()}
-                                    className="w-full h-14 rounded-xl bg-slate-900 dark:bg-white hover:bg-slate-800 text-white dark:text-slate-900 font-bold gap-2"
+                                    onClick={exportPDF}
+                                    disabled={isExporting}
+                                    className="w-full h-14 rounded-xl bg-slate-900 dark:bg-white hover:bg-slate-800 text-white dark:text-slate-900 font-bold gap-2 disabled:opacity-50"
                                 >
-                                    <Download className="w-5 h-5" /> Save Quote PDF
+                                    {isExporting ? <div className="w-4 h-4 border-2 border-slate-400 border-t-transparent rounded-full animate-spin"></div> : <Download className="w-5 h-5" />}
+                                    {isExporting ? "Generating PDF..." : "Save Quote PDF"}
                                 </Button>
                             </CardContent>
                         </Card>

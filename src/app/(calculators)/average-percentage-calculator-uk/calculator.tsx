@@ -49,25 +49,48 @@ export function AveragePercentageCalculator() {
     const results = processResults();
 
     const exportPDF = async () => {
-        if (!calculatorRef.current) return;
+        const currentRef = calculatorRef.current;
+        if (!currentRef) return;
         setIsExporting(true);
+
+        const ignoreElements = currentRef.querySelectorAll('[data-pdf-export-ignore]');
+        ignoreElements.forEach(el => {
+            if (el instanceof HTMLElement) el.style.opacity = '0';
+        });
+
         try {
-            await new Promise((resolve) => setTimeout(resolve, 100));
-            const canvas = await html2canvas(calculatorRef.current, { scale: 2, backgroundColor: "#ffffff" });
+            await new Promise((resolve) => setTimeout(resolve, 150));
+            const canvas = await html2canvas(currentRef, {
+                scale: 2,
+                useCORS: true,
+                backgroundColor: "#ffffff",
+                windowWidth: currentRef.scrollWidth,
+                windowHeight: currentRef.scrollHeight,
+            });
             const imgData = canvas.toDataURL("image/png");
             const pdf = new jsPDF("p", "mm", "a4");
             const pdfWidth = pdf.internal.pageSize.getWidth();
-            const pdfHeight = (canvas.height * pdfWidth) / canvas.width;
-            pdf.setFontSize(20);
-            pdf.text("Average Percentage Report", 15, 15);
+            
+            // Professional Header
+            pdf.setFontSize(22);
+            pdf.setTextColor(15, 23, 42);
+            pdf.text("Average Percentage Report", 15, 20);
+            
             pdf.setFontSize(10);
             pdf.setTextColor(100);
-            pdf.text(`Generated on: ${new Date().toLocaleDateString()}`, 15, 22);
-            pdf.addImage(imgData, "PNG", 15, 30, pdfWidth - 30, pdfHeight - 30);
+            pdf.text(`Generated on: ${new Date().toLocaleDateString()} at ${new Date().toLocaleTimeString()} | CalZone.uk`, 15, 28);
+            
+            pdf.setDrawColor(226, 232, 240);
+            pdf.line(15, 32, pdfWidth - 15, 32);
+
+            pdf.addImage(imgData, "PNG", 15, 40, pdfWidth - 30, (canvas.height * (pdfWidth - 30)) / canvas.width);
             pdf.save("average-percentage-report.pdf");
         } catch (error) {
             console.error("Failed to generate PDF", error);
         } finally {
+            ignoreElements.forEach(el => {
+                if (el instanceof HTMLElement) el.style.opacity = '1';
+            });
             setIsExporting(false);
         }
     };
@@ -87,6 +110,7 @@ export function AveragePercentageCalculator() {
                 <button
                     onClick={exportPDF}
                     disabled={isExporting}
+                    data-pdf-export-ignore
                     className="inline-flex items-center gap-2 px-4 py-2 bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300 text-sm font-semibold rounded-xl transition-colors disabled:opacity-50"
                 >
                     {isExporting ? <div className="w-4 h-4 border-2 border-slate-400 border-t-transparent rounded-full animate-spin"></div> : <Download className="w-4 h-4" />}
@@ -115,6 +139,7 @@ export function AveragePercentageCalculator() {
                                 <button
                                     onClick={() => removeInput(p.id)}
                                     disabled={percentages.length <= 2}
+                                    data-pdf-export-ignore
                                     className="p-3 bg-slate-100 dark:bg-slate-800 text-slate-400 hover:text-red-500 rounded-xl transition-colors disabled:opacity-30 disabled:hover:text-slate-400"
                                 >
                                     <Trash2 className="w-5 h-5" />
@@ -125,6 +150,7 @@ export function AveragePercentageCalculator() {
 
                     <button
                         onClick={addInput}
+                        data-pdf-export-ignore
                         className="w-full mt-4 flex justify-center items-center gap-2 py-3 border-2 border-dashed border-slate-200 dark:border-slate-800 hover:border-purple-300 dark:hover:border-purple-700/50 rounded-xl text-slate-500 dark:text-slate-400 font-semibold transition-colors"
                     >
                         <Plus className="w-4 h-4" /> Add Another Percentage

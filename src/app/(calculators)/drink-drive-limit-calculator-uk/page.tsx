@@ -9,7 +9,7 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { AlertTriangle, AlertCircle } from "lucide-react";
+import { AlertTriangle, AlertCircle, Wine } from "lucide-react";
 
 // Extremely rough "standard drinks / units" to BAC calculation formula (Widmark formula) for demonstration only
 // r values: Men roughly ~0.68, Women ~0.55
@@ -79,6 +79,8 @@ export default function DrinkDriveLimitCalculator() {
             title="Drink Drive Limit Estimator"
             description="Estimate your Blood Alcohol Concentration (BAC). Crucially: NEVER rely on this to decide if you can drive."
             hasResult={!!result}
+            icon={<Wine className="w-6 h-6" />}
+            heroImage="https://images.unsplash.com/photo-1510812431401-41d2bd2722f3?q=80&w=2070&auto=format&fit=crop"
         >
             <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
                 <div className="space-y-4">
@@ -147,7 +149,7 @@ export default function DrinkDriveLimitCalculator() {
                     </div>
                 </div>
 
-                <Button type="submit" className="w-full">
+                <Button type="submit" className="w-full" data-pdf-export-ignore>
                     Estimate BAC
                 </Button>
             </form>

@@ -1,12 +1,14 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { CalculatorCard } from "@/components/calculator-card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { Flame } from "lucide-react";
+import { Flame, Download } from "lucide-react";
+import html2canvas from "html2canvas";
+import jsPDF from "jspdf";
 
 export default function BTUCalculator() {
     const [length, setLength] = useState("");
@@ -15,6 +17,8 @@ export default function BTUCalculator() {
     const [unit, setUnit] = useState<"meters" | "feet">("meters");
     const [insulation, setInsulation] = useState("average");
 
+    const [isExporting, setIsExporting] = useState(false);
+    const calculatorRef = useRef<HTMLDivElement>(null);
     const [result, setResult] = useState<{ btu: number; kw: string } | null>(null);
 
     const calculateBTU = (e: React.FormEvent) => {
@@ -45,14 +49,68 @@ export default function BTUCalculator() {
         setResult({ btu, kw });
     };
 
+    const exportPDF = async () => {
+        if (!calculatorRef.current) return;
+        setIsExporting(true);
+
+        const exportButton = calculatorRef.current.parentNode?.querySelector('button[onClick*="exportPDF"]');
+        if (exportButton instanceof HTMLElement) exportButton.style.opacity = '0';
+
+        try {
+            await new Promise((resolve) => setTimeout(resolve, 150));
+            const canvas = await html2canvas(calculatorRef.current, {
+                scale: 2,
+                useCORS: true,
+                backgroundColor: "#ffffff",
+                windowWidth: calculatorRef.current.scrollWidth,
+                windowHeight: calculatorRef.current.scrollHeight,
+            });
+            const imgData = canvas.toDataURL("image/png");
+            const pdf = new jsPDF("p", "mm", "a4");
+            const pdfWidth = pdf.internal.pageSize.getWidth();
+            
+            pdf.setFontSize(22);
+            pdf.setTextColor(15, 23, 42);
+            pdf.text("Radiator (BTU) Report", 15, 20);
+            
+            pdf.setFontSize(10);
+            pdf.setTextColor(100);
+            pdf.text(`Generated on: ${new Date().toLocaleDateString()} at ${new Date().toLocaleTimeString()}`, 15, 28);
+            
+            pdf.setDrawColor(226, 232, 240);
+            pdf.line(15, 32, pdfWidth - 15, 32);
+
+            pdf.addImage(imgData, "PNG", 15, 40, pdfWidth - 30, (canvas.height * (pdfWidth - 30)) / canvas.width);
+            pdf.save("btu-radiator-report.pdf");
+        } catch (error) {
+            console.error("Failed to generate PDF", error);
+        } finally {
+            if (exportButton instanceof HTMLElement) exportButton.style.opacity = '1';
+            setIsExporting(false);
+        }
+    };
+
     return (
         <div className="container mx-auto px-4 py-8">
-            <CalculatorCard
-                title="BTU Radiator Calculator"
-                description="Calculate the British Thermal Units (BTU) and Watts needed to effectively heat a room."
-                hasResult={!!result}
-            >
-                <form onSubmit={calculateBTU} className="space-y-6">
+            <div ref={calculatorRef} className="relative">
+                <CalculatorCard
+                    title="BTU Radiator Calculator"
+                    description="Calculate the British Thermal Units (BTU) and Watts needed to effectively heat a room."
+                    hasResult={!!result}
+                >
+                    <div className="absolute top-4 right-4 z-10">
+                        <Button
+                            onClick={exportPDF}
+                            variant="outline"
+                            size="sm"
+                            disabled={isExporting}
+                            className="flex items-center gap-2"
+                        >
+                            {isExporting ? <div className="w-4 h-4 border-2 border-slate-400 border-t-transparent rounded-full animate-spin"></div> : <Download className="h-4 w-4" />}
+                            Export
+                        </Button>
+                    </div>
+                    <form onSubmit={calculateBTU} className="space-y-6">
                     <div className="space-y-2">
                         <Label htmlFor="unit">Measurement Unit</Label>
                         <Select value={unit} onValueChange={(v) => setUnit(v as "meters" | "feet")}>
@@ -114,5 +172,6 @@ export default function BTUCalculator() {
                 )}
             </CalculatorCard>
         </div>
+    </div>
     );
 }

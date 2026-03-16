@@ -100,7 +100,7 @@ export default function CarWriteOffCalculator() {
                         <p className="text-xs text-muted-foreground mt-1">What the damaged car can be sold for as scrap/parts.</p>
                     </div>
 
-                    <Button type="submit" variant="destructive" className="w-full text-lg h-12">Assess Damage</Button>
+                    <Button type="submit" variant="destructive" className="w-full text-lg h-12" data-pdf-export-ignore>Assess Damage</Button>
                 </form>
 
                 {result && (

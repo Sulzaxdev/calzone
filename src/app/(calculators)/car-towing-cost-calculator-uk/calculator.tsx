@@ -58,25 +58,48 @@ export function CarTowingCostCalculator() {
     const results = processResults();
 
     const exportPDF = async () => {
-        if (!calculatorRef.current) return;
+        const currentRef = calculatorRef.current;
+        if (!currentRef) return;
         setIsExporting(true);
+
+        const ignoreElements = currentRef.querySelectorAll('[data-pdf-export-ignore]');
+        ignoreElements.forEach(el => {
+            if (el instanceof HTMLElement) el.style.opacity = '0';
+        });
+
         try {
-            await new Promise((resolve) => setTimeout(resolve, 100));
-            const canvas = await html2canvas(calculatorRef.current, { scale: 2, backgroundColor: "#ffffff" });
+            await new Promise((resolve) => setTimeout(resolve, 150));
+            const canvas = await html2canvas(currentRef, {
+                scale: 2,
+                useCORS: true,
+                backgroundColor: "#ffffff",
+                windowWidth: currentRef.scrollWidth,
+                windowHeight: currentRef.scrollHeight,
+            });
             const imgData = canvas.toDataURL("image/png");
             const pdf = new jsPDF("p", "mm", "a4");
             const pdfWidth = pdf.internal.pageSize.getWidth();
-            const pdfHeight = (canvas.height * pdfWidth) / canvas.width;
-            pdf.setFontSize(20);
-            pdf.text("Car Towing & Recovery Estimate", 15, 15);
+            
+            // Professional Header
+            pdf.setFontSize(22);
+            pdf.setTextColor(15, 23, 42);
+            pdf.text("Car Towing & Recovery Report", 15, 20);
+            
             pdf.setFontSize(10);
             pdf.setTextColor(100);
-            pdf.text(`Generated on: ${new Date().toLocaleDateString()}`, 15, 22);
-            pdf.addImage(imgData, "PNG", 15, 30, pdfWidth - 30, pdfHeight - 30);
-            pdf.save("car-towing-cost-estimate.pdf");
+            pdf.text(`Generated on: ${new Date().toLocaleDateString()} at ${new Date().toLocaleTimeString()} | CalZone.uk`, 15, 28);
+            
+            pdf.setDrawColor(226, 232, 240);
+            pdf.line(15, 32, pdfWidth - 15, 32);
+
+            pdf.addImage(imgData, "PNG", 15, 40, pdfWidth - 30, (canvas.height * (pdfWidth - 30)) / canvas.width);
+            pdf.save("car-towing-recovery-report.pdf");
         } catch (error) {
             console.error("Failed to generate PDF", error);
         } finally {
+            ignoreElements.forEach(el => {
+                if (el instanceof HTMLElement) el.style.opacity = '1';
+            });
             setIsExporting(false);
         }
     };
@@ -96,9 +119,10 @@ export function CarTowingCostCalculator() {
                 <button
                     onClick={exportPDF}
                     disabled={isExporting}
+                    data-pdf-export-ignore
                     className="inline-flex items-center gap-2 px-4 py-2 bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300 text-sm font-semibold rounded-xl transition-colors disabled:opacity-50"
                 >
-                    {isExporting ? <div className="w-4 h-4 border-2 border-blue-400 border-t-transparent rounded-full animate-spin"></div> : <Download className="w-4 h-4" />}
+                    {isExporting ? <div className="w-4 h-4 border-2 border-primary border-t-transparent rounded-full animate-spin"></div> : <Download className="w-4 h-4" />}
                     Export
                 </button>
             </div>
@@ -106,8 +130,8 @@ export function CarTowingCostCalculator() {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8 relative z-10">
                 <div className="space-y-6">
                     <div>
-                        <label className="block text-sm font-bold text-slate-700 dark:text-slate-300 mb-2 flex items-center gap-2">
-                            <MapPin className="w-4 h-4 text-slate-400" /> Towing Distance (Miles)
+                        <label className="text-sm font-bold text-slate-700 dark:text-slate-300 mb-2 flex items-center gap-2">
+                             <MapPin className="w-4 h-4 text-slate-400" /> Towing Distance (Miles)
                         </label>
                         <input
                             type="number"
@@ -165,14 +189,14 @@ export function CarTowingCostCalculator() {
                     </div>
 
                     <div>
-                        <label className="block text-sm font-bold text-slate-700 dark:text-slate-300 mb-3 flex items-center gap-2">
+                        <label className="text-sm font-bold text-slate-700 dark:text-slate-300 mb-3 flex items-center gap-2">
                             <Clock className="w-4 h-4 text-slate-400" /> Time of Service
                         </label>
                         <div className="grid grid-cols-2 gap-2">
                             <button
                                 onClick={() => setTimeOfDay("day")}
                                 className={`py-2 px-4 rounded-xl border text-sm font-bold transition-all ${timeOfDay === "day"
-                                        ? "bg-slate-900 dark:bg-slate-100 text-white dark:text-slate-900"
+                                        ? "text-white bg-slate-900 dark:bg-slate-100 dark:text-slate-900"
                                         : "bg-slate-50 dark:bg-slate-900 border-slate-200 dark:border-slate-800 text-slate-600 dark:text-slate-400"
                                     }`}
                             >

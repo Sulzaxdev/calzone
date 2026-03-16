@@ -68,6 +68,8 @@ export default function TaxiFareCalculator() {
             title="UK Taxi Fare Estimator"
             description="Calculate an estimated cab fare based on distance, tariffs, and potential waiting times."
             hasResult={!!result}
+            icon={<Car className="w-6 h-6" />}
+            heroImage="https://images.unsplash.com/photo-1556122071-e404be747493?q=80&w=1974&auto=format&fit=crop"
         >
             <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
                 <div className="space-y-4">
@@ -123,7 +125,7 @@ export default function TaxiFareCalculator() {
 
                 </div>
 
-                <Button type="submit" className="w-full">
+                <Button type="submit" className="w-full" data-pdf-export-ignore>
                     Estimate Fare
                 </Button>
             </form>

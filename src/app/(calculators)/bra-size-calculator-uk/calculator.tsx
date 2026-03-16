@@ -5,7 +5,7 @@ import { CalculatorCard } from "@/components/calculator-card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
-import { AlertCircle, RotateCcw, CheckCircle2, ChevronRight, Info } from "lucide-react";
+import { AlertCircle, RotateCcw, CheckCircle2, ChevronRight, Info, Ruler } from "lucide-react";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
 
 type Unit = "inches" | "cm";
@@ -140,6 +140,8 @@ export function BraSizeCalculatorForm() {
             title="Bra Size Calculator"
             description="A highly accurate sizing tool calculating UK, US, EU, and AU sizing with Sister-Size and pregnancy adjustments."
             hasResult={!!result}
+            icon={<Ruler className="w-6 h-6" />}
+            heroImage="https://images.unsplash.com/photo-1590559063719-743200af38cc?q=80&w=2070&auto=format&fit=crop"
         >
             <form onSubmit={handleCalculate} className="space-y-8">
                 {/* Top Toggles */}
@@ -266,12 +268,12 @@ export function BraSizeCalculatorForm() {
                 )}
 
                 <div className="flex gap-4 pt-4">
-                    <Button type="button" variant="outline" onClick={() => {
+                    <Button type="button" variant="outline" data-pdf-export-ignore onClick={() => {
                         setUnderbust(""); setBust(""); setResult(null); setError(""); setPregnancyMode(false); setWeightChange("none");
                     }} className="h-14 px-6">
                         <RotateCcw className="w-5 h-5" />
                     </Button>
-                    <Button type="submit" className="flex-1 h-14 text-lg font-bold shadow-lg shadow-primary/20">
+                    <Button type="submit" data-pdf-export-ignore className="flex-1 h-14 text-lg font-bold shadow-lg shadow-primary/20">
                         Calculate Size
                     </Button>
                 </div>

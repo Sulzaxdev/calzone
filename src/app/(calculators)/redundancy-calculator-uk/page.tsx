@@ -52,32 +52,44 @@ export default function RedundancyCalculator() {
     const isEligible = totalYears >= 2;
 
     const exportPDF = async () => {
-        if (!calculatorRef.current) return;
+        const currentRef = calculatorRef.current;
+        if (!currentRef) return;
         setIsExporting(true);
 
+        const exportButton = currentRef.parentNode?.querySelector('button[onClick*="exportPDF"]');
+        if (exportButton instanceof HTMLElement) exportButton.style.opacity = '0';
+
         try {
-            await new Promise((resolve) => setTimeout(resolve, 100));
-            const canvas = await html2canvas(calculatorRef.current, {
+            await new Promise((resolve) => setTimeout(resolve, 150));
+            const canvas = await html2canvas(currentRef, {
                 scale: 2,
+                useCORS: true,
                 backgroundColor: "#ffffff",
-                windowWidth: calculatorRef.current.scrollWidth,
-                windowHeight: calculatorRef.current.scrollHeight,
+                windowWidth: currentRef.scrollWidth,
+                windowHeight: currentRef.scrollHeight,
             });
             const imgData = canvas.toDataURL("image/png");
             const pdf = new jsPDF("p", "mm", "a4");
             const pdfWidth = pdf.internal.pageSize.getWidth();
-            const pdfHeight = (canvas.height * pdfWidth) / canvas.width;
-
-            pdf.setFontSize(20);
-            pdf.text("Statutory Redundancy Report", 15, 15);
+            
+            // Professional Header
+            pdf.setFontSize(22);
+            pdf.setTextColor(15, 23, 42);
+            pdf.text("Statutory Redundancy Report", 15, 20);
+            
             pdf.setFontSize(10);
             pdf.setTextColor(100);
-            pdf.text(`Generated on: ${new Date().toLocaleDateString()}`, 15, 22);
-            pdf.addImage(imgData, "PNG", 15, 30, pdfWidth - 30, pdfHeight - 30);
-            pdf.save("Redundancy-Calculation.pdf");
+            pdf.text(`Generated on: ${new Date().toLocaleDateString()} at ${new Date().toLocaleTimeString()} | CalZone.uk`, 15, 28);
+            
+            pdf.setDrawColor(226, 232, 240);
+            pdf.line(15, 32, pdfWidth - 15, 32);
+
+            pdf.addImage(imgData, "PNG", 15, 40, pdfWidth - 30, (canvas.height * (pdfWidth - 30)) / canvas.width);
+            pdf.save("redundancy-calculator-report.pdf");
         } catch (error) {
             console.error("Failed to export", error);
         } finally {
+            if (exportButton instanceof HTMLElement) exportButton.style.opacity = '1';
             setIsExporting(false);
         }
     };
@@ -120,6 +132,7 @@ export default function RedundancyCalculator() {
                             <button
                                 onClick={exportPDF}
                                 disabled={isExporting || !isEligible}
+                                data-pdf-export-ignore
                                 className="inline-flex items-center gap-2 px-4 py-2 bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300 text-sm font-semibold rounded-xl transition-colors disabled:opacity-50"
                             >
                                 {isExporting ? (

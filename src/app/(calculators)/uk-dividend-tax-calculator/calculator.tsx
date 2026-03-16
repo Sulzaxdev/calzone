@@ -1,13 +1,15 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useRef } from "react";
+import html2canvas from "html2canvas";
+import jsPDF from "jspdf";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm, SubmitHandler } from "react-hook-form";
 import * as z from "zod";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Calculator, RotateCcw, TrendingUp, Receipt, ShieldCheck, Landmark, Info, Coins } from "lucide-react";
+import { Calculator, RotateCcw, TrendingUp, Receipt, ShieldCheck, Landmark, Info, Coins, Download } from "lucide-react";
 import { CalculatorCard } from "@/components/calculator-card";
 
 const formSchema = z.object({
@@ -34,6 +36,49 @@ interface CalculationResult {
 
 export function DividendTaxCalculatorForm() {
     const [result, setResult] = useState<CalculationResult | null>(null);
+    const [isExporting, setIsExporting] = useState(false);
+    const calculatorRef = useRef<HTMLDivElement>(null);
+
+    const exportPDF = async () => {
+        if (!calculatorRef.current) return;
+        setIsExporting(true);
+
+        const exportButton = calculatorRef.current.parentNode?.querySelector('button[onClick*="exportPDF"]');
+        if (exportButton instanceof HTMLElement) exportButton.style.opacity = '0';
+
+        try {
+            await new Promise((resolve) => setTimeout(resolve, 150));
+            const canvas = await html2canvas(calculatorRef.current, {
+                scale: 2,
+                useCORS: true,
+                backgroundColor: "#ffffff",
+                windowWidth: calculatorRef.current.scrollWidth,
+                windowHeight: calculatorRef.current.scrollHeight,
+            });
+            const imgData = canvas.toDataURL("image/png");
+            const pdf = new jsPDF("p", "mm", "a4");
+            const pdfWidth = pdf.internal.pageSize.getWidth();
+
+            pdf.setFontSize(22);
+            pdf.setTextColor(15, 23, 42);
+            pdf.text("Dividend Tax Calculation Report", 15, 20);
+
+            pdf.setFontSize(10);
+            pdf.setTextColor(100);
+            pdf.text(`Generated on: ${new Date().toLocaleDateString()} at ${new Date().toLocaleTimeString()}`, 15, 28);
+
+            pdf.setDrawColor(226, 232, 240);
+            pdf.line(15, 32, pdfWidth - 15, 32);
+
+            pdf.addImage(imgData, "PNG", 15, 40, pdfWidth - 30, (canvas.height * (pdfWidth - 30)) / canvas.width);
+            pdf.save("Dividend-Tax-Report.pdf");
+        } catch (err) {
+            console.error("Failed to export", err);
+        } finally {
+            if (exportButton instanceof HTMLElement) exportButton.style.opacity = '1';
+            setIsExporting(false);
+        }
+    };
 
     const form = useForm<FormInput>({
         resolver: zodResolver(formSchema) as any,
@@ -217,7 +262,10 @@ export function DividendTaxCalculatorForm() {
 
                 {/* Results Card */}
                 <div className="lg:col-span-2 space-y-6">
-                    <div className={`p-8 rounded-[2.5rem] transition-all duration-500 border-none relative overflow-hidden h-full ${result ? 'bg-slate-900 text-white shadow-2xl scale-100' : 'bg-slate-200/50 dark:bg-slate-900/50 text-slate-400 scale-95 opacity-60'}`}>
+                    <div
+                        ref={calculatorRef}
+                        className={`p-8 rounded-[2.5rem] transition-all duration-500 border-none relative overflow-hidden h-full ${result ? 'bg-slate-900 text-white shadow-2xl scale-100' : 'bg-slate-200/50 dark:bg-slate-900/50 text-slate-400 scale-95 opacity-60'}`}
+                    >
                         {result ? (
                             <div className="relative z-10 space-y-8 animate-in fade-in zoom-in duration-500">
                                 <div className="flex items-center justify-between">
@@ -294,6 +342,23 @@ export function DividendTaxCalculatorForm() {
                         {/* Background Decorative Element */}
                         <div className="absolute -bottom-20 -right-20 w-64 h-64 bg-primary/10 rounded-full blur-3xl"></div>
                     </div>
+
+                    {result && (
+                        <div className="flex justify-end pt-2">
+                            <button
+                                onClick={exportPDF}
+                                disabled={isExporting}
+                                className="inline-flex items-center gap-2 px-6 py-3 bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300 text-sm font-bold rounded-2xl transition-colors disabled:opacity-50 shadow-sm"
+                            >
+                                {isExporting ? (
+                                    <div className="w-4 h-4 border-2 border-slate-400 border-t-transparent shrink-0 rounded-full animate-spin"></div>
+                                ) : (
+                                    <Download className="w-4 h-4" />
+                                )}
+                                Export Report to PDF
+                            </button>
+                        </div>
+                    )}
                 </div>
             </div>
         </CalculatorCard>
