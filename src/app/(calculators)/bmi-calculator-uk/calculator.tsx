@@ -9,7 +9,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { AlertCircle, RotateCcw, CheckCircle2, TrendingUp, Info, Download } from "lucide-react";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
 import React, { useRef } from "react";
-import html2canvas from "html2canvas";
+
 import jsPDF from "jspdf";
 
 export function BMICalculatorForm() {
@@ -38,15 +38,16 @@ export function BMICalculatorForm() {
         if (exportButton) exportButton.style.opacity = '0';
 
         try {
+            const { toPng } = await import('html-to-image');
             await new Promise((resolve) => setTimeout(resolve, 150));
-            const canvas = await html2canvas(calculatorRef.current, {
-                scale: 2,
-                useCORS: true,
+            const imgData = await toPng(calculatorRef.current, {
+                pixelRatio: 2,
                 backgroundColor: "#ffffff",
-                windowWidth: calculatorRef.current.scrollWidth,
-                windowHeight: calculatorRef.current.scrollHeight,
+                style: {
+                    transform: 'scale(1)',
+                    transformOrigin: 'top left'
+                }
             });
-            const imgData = canvas.toDataURL("image/png");
             const pdf = new jsPDF("p", "mm", "a4");
             const pdfWidth = pdf.internal.pageSize.getWidth();
             
@@ -61,7 +62,7 @@ export function BMICalculatorForm() {
             pdf.setDrawColor(226, 232, 240);
             pdf.line(15, 32, pdfWidth - 15, 32);
 
-            pdf.addImage(imgData, "PNG", 15, 40, pdfWidth - 30, (canvas.height * (pdfWidth - 30)) / canvas.width);
+            pdf.addImage(imgData, "PNG", 15, 40, pdfWidth - 30, (pdfWidth - 30) * 0.75); // Fallback ratio
             pdf.save("BMI-Calculation.pdf");
         } catch (err) {
             console.error("Failed to export", err);

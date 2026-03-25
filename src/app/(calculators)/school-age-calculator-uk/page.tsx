@@ -2,7 +2,7 @@
 
 import React, { useState, useRef } from "react";
 import { Calculator, Download, Info, CheckCircle2, FileText, School, GraduationCap } from "lucide-react";
-import html2canvas from "html2canvas";
+
 import jsPDF from "jspdf";
 
 export default function SchoolAgeCalculator() {
@@ -70,33 +70,26 @@ export default function SchoolAgeCalculator() {
     const results = calculateSchoolYears();
 
     const exportPDF = async () => {
-        const currentRef = calculatorRef.current;
-        if (!currentRef) return;
+        if (!calculatorRef.current) return;
         setIsExporting(true);
 
-        const ignoreElements = currentRef.querySelectorAll('[data-pdf-export-ignore]');
-        ignoreElements.forEach(el => {
-            if (el instanceof HTMLElement) el.style.opacity = '0';
-        });
-
-        const exportButton = currentRef.parentNode?.querySelector('button[onClick*="exportPDF"]');
-        if (exportButton instanceof HTMLElement) exportButton.style.opacity = '0';
+        const exportButton = calculatorRef.current.querySelector('button');
+        if (exportButton) exportButton.style.opacity = '0';
 
         try {
+            const { toPng } = await import('html-to-image');
             await new Promise((resolve) => setTimeout(resolve, 150));
-            const canvas = await html2canvas(currentRef, {
-                scale: 2,
-                useCORS: true,
+            const imgData = await toPng(calculatorRef.current, {
+                pixelRatio: 2,
                 backgroundColor: "#ffffff",
-                windowWidth: currentRef.scrollWidth,
-                windowHeight: currentRef.scrollHeight,
+                style: {
+                    transform: 'scale(1)',
+                    transformOrigin: 'top left'
+                }
             });
-
-            const imgData = canvas.toDataURL("image/png");
             const pdf = new jsPDF("p", "mm", "a4");
             const pdfWidth = pdf.internal.pageSize.getWidth();
             
-            // Professional Header
             pdf.setFontSize(22);
             pdf.setTextColor(15, 23, 42);
             pdf.text("UK School Age / Year Report", 15, 20);
@@ -108,15 +101,17 @@ export default function SchoolAgeCalculator() {
             pdf.setDrawColor(226, 232, 240);
             pdf.line(15, 32, pdfWidth - 15, 32);
 
-            pdf.addImage(imgData, "PNG", 15, 40, pdfWidth - 30, (canvas.height * (pdfWidth - 30)) / canvas.width);
+            const img = new Image();
+            img.src = imgData;
+            await new Promise((resolve) => img.onload = resolve);
+            const imgHeight = (img.height * (pdfWidth - 30)) / img.width;
+
+            pdf.addImage(imgData, "PNG", 15, 40, pdfWidth - 30, imgHeight);
             pdf.save("school-year-report.pdf");
-        } catch (error) {
-            console.error("Failed to generate PDF", error);
+        } catch (err) {
+            console.error("Failed to export", err);
         } finally {
-            if (exportButton instanceof HTMLElement) exportButton.style.opacity = '1';
-            ignoreElements.forEach(el => {
-                if (el instanceof HTMLElement) el.style.opacity = '1';
-            });
+            if (exportButton) exportButton.style.opacity = '1';
             setIsExporting(false);
         }
     };

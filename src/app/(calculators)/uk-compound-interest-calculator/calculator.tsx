@@ -14,7 +14,6 @@ import { Calculator, RotateCcw, TrendingUp, Info, Wallet, Timer, ArrowRight, Lay
 import { CalculatorCard } from "@/components/calculator-card";
 import { Slider } from "@/components/ui/slider";
 import React, { useRef } from "react";
-import html2canvas from "html2canvas";
 import jsPDF from "jspdf";
 
 const formSchema = z.object({
@@ -47,15 +46,16 @@ export function CompoundCalculatorForm() {
         if (exportButton instanceof HTMLElement) exportButton.style.opacity = '0';
 
         try {
+            const { toPng } = await import('html-to-image');
             await new Promise((resolve) => setTimeout(resolve, 150));
-            const canvas = await html2canvas(calculatorRef.current, {
-                scale: 2,
-                useCORS: true,
-                backgroundColor: "#1e293b", // slate-900 bg for dark card
-                windowWidth: calculatorRef.current.scrollWidth,
-                windowHeight: calculatorRef.current.scrollHeight,
+            const imgData = await toPng(calculatorRef.current, {
+                pixelRatio: 2,
+                backgroundColor: "#1e293b",
+                style: {
+                    transform: 'scale(1)',
+                    transformOrigin: 'top left'
+                }
             });
-            const imgData = canvas.toDataURL("image/png");
             const pdf = new jsPDF("p", "mm", "a4");
             const pdfWidth = pdf.internal.pageSize.getWidth();
             
@@ -70,7 +70,14 @@ export function CompoundCalculatorForm() {
             pdf.setDrawColor(226, 232, 240);
             pdf.line(15, 32, pdfWidth - 15, 32);
 
-            pdf.addImage(imgData, "PNG", 15, 40, pdfWidth - 30, (canvas.height * (pdfWidth - 30)) / canvas.width);
+            // Add the image to PDF
+            // The aspect ratio should match the source element
+            const img = new Image();
+            img.src = imgData;
+            await new Promise((resolve) => img.onload = resolve);
+            const imgHeight = (img.height * (pdfWidth - 30)) / img.width;
+
+            pdf.addImage(imgData, "PNG", 15, 40, pdfWidth - 30, imgHeight);
             pdf.save("Compound-Interest-Projection.pdf");
         } catch (err) {
             console.error("Failed to export", err);
@@ -267,12 +274,12 @@ export function CompoundCalculatorForm() {
                 <div className="lg:col-span-2 space-y-6">
                     <div
                         ref={calculatorRef}
-                        className={`p-8 rounded-[3rem] transition-all duration-700 border-none relative overflow-hidden h-full flex flex-col justify-center shadow-2xl ${result ? 'bg-slate-900 text-white translate-y-0 opacity-100' : 'bg-slate-50 dark:bg-slate-900/40 text-slate-300 translate-y-4 opacity-70'}`}
+                        className={`p-8 rounded-[3rem] transition-all duration-700 border-none relative overflow-hidden h-full flex flex-col justify-center shadow-2xl ${result ? 'bg-[#0f172a] text-white translate-y-0 opacity-100' : 'bg-[#f8fafc] text-slate-300 translate-y-4 opacity-70'}`}
                     >
                         {result ? (
                             <div className="relative z-10 space-y-10 animate-in fade-in zoom-in duration-700">
                                 <div className="text-center group">
-                                    <div className="text-[10px] font-bold text-primary uppercase tracking-[0.2em] mb-4 opacity-80">Estimated Future Value</div>
+                                    <div className="text-[10px] font-bold text-[#A79FC0] uppercase tracking-[0.2em] mb-4 opacity-80">Estimated Future Value</div>
                                     <h3 className="text-6xl font-black mb-2 tracking-tighter drop-shadow-[0_0_15px_rgba(var(--primary),0.3)]">£{Math.round(result.totalValue).toLocaleString()}</h3>
                                     <div className="h-1 w-24 bg-primary mx-auto rounded-full group-hover:w-32 transition-all"></div>
                                 </div>

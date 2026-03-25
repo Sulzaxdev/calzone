@@ -2,7 +2,7 @@
 
 import React, { useState, useRef } from "react";
 import { Download, ClipboardCheck, Home, Ruler } from "lucide-react";
-import html2canvas from "html2canvas";
+
 import jsPDF from "jspdf";
 
 export function HouseSurveyCostCalculator() {
@@ -73,23 +73,46 @@ export function HouseSurveyCostCalculator() {
     const exportPDF = async () => {
         if (!calculatorRef.current) return;
         setIsExporting(true);
+
+        const exportButton = calculatorRef.current.querySelector('button');
+        if (exportButton) exportButton.style.opacity = '0';
+
         try {
-            await new Promise((resolve) => setTimeout(resolve, 100));
-            const canvas = await html2canvas(calculatorRef.current, { scale: 2, backgroundColor: "#ffffff" });
-            const imgData = canvas.toDataURL("image/png");
+            const { toPng } = await import('html-to-image');
+            await new Promise((resolve) => setTimeout(resolve, 150));
+            const imgData = await toPng(calculatorRef.current, {
+                pixelRatio: 2,
+                backgroundColor: "#ffffff",
+                style: {
+                    transform: 'scale(1)',
+                    transformOrigin: 'top left'
+                }
+            });
             const pdf = new jsPDF("p", "mm", "a4");
             const pdfWidth = pdf.internal.pageSize.getWidth();
-            const pdfHeight = (canvas.height * pdfWidth) / canvas.width;
-            pdf.setFontSize(20);
-            pdf.text("House Survey Cost Estimate", 15, 15);
+            
+            pdf.setFontSize(22);
+            pdf.setTextColor(15, 23, 42);
+            pdf.text("House Survey Cost Estimate", 15, 20);
+            
             pdf.setFontSize(10);
             pdf.setTextColor(100);
-            pdf.text(`Generated on: ${new Date().toLocaleDateString()}`, 15, 22);
-            pdf.addImage(imgData, "PNG", 15, 30, pdfWidth - 30, pdfHeight - 30);
+            pdf.text(`Generated on: ${new Date().toLocaleDateString()} at ${new Date().toLocaleTimeString()} | CalZone.uk`, 15, 28);
+            
+            pdf.setDrawColor(226, 232, 240);
+            pdf.line(15, 32, pdfWidth - 15, 32);
+
+            const img = new Image();
+            img.src = imgData;
+            await new Promise((resolve) => img.onload = resolve);
+            const imgHeight = (img.height * (pdfWidth - 30)) / img.width;
+
+            pdf.addImage(imgData, "PNG", 15, 40, pdfWidth - 30, imgHeight);
             pdf.save("house-survey-cost-report.pdf");
-        } catch (error) {
-            console.error("Failed to generate PDF", error);
+        } catch (err) {
+            console.error("Failed to export", err);
         } finally {
+            if (exportButton) exportButton.style.opacity = '1';
             setIsExporting(false);
         }
     };

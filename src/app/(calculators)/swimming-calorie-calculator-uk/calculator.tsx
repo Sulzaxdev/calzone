@@ -2,7 +2,7 @@
 
 import React, { useState, useRef } from "react";
 import { Download, Waves, Activity, Timer } from "lucide-react";
-import html2canvas from "html2canvas";
+
 import jsPDF from "jspdf";
 
 export function SwimmingCalorieCalculator() {
@@ -48,19 +48,20 @@ export function SwimmingCalorieCalculator() {
         if (!calculatorRef.current) return;
         setIsExporting(true);
 
-        const exportButton = calculatorRef.current.parentNode?.querySelector('button[onClick*="exportPDF"]');
-        if (exportButton instanceof HTMLElement) exportButton.style.opacity = '0';
+        const exportButton = calculatorRef.current.querySelector('button');
+        if (exportButton) exportButton.style.opacity = '0';
 
         try {
+            const { toPng } = await import('html-to-image');
             await new Promise((resolve) => setTimeout(resolve, 150));
-            const canvas = await html2canvas(calculatorRef.current, {
-                scale: 2,
-                useCORS: true,
+            const imgData = await toPng(calculatorRef.current, {
+                pixelRatio: 2,
                 backgroundColor: "#ffffff",
-                windowWidth: calculatorRef.current.scrollWidth,
-                windowHeight: calculatorRef.current.scrollHeight,
+                style: {
+                    transform: 'scale(1)',
+                    transformOrigin: 'top left'
+                }
             });
-            const imgData = canvas.toDataURL("image/png");
             const pdf = new jsPDF("p", "mm", "a4");
             const pdfWidth = pdf.internal.pageSize.getWidth();
             
@@ -70,17 +71,22 @@ export function SwimmingCalorieCalculator() {
             
             pdf.setFontSize(10);
             pdf.setTextColor(100);
-            pdf.text(`Generated on: ${new Date().toLocaleDateString()} at ${new Date().toLocaleTimeString()}`, 15, 28);
+            pdf.text(`Generated on: ${new Date().toLocaleDateString()} at ${new Date().toLocaleTimeString()} | CalZone.uk`, 15, 28);
             
             pdf.setDrawColor(226, 232, 240);
             pdf.line(15, 32, pdfWidth - 15, 32);
 
-            pdf.addImage(imgData, "PNG", 15, 40, pdfWidth - 30, (canvas.height * (pdfWidth - 30)) / canvas.width);
+            const img = new Image();
+            img.src = imgData;
+            await new Promise((resolve) => img.onload = resolve);
+            const imgHeight = (img.height * (pdfWidth - 30)) / img.width;
+
+            pdf.addImage(imgData, "PNG", 15, 40, pdfWidth - 30, imgHeight);
             pdf.save("swimming-calorie-report.pdf");
-        } catch (error) {
-            console.error("Failed to generate PDF", error);
+        } catch (err) {
+            console.error("Failed to export", err);
         } finally {
-            if (exportButton instanceof HTMLElement) exportButton.style.opacity = '1';
+            if (exportButton) exportButton.style.opacity = '1';
             setIsExporting(false);
         }
     };
@@ -142,7 +148,7 @@ export function SwimmingCalorieCalculator() {
                     </h3>
 
                     <div className="bg-cyan-500 dark:bg-cyan-600 p-8 rounded-2xl text-center shadow-lg shadow-cyan-500/20 mb-8 border border-cyan-400 dark:border-cyan-500">
-                        <span className="block text-cyan-100 font-bold mb-2 uppercase tracking-wide text-sm flex justify-center items-center gap-2">
+                        <span className="block text-cyan-100 font-bold mb-2 uppercase tracking-wide text-sm">
                             Estimated Calories Burned
                         </span>
                         <span className="text-6xl md:text-7xl font-black text-white">{results.calories}</span>

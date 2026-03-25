@@ -9,7 +9,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { AlertCircle, CarFront, Download, FileText, CheckCircle2, ShieldCheck } from "lucide-react";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
 import React, { useRef } from "react";
-import html2canvas from "html2canvas";
+
 import jsPDF from "jspdf";
 
 export default function RoadTaxCalculator() {
@@ -26,23 +26,23 @@ export default function RoadTaxCalculator() {
         if (!calculatorRef.current) return;
         setIsExporting(true);
 
-        const exportButton = calculatorRef.current.querySelector('button[onClick*="exportPDF"]');
-        if (exportButton instanceof HTMLElement) exportButton.style.opacity = '0';
+        const exportButton = calculatorRef.current.querySelector('button');
+        if (exportButton) exportButton.style.opacity = '0';
 
         try {
+            const { toPng } = await import('html-to-image');
             await new Promise((resolve) => setTimeout(resolve, 150));
-            const canvas = await html2canvas(calculatorRef.current, {
-                scale: 2,
-                useCORS: true,
+            const imgData = await toPng(calculatorRef.current, {
+                pixelRatio: 2,
                 backgroundColor: "#ffffff",
-                windowWidth: calculatorRef.current.scrollWidth,
-                windowHeight: calculatorRef.current.scrollHeight,
+                style: {
+                    transform: 'scale(1)',
+                    transformOrigin: 'top left'
+                }
             });
-
-            const imgData = canvas.toDataURL("image/png");
             const pdf = new jsPDF("p", "mm", "a4");
             const pdfWidth = pdf.internal.pageSize.getWidth();
-
+            
             pdf.setFontSize(22);
             pdf.setTextColor(15, 23, 42);
             pdf.text("Road Tax (VED) Estimate Report", 15, 20);
@@ -54,12 +54,17 @@ export default function RoadTaxCalculator() {
             pdf.setDrawColor(226, 232, 240);
             pdf.line(15, 32, pdfWidth - 15, 32);
 
-            pdf.addImage(imgData, "PNG", 15, 40, pdfWidth - 30, (canvas.height * (pdfWidth - 30)) / canvas.width);
+            const img = new Image();
+            img.src = imgData;
+            await new Promise((resolve) => img.onload = resolve);
+            const imgHeight = (img.height * (pdfWidth - 30)) / img.width;
+
+            pdf.addImage(imgData, "PNG", 15, 40, pdfWidth - 30, imgHeight);
             pdf.save("Road-Tax-Calculation.pdf");
         } catch (err) {
             console.error("Failed to export", err);
         } finally {
-            if (exportButton instanceof HTMLElement) exportButton.style.opacity = '1';
+            if (exportButton) exportButton.style.opacity = '1';
             setIsExporting(false);
         }
     };
@@ -280,38 +285,93 @@ export default function RoadTaxCalculator() {
 
                 <div className="mt-24">
                     <article className="prose prose-slate dark:prose-invert prose-lg max-w-none prose-headings:font-bold prose-headings:tracking-tight prose-a:text-blue-600 dark:prose-a:text-blue-400">
-                        <h2>Understanding UK Road Tax (VED) Rates for 2024/2025</h2>
-                        <p>
-                            Vehicle Excise Duty (VED), commonly known as "road tax" or "car tax", is an annual tax paid to the UK Government for using your vehicle on public roads. The amount you pay depends entirely on <strong>when your car was registered, its fuel type, and its CO2 emissions</strong>.
+                        <h2 className="text-3xl font-black mb-8 border-b pb-4">Understanding UK Road Tax (VED) Rates for 2026</h2>
+                        <p className="text-xl text-slate-600 dark:text-slate-400 leading-relaxed mb-8">
+                            Vehicle Excise Duty (VED), commonly known as <strong>"road tax"</strong> or <strong>"car tax"</strong>, is a mandatory annual levy for using UK public roads. As we move into 2026, the tax landscape has shifted significantly, particularly for owners of hybrid and electric vehicles who previously enjoyed total exemptions.
                         </p>
 
-                        <h3>First-Year Rates vs. Standard Rates</h3>
+                        <div className="bg-primary/5 border-l-4 border-primary p-8 my-10 rounded-r-2xl font-sans">
+                            <h4 className="text-xl font-bold mt-0 mb-3">2026 Budget Alert: The EV Tax Shift</h4>
+                            <p className="mb-0 text-slate-700 dark:text-slate-300">
+                                Starting from April 2025, the UK Government transitioned all electric vehicles (EVs) into the standard tax bracket. If your EV was registered after April 2017, you are now liable for the <strong>Standard Rate of £190 per year</strong>. Premium EVs with a list price exceeding £40,000 are also subject to the Expensive Car Surcharge.
+                            </p>
+                        </div>
+
+                        <h3>How Is Your Road Tax Calculated?</h3>
                         <p>
-                            When a brand-new car is registered in the UK, the first time you pay road tax (the "First-Year Rate"), the amount is heavily tied to the vehicle's CO2 emissions. A high-polluting petrol or diesel car can cost over £2,600 to tax for the first 12 months, whereas lower-emission vehicles cost significantly less.
-                        </p>
-                        <p>
-                            <strong>From the second year onwards</strong>, the vast majority of drivers move onto a flat "Standard Rate". For the 2024/25 tax year, the flat rate is typically £190 per year for standard petrol and diesel cars, and £180 for alternative fuel vehicles (hybrids).
+                            For cars registered after April 1, 2017, the UK uses a two-tier system designed to penalize high-polluting vehicles while providing long-term predictable costs for the average owner:
                         </p>
 
-                        <h3>The Expensive Car Surcharge</h3>
+                        <div className="overflow-x-auto my-10 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-sm">
+                            <table className="w-full text-left border-collapse min-w-[600px] font-sans text-sm">
+                                <thead className="bg-slate-50 dark:bg-slate-950">
+                                    <tr>
+                                        <th className="p-4 font-bold border-b">Vehicle Type</th>
+                                        <th className="p-4 font-bold border-b">First Year Rate</th>
+                                        <th className="p-4 font-bold border-b">Standard Rate (2+)</th>
+                                        <th className="p-4 font-bold border-b">Premium Surcharge?</th>
+                                    </tr>
+                                </thead>
+                                <tbody className="divide-y divide-slate-100 dark:divide-slate-800">
+                                    <tr>
+                                        <td className="p-4 font-semibold">Petrol / Diesel</td>
+                                        <td className="p-4">Based on CO2 (up to £2,605)</td>
+                                        <td className="p-4">£190 / year</td>
+                                        <td className="p-4 text-red-600">Yes ({">"}£40k)</td>
+                                    </tr>
+                                    <tr>
+                                        <td className="p-4 font-semibold">Hybrid (AFV)</td>
+                                        <td className="p-4">CO2-linked (usually lower)</td>
+                                        <td className="p-4">£180 / year</td>
+                                        <td className="p-4 text-red-600">Yes ({">"}£40k)</td>
+                                    </tr>
+                                    <tr>
+                                        <td className="p-4 font-semibold">Electric (EV)</td>
+                                        <td className="p-4">£10 (Previously £0)</td>
+                                        <td className="p-4">£190 / year</td>
+                                        <td className="p-4 text-red-600">Yes ({">"}£40k)</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <h3>The "Expensive Car" Surcharge Explained</h3>
                         <p>
-                            If you buy a premium vehicle with a "list price" (the published price of the car before any discounts, but including factory-fitted options) of <strong>more than £40,000</strong>, you must pay an 'Expensive Car Surcharge'.
+                            Many premium car buyers are surprised by a sudden jump in their tax bill in the second year of ownership. This is due to the <strong>Expensive Car Surcharge</strong>. 
                         </p>
                         <ul>
-                            <li>The surcharge is currently <strong>£390 per year</strong>.</li>
-                            <li>It is paid on top of your standard rate.</li>
-                            <li>You must pay it for 5 consecutive years (years 2 through 6 of the car's life).</li>
+                            <li><strong>The Threshold:</strong> If your car had a "list price" (RRP) of over <strong>£40,000</strong> when brand new—including factory-fitted options.</li>
+                            <li><strong>The Cost:</strong> You must pay an additional <strong>£390 per year</strong> for five consecutive years (from year 2 to year 6).</li>
+                            <li><strong>Total Cost:</strong> For a premium petrol car, this brings your total annual road tax to <strong>£580 (£190 + £390)</strong>.</li>
                         </ul>
 
-                        <h3>Do Electric Vehicles Pay Tax?</h3>
+                        <h3>Planning for 2026? Check These Resources</h3>
                         <p>
-                            Currently, fully electric vehicles (EVs) are exempt from Vehicle Excise Duty. However, the UK Government has announced that <strong>from April 2025</strong>, electric vehicles will also be required to pay road tax. They will move to the standard rate of £190 per year (subject to inflation adjustments), and the £40,000 expensive car surcharge will also begin applying to premium EVs.
+                            Managing vehicle costs involves more than just tax. If you're currently budgeting for a vehicle change or a long-distance move, explore our other clinical-grade tools:
                         </p>
+                        <div className="grid sm:grid-cols-2 gap-4 not-prose my-10">
+                            <a href="/fuel-cost-calculator-uk" className="p-6 bg-white dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-2xl hover:border-primary transition-colors group">
+                                <h4 className="font-bold text-slate-900 dark:text-white group-hover:text-primary mb-2">Fuel Cost Calculator</h4>
+                                <p className="text-sm text-slate-500 m-0">Estimate journey spend based on current 2026 petrol/diesel rates.</p>
+                            </a>
+                            <a href="/car-insurance-calculator-uk" className="p-6 bg-white dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-2xl hover:border-primary transition-colors group">
+                                <h4 className="font-bold text-slate-900 dark:text-white group-hover:text-primary mb-2">Insurance Calculator</h4>
+                                <p className="text-sm text-slate-500 m-0">Determine your likely premiums based on age, location, and vehicle group.</p>
+                            </a>
+                        </div>
 
-                        <h3>How to find your CO2 emissions</h3>
-                        <p>
-                            If you are unsure of your car's emissions, you can find the exact figure on your vehicle's V5C registration certificate (logbook) under section 'V.7 CO2 (g/km)'.
-                        </p>
+                        <h3>Frequently Asked Questions</h3>
+                        <div className="space-y-6 not-prose mb-12">
+                            <div className="bg-slate-50 dark:bg-slate-900/50 p-6 rounded-2xl border border-slate-100 dark:border-slate-800 font-sans">
+                                <h4 className="font-bold mb-2">How do I find my car's CO2 emissions?</h4>
+                                <p className="text-sm m-0 text-slate-600 dark:text-slate-400">The most accurate source is your <strong>V5C Registration Certificate</strong> (Logbook). Look for category <strong>V.7</strong>. Alternatively, you can search for your vehicle on the official DVLA 'Check if a vehicle is taxed' service.</p>
+                            </div>
+                            <div className="bg-slate-50 dark:bg-slate-900/50 p-6 rounded-2xl border border-slate-100 dark:border-slate-800 font-sans">
+                                <h4 className="font-bold mb-2">Can I pay my road tax monthly?</h4>
+                                <p className="text-sm m-0 text-slate-600 dark:text-slate-400">Yes, the DVLA offers a Direct Debit scheme allowing for monthly, six-monthly, or annual payments. Note that paying monthly often carries a 5% surcharge compared to a single annual payment.</p>
+                            </div>
+                        </div>
+
                     </article>
                 </div>
             </div>

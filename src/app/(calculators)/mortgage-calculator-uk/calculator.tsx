@@ -18,7 +18,7 @@ import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage, FormDes
 import { Input } from "@/components/ui/input";
 import { CalculatorCard } from "@/components/calculator-card";
 import { Slider } from "@/components/ui/slider";
-import html2canvas from "html2canvas";
+
 import jsPDF from "jspdf";
 
 const formSchema = z.object({
@@ -49,39 +49,45 @@ export function MortgageCalculator() {
         if (!calculatorRef.current) return;
         setIsExporting(true);
 
-        const exportButton = calculatorRef.current.parentNode?.querySelector('button[onClick*="exportPDF"]');
-        if (exportButton instanceof HTMLElement) exportButton.style.opacity = '0';
+        const exportButton = calculatorRef.current.querySelector('button');
+        if (exportButton) exportButton.style.opacity = '0';
 
         try {
+            const { toPng } = await import('html-to-image');
             await new Promise((resolve) => setTimeout(resolve, 150));
-            const canvas = await html2canvas(calculatorRef.current, {
-                scale: 2,
-                useCORS: true,
+            const imgData = await toPng(calculatorRef.current, {
+                pixelRatio: 2,
                 backgroundColor: "#020617",
-                windowWidth: calculatorRef.current.scrollWidth,
-                windowHeight: calculatorRef.current.scrollHeight,
+                style: {
+                    transform: 'scale(1)',
+                    transformOrigin: 'top left'
+                }
             });
-            const imgData = canvas.toDataURL("image/png");
             const pdf = new jsPDF("p", "mm", "a4");
             const pdfWidth = pdf.internal.pageSize.getWidth();
             
             pdf.setFontSize(22);
-            pdf.setTextColor(15, 23, 42); // slate-900 (for the PDF page itself)
+            pdf.setTextColor(15, 23, 42);
             pdf.text("Mortgage Calculation Report", 15, 20);
             
             pdf.setFontSize(10);
             pdf.setTextColor(100);
-            pdf.text(`Generated on: ${new Date().toLocaleDateString()} at ${new Date().toLocaleTimeString()}`, 15, 28);
+            pdf.text(`Generated on: ${new Date().toLocaleDateString()} at ${new Date().toLocaleTimeString()} | CalZone.uk`, 15, 28);
             
             pdf.setDrawColor(226, 232, 240);
             pdf.line(15, 32, pdfWidth - 15, 32);
 
-            pdf.addImage(imgData, "PNG", 15, 40, pdfWidth - 30, (canvas.height * (pdfWidth - 30)) / canvas.width);
+            const img = new Image();
+            img.src = imgData;
+            await new Promise((resolve) => img.onload = resolve);
+            const imgHeight = (img.height * (pdfWidth - 30)) / img.width;
+
+            pdf.addImage(imgData, "PNG", 15, 40, pdfWidth - 30, imgHeight);
             pdf.save("Mortgage-Calculation.pdf");
-        } catch (error) {
-            console.error("Failed to export", error);
+        } catch (err) {
+            console.error("Failed to export", err);
         } finally {
-            if (exportButton instanceof HTMLElement) exportButton.style.opacity = '1';
+            if (exportButton) exportButton.style.opacity = '1';
             setIsExporting(false);
         }
     };

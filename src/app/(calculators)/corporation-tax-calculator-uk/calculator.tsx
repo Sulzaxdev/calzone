@@ -9,7 +9,6 @@ import { Button } from "@/components/ui/button";
 import { calculateCorporationTax } from "@/lib/corporation-tax-logic";
 import { Building2, Receipt, PoundSterling, Download, AlertCircle, Percent } from "lucide-react";
 
-import html2canvas from "html2canvas";
 import jsPDF from "jspdf";
 
 export function CorporationTaxCalculatorForm() {
@@ -20,22 +19,24 @@ export function CorporationTaxCalculatorForm() {
     const calculatorRef = React.useRef<HTMLDivElement>(null);
 
     const exportPDF = async () => {
-        if (!calculatorRef.current) return;
+        const currentRef = calculatorRef.current;
+        if (!currentRef) return;
         setIsExporting(true);
 
-        const exportButton = calculatorRef.current.parentNode?.querySelector('button[onClick*="exportPDF"]');
-        if (exportButton instanceof HTMLElement) exportButton.style.opacity = '0';
+        const exportButton = currentRef.querySelector('button');
+        if (exportButton) exportButton.style.opacity = '0';
 
         try {
+            const { toPng } = await import('html-to-image');
             await new Promise((resolve) => setTimeout(resolve, 150));
-            const canvas = await html2canvas(calculatorRef.current, {
-                scale: 2,
-                useCORS: true,
-                backgroundColor: "#fffbeb", // amber-50ish
-                windowWidth: calculatorRef.current.scrollWidth,
-                windowHeight: calculatorRef.current.scrollHeight,
+            const imgData = await toPng(currentRef, {
+                pixelRatio: 2,
+                backgroundColor: "#fffbeb",
+                style: {
+                    transform: 'scale(1)',
+                    transformOrigin: 'top left'
+                }
             });
-            const imgData = canvas.toDataURL("image/png");
             const pdf = new jsPDF("p", "mm", "a4");
             const pdfWidth = pdf.internal.pageSize.getWidth();
             
@@ -50,12 +51,17 @@ export function CorporationTaxCalculatorForm() {
             pdf.setDrawColor(226, 232, 240);
             pdf.line(15, 32, pdfWidth - 15, 32);
 
-            pdf.addImage(imgData, "PNG", 15, 40, pdfWidth - 30, (canvas.height * (pdfWidth - 30)) / canvas.width);
+            const img = new Image();
+            img.src = imgData;
+            await new Promise((resolve) => img.onload = resolve);
+            const imgHeight = (img.height * (pdfWidth - 30)) / img.width;
+
+            pdf.addImage(imgData, "PNG", 15, 40, pdfWidth - 30, imgHeight);
             pdf.save("Corporation-Tax-Report.pdf");
-        } catch (error) {
-            console.error("Failed to export", error);
+        } catch (err) {
+            console.error("Failed to export", err);
         } finally {
-            if (exportButton instanceof HTMLElement) exportButton.style.opacity = '1';
+            if (exportButton) exportButton.style.opacity = '1';
             setIsExporting(false);
         }
     };

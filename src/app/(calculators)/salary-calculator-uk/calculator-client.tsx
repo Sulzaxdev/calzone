@@ -2,7 +2,6 @@
 
 import React, { useState, useRef } from "react";
 import { Calculator, Download, Info, CheckCircle2, FileText, PieChart, PoundSterling } from "lucide-react";
-import html2canvas from "html2canvas";
 import jsPDF from "jspdf";
 
 export function SalaryCalculatorClient() {
@@ -92,16 +91,17 @@ export function SalaryCalculatorClient() {
         });
 
         try {
+            const { toPng } = await import('html-to-image');
             await new Promise((resolve) => setTimeout(resolve, 150));
-            const canvas = await html2canvas(currentRef, {
-                scale: 2,
-                useCORS: true,
+            const imgData = await toPng(currentRef, {
+                pixelRatio: 2,
                 backgroundColor: "#ffffff",
-                windowWidth: currentRef.scrollWidth,
-                windowHeight: currentRef.scrollHeight,
+                style: {
+                    transform: 'scale(1)',
+                    transformOrigin: 'top left'
+                }
             });
 
-            const imgData = canvas.toDataURL("image/png");
             const pdf = new jsPDF("p", "mm", "a4");
             const pdfWidth = pdf.internal.pageSize.getWidth();
             
@@ -117,7 +117,12 @@ export function SalaryCalculatorClient() {
             pdf.setDrawColor(226, 232, 240);
             pdf.line(15, 32, pdfWidth - 15, 32);
 
-            pdf.addImage(imgData, "PNG", 15, 40, pdfWidth - 30, (canvas.height * (pdfWidth - 30)) / canvas.width);
+            const img = new Image();
+            img.src = imgData;
+            await new Promise((resolve) => img.onload = resolve);
+            const imgHeight = (img.height * (pdfWidth - 30)) / img.width;
+
+            pdf.addImage(imgData, "PNG", 15, 40, pdfWidth - 30, imgHeight);
             pdf.save("salary-calculation-report.pdf");
         } catch (error) {
             console.error("Failed to generate PDF", error);

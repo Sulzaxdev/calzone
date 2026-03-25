@@ -5,7 +5,6 @@ import { motion } from "framer-motion";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Download, FileText, ArrowRight, Sparkles } from "lucide-react";
-import html2canvas from "html2canvas";
 import jsPDF from "jspdf";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
@@ -30,6 +29,8 @@ export function CalculatorCard({ title, description, children, hasResult, icon, 
         if (!cardRef.current) return;
         setIsExporting(true);
 
+        const { toPng } = await import('html-to-image');
+
         // Hide the export button and other noise
         const ignoreElements = cardRef.current.querySelectorAll('[data-pdf-export-ignore]');
         ignoreElements.forEach(el => {
@@ -37,17 +38,17 @@ export function CalculatorCard({ title, description, children, hasResult, icon, 
         });
 
         try {
-            await new Promise((resolve) => setTimeout(resolve, 150));
+            await new Promise((resolve) => setTimeout(resolve, 200));
             
-            const canvas = await html2canvas(cardRef.current, {
-                scale: 2,
-                useCORS: true,
+            const dataUrl = await toPng(cardRef.current, {
+                quality: 0.95,
+                pixelRatio: 2,
                 backgroundColor: "#ffffff",
-                windowWidth: cardRef.current.scrollWidth,
-                windowHeight: cardRef.current.scrollHeight,
+                style: {
+                    borderRadius: '0px'
+                }
             });
 
-            const imgData = canvas.toDataURL("image/png");
             const pdf = new jsPDF("p", "mm", "a4");
             const pdfWidth = pdf.internal.pageSize.getWidth();
             
@@ -63,7 +64,10 @@ export function CalculatorCard({ title, description, children, hasResult, icon, 
             pdf.setDrawColor(226, 232, 240);
             pdf.line(15, 32, pdfWidth - 15, 32);
 
-            pdf.addImage(imgData, "PNG", 15, 40, pdfWidth - 30, (canvas.height * (pdfWidth - 30)) / canvas.width);
+            const imgProps = pdf.getImageProperties(dataUrl);
+            const pdfImageHeight = (imgProps.height * (pdfWidth - 30)) / imgProps.width;
+
+            pdf.addImage(dataUrl, "PNG", 15, 40, pdfWidth - 30, pdfImageHeight);
             pdf.save(`${title.replace(/\s+/g, '-').toLowerCase()}-report.pdf`);
         } catch (error) {
             console.error("Failed to generate PDF:", error);
