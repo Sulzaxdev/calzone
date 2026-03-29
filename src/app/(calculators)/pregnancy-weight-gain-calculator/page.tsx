@@ -91,10 +91,10 @@ export default function PregnancyWeightGainPage() {
                     <div className="lg:col-span-2 space-y-16">
                         {/* Intro */}
                         <div className="space-y-6">
-                            <h1 className="text-4xl md:text-5xl font-black tracking-tight text-slate-900 dark:text-white leading-tight">
+                            <h1 className="text-4xl md:text-5xl font-bold tracking-tight text-slate-900 dark:text-white leading-tight">
                                 Pregnancy Weight Gain Calculator UK
                             </h1>
-                            <p className="text-xl text-slate-600 dark:text-slate-400 leading-relaxed font-medium">
+                            <p className="text-xl text-slate-600 dark:text-slate-400 leading-relaxed">
                                 Not sure how much weight to gain during pregnancy? Use our free Pregnancy Weight Gain Calculator to get a personalized guide based on your BMI and week of pregnancy.
                             </p>
                             
@@ -111,7 +111,7 @@ export default function PregnancyWeightGainPage() {
                                     As a general guide, most women with a normal BMI should gain around 11.5 to 16 kg over their entire pregnancy. But if you were underweight before pregnancy, you may need to gain a little more. If you were overweight, a little less.
                                 </p>
                                 <p>
-                                    The good news is, you don't have to guess. CalZone’s free UK pregnancy weight gain calculator works it all out for you, based on guidelines from the Institute of Medicine (IoM) and supported by NICE and RCOG recommendations.
+                                    The good news is, you don't have to guess. <Link href="/" className="text-pink-600 hover:text-pink-700 font-semibold underline decoration-pink-200 underline-offset-4">CalZone’s</Link> free UK pregnancy weight gain calculator works it all out for you, based on guidelines from the Institute of Medicine (IoM) and supported by NICE and RCOG recommendations.
                                 </p>
                                 <p>
                                     Simply enter your height, pre-pregnancy weight, current weight and your week of pregnancy. We will do the rest.
@@ -121,7 +121,7 @@ export default function PregnancyWeightGainPage() {
 
                         {/* Chart Section */}
                         <div className="space-y-8 bg-white dark:bg-slate-900 p-8 rounded-[2.5rem] border border-slate-100 dark:border-slate-800 shadow-xl shadow-slate-200/50 dark:shadow-none">
-                            <h2 className="text-2xl font-black text-slate-900 dark:text-white flex items-center gap-3">
+                            <h2 className="text-2xl font-bold text-slate-900 dark:text-white flex items-center gap-3">
                                 <span className="p-2 bg-pink-100 dark:bg-pink-900/30 rounded-xl">
                                     <Activity className="w-6 h-6 text-pink-600 dark:text-pink-400" />
                                 </span>
@@ -133,7 +133,7 @@ export default function PregnancyWeightGainPage() {
                             
                             <div className="overflow-x-auto rounded-2xl border border-slate-100 dark:border-slate-800">
                                 <table className="w-full text-sm text-left">
-                                    <thead className="bg-slate-50 dark:bg-slate-800/50 text-slate-500 dark:text-slate-400 uppercase text-[10px] font-black tracking-widest">
+                                    <thead className="bg-slate-50 dark:bg-slate-800/50 text-slate-500 dark:text-slate-400 uppercase text-[10px] font-bold tracking-widest">
                                         <tr>
                                             <th className="px-4 py-4">Week of Pregnancy</th>
                                             <th className="px-4 py-4">Underweight (BMI &lt; 18.5)</th>
@@ -144,39 +144,39 @@ export default function PregnancyWeightGainPage() {
                                     </thead>
                                     <tbody className="divide-y divide-slate-50 dark:divide-slate-800">
                                         <tr>
-                                            <td className="px-4 py-4 font-bold">Week 12</td>
+                                            <td className="px-4 py-4 font-semibold">Week 12</td>
                                             <td className="px-4 py-4">1.5 – 2 kg</td>
                                             <td className="px-4 py-4">1 – 1.5 kg</td>
                                             <td className="px-4 py-4">0.5 – 1 kg</td>
                                             <td className="px-4 py-4">0 – 0.5 kg</td>
                                         </tr>
                                         <tr>
-                                            <td className="px-4 py-4 font-bold">Week 20</td>
+                                            <td className="px-4 py-4 font-semibold">Week 20</td>
                                             <td className="px-4 py-4">4 – 5 kg</td>
                                             <td className="px-4 py-4">3.5 – 4.5 kg</td>
                                             <td className="px-4 py-4">2.5 – 3.5 kg</td>
                                             <td className="px-4 py-4">1.5 – 2.5 kg</td>
                                         </tr>
                                         <tr>
-                                            <td className="px-4 py-4 font-bold">Week 28</td>
+                                            <td className="px-4 py-4 font-semibold">Week 28</td>
                                             <td className="px-4 py-4">7 – 8 kg</td>
                                             <td className="px-4 py-4">6.5 – 7.5 kg</td>
                                             <td className="px-4 py-4">5 – 6 kg</td>
                                             <td className="px-4 py-4">3.5 – 4.5 kg</td>
                                         </tr>
                                         <tr>
-                                            <td className="px-4 py-4 font-bold">Week 36</td>
+                                            <td className="px-4 py-4 font-semibold">Week 36</td>
                                             <td className="px-4 py-4">11 – 12 kg</td>
                                             <td className="px-4 py-4">10 – 11 kg</td>
                                             <td className="px-4 py-4">8 – 9 kg</td>
                                             <td className="px-4 py-4">6 – 7 kg</td>
                                         </tr>
                                         <tr className="bg-pink-50/30 dark:bg-pink-900/10">
-                                            <td className="px-4 py-4 font-black text-pink-600 dark:text-pink-400">Week 40</td>
-                                            <td className="px-4 py-4 font-bold">12.5 – 18 kg</td>
-                                            <td className="px-4 py-4 font-bold">11.5 – 16 kg</td>
-                                            <td className="px-4 py-4 font-bold">7 – 11.5 kg</td>
-                                            <td className="px-4 py-4 font-bold">5 – 9 kg</td>
+                                            <td className="px-4 py-4 font-bold text-pink-600 dark:text-pink-400">Week 40</td>
+                                            <td className="px-4 py-4 font-semibold">12.5 – 18 kg</td>
+                                            <td className="px-4 py-4 font-semibold">11.5 – 16 kg</td>
+                                            <td className="px-4 py-4 font-semibold">7 – 11.5 kg</td>
+                                            <td className="px-4 py-4 font-semibold">5 – 9 kg</td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -188,7 +188,7 @@ export default function PregnancyWeightGainPage() {
 
                         {/* BMI Categories */}
                         <div className="space-y-8">
-                            <h2 className="text-3xl font-black text-slate-900 dark:text-white flex items-center gap-3">
+                            <h2 className="text-3xl font-bold text-slate-900 dark:text-white flex items-center gap-3">
                                 <span className="p-2 bg-blue-100 dark:bg-blue-900/30 rounded-xl">
                                     <Scale className="w-6 h-6 text-blue-600 dark:text-blue-400" />
                                 </span>
@@ -206,25 +206,25 @@ export default function PregnancyWeightGainPage() {
 
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                                 <div className="p-6 bg-blue-50/50 dark:bg-blue-900/20 rounded-2xl border border-blue-100 dark:border-blue-800">
-                                    <h4 className="font-black text-blue-700 dark:text-blue-300 mb-2">Underweight (BMI under 18.5)</h4>
+                                    <h4 className="font-bold text-blue-700 dark:text-blue-300 mb-2">Underweight (BMI under 18.5)</h4>
                                     <p className="text-sm text-slate-600 dark:text-slate-400">If you were underweight before pregnancy, you will likely need to gain a bit more weight than average. The recommended range is around 12.5 to 18 kg for a single baby pregnancy.</p>
                                 </div>
                                 <div className="p-6 bg-green-50/50 dark:bg-green-900/20 rounded-2xl border border-green-100 dark:border-green-800">
-                                    <h4 className="font-black text-green-700 dark:text-green-300 mb-2">Normal Weight (BMI 18.5–24.9)</h4>
+                                    <h4 className="font-bold text-green-700 dark:text-green-300 mb-2">Normal Weight (BMI 18.5–24.9)</h4>
                                     <p className="text-sm text-slate-600 dark:text-slate-400">For most women, the recommended total weight gain sits between 11.5 and 16 kg. Aiming for around 0.4 kg per week in the second and third trimesters is a good rule of thumb.</p>
                                 </div>
                                 <div className="p-6 bg-yellow-50/50 dark:bg-yellow-900/20 rounded-2xl border border-yellow-100 dark:border-yellow-800">
-                                    <h4 className="font-black text-yellow-700 dark:text-yellow-300 mb-2">Overweight (BMI 25–29.9)</h4>
+                                    <h4 className="font-bold text-yellow-700 dark:text-yellow-300 mb-2">Overweight (BMI 25–29.9)</h4>
                                     <p className="text-sm text-slate-600 dark:text-slate-400">The guidance is to gain a little less, around 7 to 11.5 kg in total. This helps reduce the risk of complications during labour and delivery.</p>
                                 </div>
                                 <div className="p-6 bg-red-50/50 dark:bg-red-900/20 rounded-2xl border border-red-100 dark:border-red-800">
-                                    <h4 className="font-black text-red-700 dark:text-red-300 mb-2">Obese (BMI over 30)</h4>
+                                    <h4 className="font-bold text-red-700 dark:text-red-300 mb-2">Obese (BMI over 30)</h4>
                                     <p className="text-sm text-slate-600 dark:text-slate-400">Generally advised to gain between 5 and 9 kg during pregnancy. It's still important to gain some weight, your baby needs it.</p>
                                 </div>
                             </div>
                             
                             <div className="p-6 bg-slate-900 dark:bg-slate-800 rounded-3xl text-white">
-                                <h4 className="font-black text-pink-400 mb-2 flex items-center gap-2">
+                                <h4 className="font-bold text-pink-400 mb-2 flex items-center gap-2">
                                     <Baby className="w-5 h-5" /> Twin or Multiple Pregnancy
                                 </h4>
                                 <p className="text-sm text-slate-300 leading-relaxed">
@@ -235,7 +235,7 @@ export default function PregnancyWeightGainPage() {
 
                         {/* Timeline */}
                         <div className="space-y-10">
-                            <h2 className="text-3xl font-black text-slate-900 dark:text-white flex items-center gap-3">
+                            <h2 className="text-3xl font-bold text-slate-900 dark:text-white flex items-center gap-3">
                                 <span className="p-2 bg-pink-100 dark:bg-pink-900/30 rounded-xl">
                                     <Timer className="w-6 h-6 text-pink-600 dark:text-pink-400" />
                                 </span>
@@ -245,7 +245,7 @@ export default function PregnancyWeightGainPage() {
                             <div className="space-y-12">
                                 <div className="relative pl-8 border-l-2 border-pink-100 dark:border-pink-900/40">
                                     <div className="absolute -left-[9px] top-0 w-4 h-4 rounded-full bg-pink-500"></div>
-                                    <h3 className="text-xl font-black text-slate-900 dark:text-white mb-4">Weight Gain in the First Trimester</h3>
+                                    <h3 className="text-xl font-bold text-slate-900 dark:text-white mb-4">Weight Gain in the First Trimester</h3>
                                     <p className="text-slate-600 dark:text-slate-400 leading-relaxed">
                                         Most women gain very little in the first 12 weeks. We are talking somewhere between 0.5 and 2 kg in total, sometimes even less. In fact, if you are suffering from morning sickness, you might actually lose a little weight early on.
                                     </p>
@@ -253,7 +253,7 @@ export default function PregnancyWeightGainPage() {
                                 
                                 <div className="relative pl-8 border-l-2 border-pink-100 dark:border-pink-900/40">
                                     <div className="absolute -left-[9px] top-0 w-4 h-4 rounded-full bg-pink-500"></div>
-                                    <h3 className="text-xl font-black text-slate-900 dark:text-white mb-4">Weight Gain in the Second Trimester</h3>
+                                    <h3 className="text-xl font-bold text-slate-900 dark:text-white mb-4">Weight Gain in the Second Trimester</h3>
                                     <p className="text-slate-600 dark:text-slate-400 leading-relaxed">
                                         From around week 13, most women begin gaining weight more steadily, roughly 0.4 to 0.5 kg per week if your BMI is in the normal range. Your body is expanding blood volume and laying down fat stores to prepare for breastfeeding.
                                     </p>
@@ -261,7 +261,7 @@ export default function PregnancyWeightGainPage() {
                                 
                                 <div className="relative pl-8 border-l-2 border-pink-100 dark:border-pink-900/40">
                                     <div className="absolute -left-[9px] top-0 w-4 h-4 rounded-full bg-pink-500"></div>
-                                    <h3 className="text-xl font-black text-slate-900 dark:text-white mb-4">Weight Gain in the Third Trimester</h3>
+                                    <h3 className="text-xl font-bold text-slate-900 dark:text-white mb-4">Weight Gain in the Third Trimester</h3>
                                     <p className="text-slate-600 dark:text-slate-400 leading-relaxed">
                                         The third trimester brings the most noticeable weight gain. Your baby is putting on weight rapidly in these final weeks, and most women gain around 0.5 kg per week during this stage.
                                     </p>
@@ -271,7 +271,7 @@ export default function PregnancyWeightGainPage() {
 
                         {/* Breakdown Table */}
                         <div className="space-y-8 bg-slate-50 dark:bg-slate-900/50 p-8 rounded-[2.5rem] border border-slate-100 dark:border-slate-800">
-                            <h2 className="text-2xl font-black text-slate-900 dark:text-white">Where Does Pregnancy Weight Gain Actually Go?</h2>
+                            <h2 className="text-2xl font-bold text-slate-900 dark:text-white">Where Does Pregnancy Weight Gain Actually Go?</h2>
                             <p className="text-slate-600 dark:text-slate-400">
                                 Pregnancy weight gain isn't just body fat. Here is a realistic breakdown of where that weight typically goes:
                             </p>
@@ -288,8 +288,8 @@ export default function PregnancyWeightGainPage() {
                                     { item: "Fat and nutrient stores", weight: "~2.7 – 3.6 kg" },
                                 ].map((row, i) => (
                                     <div key={i} className="flex items-center justify-between p-4 bg-white dark:bg-slate-900 rounded-xl border border-slate-100 dark:border-slate-800">
-                                        <span className="text-sm font-bold text-slate-600 dark:text-slate-400">{row.item}</span>
-                                        <span className="text-sm font-black text-pink-600 dark:text-pink-400">{row.weight}</span>
+                                        <span className="text-sm font-semibold text-slate-600 dark:text-slate-400">{row.item}</span>
+                                        <span className="text-sm font-bold text-pink-600 dark:text-pink-400">{row.weight}</span>
                                     </div>
                                 ))}
                             </div>
@@ -297,7 +297,7 @@ export default function PregnancyWeightGainPage() {
 
                         {/* Nutrition */}
                         <div className="space-y-8">
-                            <h2 className="text-3xl font-black text-slate-900 dark:text-white flex items-center gap-3">
+                            <h2 className="text-3xl font-bold text-slate-900 dark:text-white flex items-center gap-3">
                                 <span className="p-2 bg-green-100 dark:bg-green-900/30 rounded-xl">
                                     <Utensils className="w-6 h-6 text-green-600 dark:text-green-400" />
                                 </span>
@@ -318,14 +318,14 @@ export default function PregnancyWeightGainPage() {
                                     { title: "Protein", desc: "Essential for growth. Eggs, chicken, fish, beans, and tofu are excellent choices." }
                                 ].map((nut, i) => (
                                     <div key={i} className="p-6 bg-white dark:bg-slate-900 rounded-2xl border border-slate-100 dark:border-slate-800 shadow-sm">
-                                        <h4 className="font-black text-slate-900 dark:text-white mb-2">{nut.title}</h4>
+                                        <h4 className="font-bold text-slate-900 dark:text-white mb-2">{nut.title}</h4>
                                         <p className="text-sm text-slate-600 dark:text-slate-400">{nut.desc}</p>
                                     </div>
                                 ))}
                             </div>
 
                             <div className="p-8 bg-red-50/50 dark:bg-red-900/20 rounded-[2rem] border border-red-100 dark:border-red-900/40">
-                                <h4 className="font-black text-red-700 dark:text-red-300 mb-4 flex items-center gap-2">
+                                <h4 className="font-bold text-red-700 dark:text-red-300 mb-4 flex items-center gap-2">
                                     <AlertCircle className="w-5 h-5 text-red-500" /> What to Avoid
                                 </h4>
                                 <p className="text-sm text-red-900/70 dark:text-red-300/70 leading-relaxed">
@@ -338,7 +338,7 @@ export default function PregnancyWeightGainPage() {
                         <div className="space-y-8">
                             <div className="flex items-center gap-3">
                                 <HelpCircle className="w-6 h-6 text-primary" />
-                                <h2 className="text-3xl font-extrabold tracking-tight">Frequently Asked Questions</h2>
+                                <h2 className="text-3xl font-bold tracking-tight">Frequently Asked Questions</h2>
                             </div>
                             <Accordion type="single" collapsible className="w-full space-y-4">
                                 {faqs.map((faq, i) => (
@@ -360,7 +360,7 @@ export default function PregnancyWeightGainPage() {
                         {/* MEDICAL DISCLAIMER */}
                         <div className="p-8 rounded-3xl bg-amber-50/50 dark:bg-amber-950/20 border border-amber-200 dark:border-amber-900/40 relative overflow-hidden group">
                             <div className="relative z-10 space-y-4">
-                                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-100 dark:bg-amber-900/50 text-amber-700 dark:text-amber-400 text-[10px] font-black uppercase tracking-widest">
+                                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-100 dark:bg-amber-900/50 text-amber-700 dark:text-amber-400 text-[10px] font-bold uppercase tracking-widest">
                                     <ShieldAlert className="w-3 h-3" />
                                     Medical Disclaimer
                                 </div>

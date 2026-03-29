@@ -115,7 +115,7 @@ export function PregnancyBMIForm() {
                     <form onSubmit={handleSubmit(onSubmit)} className="space-y-8">
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                             <div className="space-y-2">
-                                <Label htmlFor="height" className="font-semibold flex items-center gap-2">
+                                <Label htmlFor="height" className="font-medium flex items-center gap-2">
                                     Pre-pregnancy Height ({unit === "metric" ? "cm" : "in"})
                                     <TooltipProvider>
                                         <Tooltip>
@@ -140,7 +140,7 @@ export function PregnancyBMIForm() {
                             </div>
 
                             <div className="space-y-2">
-                                <Label htmlFor="weight" className="font-semibold flex items-center gap-2">
+                                <Label htmlFor="weight" className="font-medium flex items-center gap-2">
                                     Pre-pregnancy Weight ({unit === "metric" ? "kg" : "lbs"})
                                     <TooltipProvider>
                                         <Tooltip>
@@ -168,14 +168,14 @@ export function PregnancyBMIForm() {
                         <div className="p-6 bg-slate-50 dark:bg-slate-900/50 rounded-2xl border border-dashed border-slate-200 dark:border-slate-800 space-y-6">
                             <div className="flex items-center gap-2 mb-2">
                                 <Sparkles className="w-4 h-4 text-pink-500" />
-                                <h4 className="text-sm font-bold uppercase tracking-wider text-slate-500">Optional: Tracking</h4>
+                                <h4 className="text-sm font-semibold uppercase tracking-wider text-slate-500">Optional: Tracking</h4>
                             </div>
 
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                                 <div className="space-y-4">
-                                    <Label htmlFor="week" className="font-semibold flex items-center justify-between">
+                                    <Label htmlFor="week" className="font-medium flex items-center justify-between">
                                         <span>Current Week of Pregnancy</span>
-                                        <span className="text-pink-600 dark:text-pink-400 font-bold bg-pink-50 dark:bg-pink-900/30 px-2 py-0.5 rounded text-xs">Week {currentWeek}</span>
+                                        <span className="text-pink-600 dark:text-pink-400 font-semibold bg-pink-50 dark:bg-pink-900/30 px-2 py-0.5 rounded text-xs">Week {currentWeek}</span>
                                     </Label>
                                     <div className="space-y-4">
                                         <Input
@@ -186,7 +186,7 @@ export function PregnancyBMIForm() {
                                             {...register("week")}
                                             className="accent-pink-600 h-2 bg-slate-200 dark:bg-slate-800 rounded-lg cursor-pointer"
                                         />
-                                        <div className="flex justify-between text-[10px] text-slate-400 font-bold">
+                                        <div className="flex justify-between text-[10px] text-slate-400 font-semibold">
                                             <span>CONCEPTION</span>
                                             <span>TRIMESTER 2</span>
                                             <span>TRIMESTER 3</span>
@@ -196,7 +196,7 @@ export function PregnancyBMIForm() {
                                 </div>
 
                                 <div className="space-y-4">
-                                    <Label htmlFor="currentWeight" className="font-semibold">
+                                    <Label htmlFor="currentWeight" className="font-medium">
                                         Current Weight ({unit === "metric" ? "kg" : "lbs"})
                                     </Label>
                                     <Input
@@ -218,7 +218,7 @@ export function PregnancyBMIForm() {
                             <Button
                                 type="submit"
                                 disabled={loading}
-                                className="flex-1 h-14 text-lg font-bold shadow-xl shadow-pink-500/10 bg-linear-to-r from-pink-600 to-rose-500 hover:from-pink-700 hover:to-rose-600 text-white rounded-2xl transition-all"
+                                className="flex-1 h-14 text-lg font-semibold shadow-xl shadow-pink-500/10 bg-linear-to-r from-pink-600 to-rose-500 hover:from-pink-700 hover:to-rose-600 text-white rounded-2xl transition-all"
                             >
                                 {loading ? "Analyzing..." : "Calculate Pregnancy Plan"}
                             </Button>
@@ -231,17 +231,17 @@ export function PregnancyBMIForm() {
                         <div className="p-8 md:p-10 rounded-[2.5rem] bg-linear-to-br from-white to-pink-50/30 dark:from-slate-900 dark:to-pink-900/10 border border-pink-100 dark:border-pink-900/30 shadow-2xl shadow-pink-500/5 relative overflow-hidden text-center">
                             <div className="absolute -top-10 -right-10 w-40 h-40 bg-pink-100/50 dark:bg-pink-900/20 rounded-full blur-3xl"></div>
                             <div className="relative z-10 flex flex-col items-center">
-                                <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-pink-100 dark:bg-pink-900/30 text-pink-600 dark:text-pink-400 text-xs font-black uppercase tracking-widest mb-6">
+                                <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-pink-100 dark:bg-pink-900/30 text-pink-600 dark:text-pink-400 text-xs font-bold uppercase tracking-widest mb-6">
                                     <Baby className="w-4 h-4" />
                                     Pregnancy Profile
                                 </div>
 
-                                <h3 className="text-slate-500 dark:text-slate-400 font-bold text-sm uppercase tracking-[0.2em] mb-2">Pre-Pregnancy BMI</h3>
-                                <div className="text-8xl font-black mb-4 bg-linear-to-b from-slate-900 to-slate-700 dark:from-white dark:to-slate-400 bg-clip-text text-transparent drop-shadow-sm">
+                                <h3 className="text-slate-500 dark:text-slate-400 font-semibold text-sm uppercase tracking-[0.2em] mb-2">Pre-Pregnancy BMI</h3>
+                                <div className="text-8xl font-bold mb-4 bg-linear-to-b from-slate-900 to-slate-700 dark:from-white dark:to-slate-400 bg-clip-text text-transparent drop-shadow-sm">
                                     {result.bmi}
                                 </div>
 
-                                <div className={`inline-flex items-center gap-2 px-8 py-2.5 rounded-2xl font-black text-xl mb-10 border shadow-lg transition-all ${result.color === 'green' ? 'bg-green-50 border-green-200 text-green-700 dark:bg-green-900/30 dark:border-green-800' :
+                                <div className={`inline-flex items-center gap-2 px-8 py-2.5 rounded-2xl font-bold text-xl mb-10 border shadow-lg transition-all ${result.color === 'green' ? 'bg-green-50 border-green-200 text-green-700 dark:bg-green-900/30 dark:border-green-800' :
                                     result.color === 'yellow' ? 'bg-yellow-50 border-yellow-200 text-yellow-700 dark:bg-yellow-900/30 dark:border-yellow-800' :
                                         result.color === 'red' ? 'bg-red-50 border-red-200 text-red-700 dark:bg-red-900/30 dark:border-red-800' :
                                             'bg-blue-50 border-blue-200 text-blue-700 dark:bg-blue-900/30 dark:border-blue-800'
@@ -254,18 +254,18 @@ export function PregnancyBMIForm() {
                                 <div className="w-full grid grid-cols-1 md:grid-cols-2 gap-6 text-left mb-10">
                                     <div className="bg-white dark:bg-black/40 p-6 rounded-[2rem] shadow-sm border border-slate-100 dark:border-slate-800 flex flex-col items-center text-center">
                                         <Scale className="w-10 h-10 text-pink-500 mb-4" />
-                                        <h4 className="text-xs font-black text-slate-400 uppercase tracking-widest mb-2">Recommended Gain</h4>
-                                        <p className="text-3xl font-black text-slate-800 dark:text-slate-100">{result.weightGain}</p>
-                                        <p className="text-[10px] text-slate-400 mt-3 leading-relaxed uppercase font-bold">Based on clinical standards for your pre-pregnancy BMI category.</p>
+                                        <h4 className="text-xs font-bold text-slate-400 uppercase tracking-widest mb-2">Recommended Gain</h4>
+                                        <p className="text-3xl font-bold text-slate-800 dark:text-slate-100">{result.weightGain}</p>
+                                        <p className="text-[10px] text-slate-400 mt-3 leading-relaxed uppercase font-semibold">Based on clinical standards for your pre-pregnancy BMI category.</p>
                                     </div>
 
                                     <div className="bg-white dark:bg-black/40 p-6 rounded-[2rem] shadow-sm border border-slate-100 dark:border-slate-800 flex flex-col items-center text-center">
                                         <Timer className="w-10 h-10 text-blue-500 mb-4" />
-                                        <h4 className="text-xs font-black text-slate-400 uppercase tracking-widest mb-2">Current Status</h4>
+                                        <h4 className="text-xs font-bold text-slate-400 uppercase tracking-widest mb-2">Current Status</h4>
                                         <div className="flex flex-col gap-1">
-                                            <p className="text-2xl font-black text-slate-800 dark:text-slate-100">Week {result.week || 0}</p>
+                                            <p className="text-2xl font-bold text-slate-800 dark:text-slate-100">Week {result.week || 0}</p>
                                             {result.currentWeight && (
-                                                <p className="text-sm font-bold text-slate-500">
+                                                <p className="text-sm font-semibold text-slate-500">
                                                     +{Math.max(0, result.currentWeight - result.initialWeight).toFixed(1)} {unit === "metric" ? "kg" : "lbs"} Gained
                                                 </p>
                                             )}
@@ -279,28 +279,28 @@ export function PregnancyBMIForm() {
                                 <div className="w-full p-6 bg-linear-to-r from-slate-900 to-slate-800 dark:from-slate-800 dark:to-slate-950 rounded-[2rem] text-white text-left overflow-hidden relative">
                                     <div className="absolute -right-8 -bottom-8 opacity-10"><Baby className="w-32 h-32" /></div>
                                     <div className="relative z-10">
-                                        <div className="flex items-center gap-2 mb-4 text-pink-400 text-xs font-bold uppercase tracking-widest">
+                                        <div className="flex items-center gap-2 mb-4 text-pink-400 text-xs font-semibold uppercase tracking-widest">
                                             <Calendar className="w-4 h-4" />
                                             Expected Progression
                                         </div>
                                         <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
                                             <div>
-                                                <p className="text-xs font-bold text-white/50 mb-1">TRIMESTER 1</p>
-                                                <p className="text-sm font-semibold">0.5 – 2.0 kg total</p>
+                                                <p className="text-xs font-semibold text-white/50 mb-1">TRIMESTER 1</p>
+                                                <p className="text-sm font-medium">0.5 – 2.0 kg total</p>
                                                 <div className="mt-2 h-1 w-full bg-slate-700 rounded-full overflow-hidden">
                                                     <div className={`h-full bg-pink-500 ${result.week > 0 ? 'w-full' : 'w-0'}`}></div>
                                                 </div>
                                             </div>
                                             <div>
-                                                <p className="text-xs font-bold text-white/50 mb-1">TRIMESTER 2</p>
-                                                <p className="text-sm font-semibold">~0.5 kg / week</p>
+                                                <p className="text-xs font-semibold text-white/50 mb-1">TRIMESTER 2</p>
+                                                <p className="text-sm font-medium">~0.5 kg / week</p>
                                                 <div className="mt-2 h-1 w-full bg-slate-700 rounded-full overflow-hidden">
                                                     <div className={`h-full bg-pink-500 ${result.week > 13 ? 'w-full' : result.week > 0 ? 'w-1/3' : 'w-0'}`}></div>
                                                 </div>
                                             </div>
                                             <div>
-                                                <p className="text-xs font-bold text-white/50 mb-1">TRIMESTER 3</p>
-                                                <p className="text-sm font-semibold">~0.5 kg / week</p>
+                                                <p className="text-xs font-semibold text-white/50 mb-1">TRIMESTER 3</p>
+                                                <p className="text-sm font-medium">~0.5 kg / week</p>
                                                 <div className="mt-2 h-1 w-full bg-slate-700 rounded-full overflow-hidden">
                                                     <div className={`h-full bg-pink-500 ${result.week > 27 ? 'w-full' : 'w-0'}`}></div>
                                                 </div>
@@ -316,11 +316,11 @@ export function PregnancyBMIForm() {
                 <div className="mt-12 space-y-6">
                     <div className="flex items-center gap-3 border-b border-slate-200 dark:border-slate-800 pb-4">
                         <Scale className="w-5 h-5 text-primary" />
-                        <h3 className="text-xl font-bold">Standard Weight Gain Guidelines</h3>
+                        <h3 className="text-xl font-semibold">Standard Weight Gain Guidelines</h3>
                     </div>
                     <div className="overflow-hidden rounded-2xl border border-slate-200 dark:border-slate-800">
                         <table className="w-full text-sm text-left">
-                            <thead className="bg-slate-50 dark:bg-slate-900/50 text-slate-500 uppercase text-[10px] font-black tracking-widest">
+                            <thead className="bg-slate-50 dark:bg-slate-900/50 text-slate-500 uppercase text-[10px] font-bold tracking-widest">
                                 <tr>
                                     <th className="px-6 py-4">Pre-Pregnancy BMI</th>
                                     <th className="px-6 py-4">Category</th>
@@ -330,23 +330,23 @@ export function PregnancyBMIForm() {
                             <tbody className="divide-y divide-slate-100 dark:divide-slate-800">
                                 <tr className={result?.color === 'blue' ? "bg-blue-50/50 dark:bg-blue-900/10" : ""}>
                                     <td className="px-6 py-4 font-medium text-slate-900 dark:text-slate-100">&lt; 18.5</td>
-                                    <td className="px-6 py-4 text-blue-600 dark:text-blue-400 font-bold">Underweight</td>
-                                    <td className="px-6 py-4 font-bold">12.5 – 18 kg</td>
+                                    <td className="px-6 py-4 text-blue-600 dark:text-blue-400 font-semibold">Underweight</td>
+                                    <td className="px-6 py-4 font-semibold">12.5 – 18 kg</td>
                                 </tr>
                                 <tr className={result?.color === 'green' ? "bg-green-50/50 dark:bg-green-900/10" : ""}>
                                     <td className="px-6 py-4 font-medium text-slate-900 dark:text-slate-100">18.5 – 24.9</td>
-                                    <td className="px-6 py-4 text-green-600 dark:text-green-400 font-bold">Normal</td>
-                                    <td className="px-6 py-4 font-bold">11.5 – 16 kg</td>
+                                    <td className="px-6 py-4 text-green-600 dark:text-green-400 font-semibold">Normal</td>
+                                    <td className="px-6 py-4 font-semibold">11.5 – 16 kg</td>
                                 </tr>
                                 <tr className={result?.color === 'yellow' ? "bg-yellow-50/50 dark:bg-yellow-900/10" : ""}>
                                     <td className="px-6 py-4 font-medium text-slate-900 dark:text-slate-100">25.0 – 29.9</td>
-                                    <td className="px-6 py-4 text-yellow-600 dark:text-yellow-400 font-bold">Overweight</td>
-                                    <td className="px-6 py-4 font-bold">7.0 – 11.5 kg</td>
+                                    <td className="px-6 py-4 text-yellow-600 dark:text-yellow-400 font-semibold">Overweight</td>
+                                    <td className="px-6 py-4 font-semibold">7.0 – 11.5 kg</td>
                                 </tr>
                                 <tr className={result?.color === 'red' ? "bg-red-50/50 dark:bg-red-900/10" : ""}>
                                     <td className="px-6 py-4 font-medium text-slate-900 dark:text-slate-100">≥ 30.0</td>
-                                    <td className="px-6 py-4 text-red-600 dark:text-red-400 font-bold">Obese</td>
-                                    <td className="px-6 py-4 font-bold">5.0 – 9 kg</td>
+                                    <td className="px-6 py-4 text-red-600 dark:text-red-400 font-semibold">Obese</td>
+                                    <td className="px-6 py-4 font-semibold">5.0 – 9 kg</td>
                                 </tr>
                             </tbody>
                         </table>
