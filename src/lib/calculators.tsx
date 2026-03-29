@@ -10,7 +10,7 @@ export const categories = [
             { name: "BMI Calculator", href: "/bmi-calculator-uk", desc: "Body Mass Index" },
             { name: "Reverse BMI", href: "/reverse-bmi-calculator", desc: "Find weight for a target BMI" },
             { name: "Child BMI", href: "/child-bmi-calculator", desc: "BMI percentile for children" },
-            { name: "Pregnancy BMI", href: "/pregnancy-bmi", desc: "Healthy weight gain during pregnancy" },
+            { name: "Pregnancy Weight Gain Calculator UK", href: "/pregnancy-weight-gain-calculator", desc: "Healthy weight gain during pregnancy" },
             { name: "BMR Calculator", href: "/bmr-calculator-to-lose-weight", desc: "Basal Metabolic Rate" },
             { name: "Heart Age", href: "/heart-age-calculator-uk", desc: "Estimate your cardiovascular age" },
             { name: "Waist-to-Height", href: "/waist-to-height-ratio-calculator", desc: "Better indicator than BMI" },

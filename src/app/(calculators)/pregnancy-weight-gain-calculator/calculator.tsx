@@ -56,7 +56,7 @@ export function PregnancyBMIForm() {
     const onSubmit: SubmitHandler<FormValues> = async (data) => {
         setLoading(true);
         try {
-            const response = await fetch("/api/pregnancy-bmi", {
+            const response = await fetch("/api/pregnancy-weight-gain-calculator", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(data),
@@ -92,8 +92,8 @@ export function PregnancyBMIForm() {
 
     return (
         <CalculatorCard
-            title="Pregnancy BMI Calculator"
-            description="Assess your pre-pregnancy BMI and discover the medically recommended weight gain range for a healthy journey."
+            title="Pregnancy Weight Gain Calculator"
+            description="Assess your pre-pregnancy BMI and find your healthy weight gain range by week based on NHS and IoM guidelines."
             hasResult={!!result}
         >
             <div className="max-w-3xl mx-auto">
