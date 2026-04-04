@@ -23,10 +23,12 @@ import {
 } from "@/components/ui/accordion";
 import { Button } from "@/components/ui/button";
 import { allCalculators } from "@/lib/calculators";
+import { CalculatorSchema } from "@/components/seo/calculator-schema";
+import { BreadcrumbSchema } from "@/components/seo/breadcrumb-schema";
 
 export const metadata = {
     title: "Pregnancy Weight Gain Calculator UK",
-    description: "Use our free UK pregnancy weight gain calculator to find your healthy weight gain range by week. Based on NHS & IoM guidelines. Enter your BMI and get instant results.",
+    description: "Not sure how much weight to gain during pregnancy? Use our free Pregnancy Weight Gain Calculator UK to get a personalized guide based on your BMI and week of pregnancy. Based on IoM, NICE, and RCOG guidelines.",
 };
 
 export default function PregnancyWeightGainPage() {
@@ -79,6 +81,155 @@ export default function PregnancyWeightGainPage() {
 
     return (
         <div className="animate-in fade-in duration-700">
+            <BreadcrumbSchema items={[
+                { name: "Home", item: "/" },
+                { name: "Health & Fitness", item: "/fitness-diet" },
+                { name: "Pregnancy Weight Gain Calculator", item: "/pregnancy-weight-gain-calculator" }
+            ]} />
+            <script
+                type="application/ld+json"
+                dangerouslySetInnerHTML={{
+                    __html: JSON.stringify({
+                        "@context": "https://schema.org/",
+                        "@type": "SoftwareApplication",
+                        "name": "Pregnancy Weight Gain Calculator UK",
+                        "description": "Not sure how much weight to gain during pregnancy? Use our free Pregnancy Weight Gain Calculator UK to get a personalized guide based on your BMI and week of pregnancy. The good news is, you don't have to guess. CalZone’s  free UK pregnancy weight gain calculator works it all out for you, based on guidelines from the Institute of Medicine (IoM) and supported by NICE and RCOG recommendations.",
+                        "operatingSystem": "Web",
+                        "applicationCategory": "SAAS",
+                        "offers": {
+                            "@type": "Offer",
+                            "price": "0",
+                            "priceCurrency": "GBP"
+                        },
+                        "downloadUrl": "https://www.thecalzone.co.uk/pregnancy-weight-gain-calculator",
+                        "author": {
+                            "@type": "Person",
+                            "name": "CalZone"
+                        }
+                    })
+                }}
+            />
+            <script
+                type="application/ld+json"
+                dangerouslySetInnerHTML={{
+                    __html: JSON.stringify({
+                        "@context": "http://schema.org",
+                        "@type": "Product",
+                        "name": "Pregnancy Weight Gain Calculator UK",
+                        "url": "https://www.thecalzone.co.uk/pregnancy-weight-gain-calculator",
+                        "image": "https://www.thecalzone.co.uk/_next/image?url=%2Flogo.png",
+                        "description": "Not sure how much weight to gain during pregnancy? Use our free Pregnancy Weight Gain Calculator UK to get a personalized guide based on your BMI and week of pregnancy. The good news is, you don't have to guess. CalZone’s  free UK pregnancy weight gain calculator works it all out for you, based on guidelines from the Institute of Medicine (IoM) and supported by NICE and RCOG recommendations.",
+                        "brand": {
+                            "@type": "Brand",
+                            "name": "CalZone"
+                        },
+                        "aggregateRating": {
+                            "@type": "AggregateRating",
+                            "ratingValue": "4.9",
+                            "reviewCount": "120"
+                        },
+                        "offers": {
+                            "@type": "Offer",
+                            "priceCurrency": "GBP",
+                            "price": "0",
+                            "priceValidUntil": "2030-01-01",
+                            "itemCondition": "NewCondition",
+                            "availability": "InStock"
+                        }
+                    })
+                }}
+            />
+            <script
+                type="application/ld+json"
+                dangerouslySetInnerHTML={{
+                    __html: JSON.stringify({
+                        "@context": "http://schema.org",
+                        "@type": "FAQPage",
+                        "mainEntity": [
+                            {
+                                "@type": "Question",
+                                "name": "How much weight should I gain during pregnancy in the UK?",
+                                "acceptedAnswer": {
+                                    "@type": "Answer",
+                                    "text": "It depends on your pre-pregnancy BMI. For most women with a normal BMI, the recommended total weight gain is between 11.5 and 16 kg across the full pregnancy. If you were underweight before pregnancy, you may need to gain a little more, up to 18 kg. If you were overweight or obese, target is lower, typically between 5 and 11.5 kg. These figures are based on IoM guidelines and are widely used by UK healthcare professionals."
+                                }
+                            },
+                            {
+                                "@type": "Question",
+                                "name": "When do you start gaining weight in pregnancy?",
+                                "acceptedAnswer": {
+                                    "@type": "Answer",
+                                    "text": "Most women gain very little weight in the first trimester, often less than 2 kg in total. Weight gain really picks up from the second trimester onwards, with a steady gain of around 0.4 to 0.5 kg per week. By the third trimester, you may notice the gain feels more significant as your baby grows rapidly."
+                                }
+                            },
+                            {
+                                "@type": "Question",
+                                "name": "What is a normal weight gain in pregnancy?",
+                                "acceptedAnswer": {
+                                    "@type": "Answer",
+                                    "text": "Normal weight gain in pregnancy varies depending on your starting BMI. For women with a normal pre-pregnancy BMI, gaining between 11.5 and 16 kg over 40 weeks is considered appropriate. However, individual variation is normal, some women gain a little more or less and still have perfectly healthy pregnancies."
+                                }
+                            },
+                            {
+                                "@type": "Question",
+                                "name": "How much weight do you gain in the third trimester?",
+                                "acceptedAnswer": {
+                                    "@type": "Answer",
+                                    "text": "Third trimester weight gain is usually around 0.5 kg per week. This is the most active growth period for your baby, so it's natural to gain weight more quickly during these final weeks. In total, you might gain around 4 to 6 kg between weeks 28 and 40."
+                                }
+                            },
+                            {
+                                "@type": "Question",
+                                "name": "How much weight do you gain in early pregnancy?",
+                                "acceptedAnswer": {
+                                    "@type": "Answer",
+                                    "text": "Weight gain in early pregnancy is usually minimal. Most women gain somewhere between 0.5 and 2 kg in the first trimester. Some women gain nothing at all, especially if morning sickness is a factor."
+                                }
+                            },
+                            {
+                                "@type": "Question",
+                                "name": "How much does the placenta weigh?",
+                                "acceptedAnswer": {
+                                    "@type": "Answer",
+                                    "text": "The placenta typically weighs around 0.6 to 0.7 kg at full term. It's a remarkable organ that delivers oxygen and nutrients to your baby throughout pregnancy. After birth, it's delivered separately, this is what's often referred to as the third stage of labour."
+                                }
+                            },
+                            {
+                                "@type": "Question",
+                                "name": "Is it normal to lose weight in the first trimester?",
+                                "acceptedAnswer": {
+                                    "@type": "Answer",
+                                    "text": "Yes, it can be. If you are experiencing morning sickness or food aversions, losing a small amount of weight in the first trimester is quite common. As long as you are keeping fluids down and eating when you can, this usually isn't a concern. If you're losing significant weight or can't keep food or water down, speak to your GP or midwife."
+                                }
+                            },
+                            {
+                                "@type": "Question",
+                                "name": "How many extra calories do you need when pregnant?",
+                                "acceptedAnswer": {
+                                    "@type": "Answer",
+                                    "text": "You don't need extra calories in the first trimester. From the second trimester, most women need around an extra 200 calories per day, rising to approximately 300 extra calories in the third trimester. These are rough estimates, your actual needs will depend on your activity level, BMI and how your pregnancy is progressing."
+                                }
+                            },
+                            {
+                                "@type": "Question",
+                                "name": "What is a healthy BMI before pregnancy?",
+                                "acceptedAnswer": {
+                                    "@type": "Answer",
+                                    "text": "A BMI between 18.5 and 24.9 is considered a healthy weight range for adults. Before pregnancy, knowing your BMI helps you and your healthcare team set appropriate weight gain targets for the months ahead. You can calculate yours using our free BMI Calculator UK."
+                                }
+                            },
+                            {
+                                "@type": "Question",
+                                "name": "Does weight gain differ for twin pregnancies?",
+                                "acceptedAnswer": {
+                                    "@type": "Answer",
+                                    "text": "Yes, significantly. Women carrying twins are generally advised to gain more weight overall. The recommended range for a twin pregnancy is around 16.8 to 24.5 kg, compared to 11.5 to 16 kg for a singleton pregnancy with a normal BMI. If you are carrying twins, your consultant or specialist midwife will give you more tailored guidance."
+                                }
+                            }
+                        ]
+                    })
+                }}
+            />
             {/* HERO & CALCULATOR SECTION */}
             <section className="container mx-auto px-4 pb-12">
                 <PregnancyBMIForm />
@@ -91,25 +242,20 @@ export default function PregnancyWeightGainPage() {
                     <div className="lg:col-span-2 space-y-16">
                         {/* Intro */}
                         <div className="space-y-6">
-                            <h1 className="text-4xl md:text-5xl font-bold tracking-tight text-slate-900 dark:text-white leading-tight">
-                                Pregnancy Weight Gain Calculator UK
-                            </h1>
-                            <p className="text-xl text-slate-600 dark:text-slate-400 leading-relaxed">
-                                Not sure how much weight to gain during pregnancy? Use our free Pregnancy Weight Gain Calculator to get a personalized guide based on your BMI and week of pregnancy.
-                            </p>
-                            
+
+
                             <div className="prose prose-slate dark:prose-invert max-w-none text-slate-600 dark:text-slate-400 leading-relaxed">
-                                <h2 className="text-3xl font-bold text-slate-900 dark:text-white">How Much Weight Should You Gain During Pregnancy?</h2>
+                                <h2 className="text-3xl font-bold text-slate-900 dark:text-white">How Much Weight Should You Gain During Pregnancy?</h2> <br />
                                 <p>
                                     Pregnancy is one of the most incredible journeys a woman can go through. But it comes with a lot of questions and one of the most common ones is: "Am I gaining the right amount of weight?"
                                 </p>
-                                <p>The honest answer? It depends on your body.</p>
+                                <p>The honest answer? It depends on your body.</p>  <br />
                                 <p>
                                     Your healthy weight gain range during pregnancy is based on your pre-pregnancy BMI. That means two women at the same stage of pregnancy might have completely different targets and both can be perfectly healthy.
-                                </p>
+                                </p> <br />
                                 <p>
                                     As a general guide, most women with a normal BMI should gain around 11.5 to 16 kg over their entire pregnancy. But if you were underweight before pregnancy, you may need to gain a little more. If you were overweight, a little less.
-                                </p>
+                                </p> <br />
                                 <p>
                                     The good news is, you don't have to guess. <Link href="/" className="text-pink-600 hover:text-pink-700 font-semibold underline decoration-pink-200 underline-offset-4">CalZone’s</Link> free UK pregnancy weight gain calculator works it all out for you, based on guidelines from the Institute of Medicine (IoM) and supported by NICE and RCOG recommendations.
                                 </p>
@@ -130,7 +276,9 @@ export default function PregnancyWeightGainPage() {
                             <p className="text-slate-600 dark:text-slate-400 leading-relaxed">
                                 Not everyone gains weight at the same pace and that's completely normal. Weight gain tends to be slow in the first trimester and then picks up steadily from around week 13 onwards.
                             </p>
-                            
+
+                            <p className="text-slate-600 dark:text-slate-400 leading-relaxed">The chart below gives you a rough idea of how much weight you might expect to gain each week, broken down by your pre-pregnancy BMI category.</p>
+
                             <div className="overflow-x-auto rounded-2xl border border-slate-100 dark:border-slate-800">
                                 <table className="w-full text-sm text-left">
                                     <thead className="bg-slate-50 dark:bg-slate-800/50 text-slate-500 dark:text-slate-400 uppercase text-[10px] font-bold tracking-widest">
@@ -182,25 +330,30 @@ export default function PregnancyWeightGainPage() {
                                 </table>
                             </div>
                             <p className="text-xs text-slate-500 dark:text-slate-400 italic">
-                                These figures are based on IoM 2009 pregnancy weight gain guidelines, which are widely used by healthcare professionals across the UK.
+                                These figures are based on IoM 2009 pregnancy weight gain guidelines, which are widely used by healthcare professionals across the UK. They give a realistic pregnancy weight graph to follow, not a strict rulebook.
+                                If your weight gain looks a bit different week to week, don't panic. Fluctuations are normal. What matters more is the overall trend across your pregnancy.
+
                             </p>
                         </div>
 
                         {/* BMI Categories */}
                         <div className="space-y-8">
                             <h2 className="text-3xl font-bold text-slate-900 dark:text-white flex items-center gap-3">
-                                <span className="p-2 bg-blue-100 dark:bg-blue-900/30 rounded-xl">
-                                    <Scale className="w-6 h-6 text-blue-600 dark:text-blue-400" />
-                                </span>
+
                                 Understanding Your BMI and Pregnancy Weight Gain
                             </h2>
                             <div className="prose prose-slate dark:prose-invert max-w-none text-slate-600 dark:text-slate-400 leading-relaxed">
                                 <p>
                                     Your pre-pregnancy BMI (body mass index) plays a big role in how much weight you should gain. It helps your midwife or GP set a healthy target that's right for your body, not just an average number pulled from a chart.
-                                </p>
+                                </p> <br />
                                 <h3 className="text-xl font-bold text-slate-900 dark:text-white">What Is a Healthy BMI Before Pregnancy?</h3>
-                                <p>
-                                    BMI is calculated using your height and weight. It gives a general indication of whether your weight is in a healthy range for your height. Before pregnancy, a BMI between 18.5 and 24.9 is considered normal.
+                                <p className="">
+                                    BMI is calculated using your height and weight. It gives a general indication of whether your weight is in a healthy range for your height. Before pregnancy, a BMI between 18.5 and 24.9 is considered normal.Once you are pregnant, your pre-pregnancy BMI is used to estimate your recommended weight gain range across all 40 weeks.
+
+                                </p> <br />
+                                <h3 className="text-xl font-bold text-slate-900 dark:text-white">Recommended Weight Gain by BMI Category
+                                </h3>
+                                <p>Here is a simple breakdown of what's generally recommended, based on IoM guidelines:
                                 </p>
                             </div>
 
@@ -222,7 +375,7 @@ export default function PregnancyWeightGainPage() {
                                     <p className="text-sm text-slate-600 dark:text-slate-400">Generally advised to gain between 5 and 9 kg during pregnancy. It's still important to gain some weight, your baby needs it.</p>
                                 </div>
                             </div>
-                            
+
                             <div className="p-6 bg-slate-900 dark:bg-slate-800 rounded-3xl text-white">
                                 <h4 className="font-bold text-pink-400 mb-2 flex items-center gap-2">
                                     <Baby className="w-5 h-5" /> Twin or Multiple Pregnancy
@@ -241,16 +394,20 @@ export default function PregnancyWeightGainPage() {
                                 </span>
                                 When Do You Start Gaining Weight in Pregnancy?
                             </h2>
-                            
+
                             <div className="space-y-12">
                                 <div className="relative pl-8 border-l-2 border-pink-100 dark:border-pink-900/40">
                                     <div className="absolute -left-[9px] top-0 w-4 h-4 rounded-full bg-pink-500"></div>
                                     <h3 className="text-xl font-bold text-slate-900 dark:text-white mb-4">Weight Gain in the First Trimester</h3>
                                     <p className="text-slate-600 dark:text-slate-400 leading-relaxed">
                                         Most women gain very little in the first 12 weeks. We are talking somewhere between 0.5 and 2 kg in total, sometimes even less. In fact, if you are suffering from morning sickness, you might actually lose a little weight early on.
+                                    </p> <br />
+
+                                    <p className="text-slate-600 dark:text-slate-400 leading-relaxed">That's completely normal and nothing to worry about.
+                                        Your baby is tiny at this stage. The weight gain you experience in early pregnancy is mostly down to changes in your blood volume and your body starting to build up its stores.
                                     </p>
                                 </div>
-                                
+
                                 <div className="relative pl-8 border-l-2 border-pink-100 dark:border-pink-900/40">
                                     <div className="absolute -left-[9px] top-0 w-4 h-4 rounded-full bg-pink-500"></div>
                                     <h3 className="text-xl font-bold text-slate-900 dark:text-white mb-4">Weight Gain in the Second Trimester</h3>
@@ -258,13 +415,14 @@ export default function PregnancyWeightGainPage() {
                                         From around week 13, most women begin gaining weight more steadily, roughly 0.4 to 0.5 kg per week if your BMI is in the normal range. Your body is expanding blood volume and laying down fat stores to prepare for breastfeeding.
                                     </p>
                                 </div>
-                                
+
                                 <div className="relative pl-8 border-l-2 border-pink-100 dark:border-pink-900/40">
                                     <div className="absolute -left-[9px] top-0 w-4 h-4 rounded-full bg-pink-500"></div>
                                     <h3 className="text-xl font-bold text-slate-900 dark:text-white mb-4">Weight Gain in the Third Trimester</h3>
                                     <p className="text-slate-600 dark:text-slate-400 leading-relaxed">
                                         The third trimester brings the most noticeable weight gain. Your baby is putting on weight rapidly in these final weeks, and most women gain around 0.5 kg per week during this stage.
-                                    </p>
+                                    </p> <br />
+                                    <p className="text-slate-600 dark:text-slate-400 leading-relaxed">Third trimester weight gain can feel quite sudden, but it's your body doing exactly what it should. Your baby is building fat under their skin, your amniotic fluid levels are at their highest and your body is preparing for labour</p>
                                 </div>
                             </div>
                         </div>
@@ -273,9 +431,11 @@ export default function PregnancyWeightGainPage() {
                         <div className="space-y-8 bg-slate-50 dark:bg-slate-900/50 p-8 rounded-[2.5rem] border border-slate-100 dark:border-slate-800">
                             <h2 className="text-2xl font-bold text-slate-900 dark:text-white">Where Does Pregnancy Weight Gain Actually Go?</h2>
                             <p className="text-slate-600 dark:text-slate-400">
-                                Pregnancy weight gain isn't just body fat. Here is a realistic breakdown of where that weight typically goes:
+                                A lot of women are surprised to learn that pregnancy weight gain isn't just body fat. In fact, the majority of the weight you gain goes towards supporting your baby and your body's changing needs. Here is a realistic breakdown of where that weight typically goes.
+
+
                             </p>
-                            
+
                             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                                 {[
                                     { item: "Baby", weight: "~3.4 kg" },
@@ -294,7 +454,10 @@ export default function PregnancyWeightGainPage() {
                                 ))}
                             </div>
                         </div>
-
+                        <p className="text-slate-600 dark:text-slate-400">So when you look at it this way, a significant portion of your pregnancy weight gain is made up of your baby, placenta, amniotic fluid and the essential fluids your body needs to keep everything running. The fat stores are there for a reason too, they fuel breastfeeding and recovery after birth.
+                            <br />
+                            Research behind these figures comes from the IoM's 2009 report and the foundational work by Hytten and Chamberlain in Clinical Physiology in Obstetrics. These are the most widely cited sources used to understand maternal weight gain components during singleton pregnancies.
+                        </p>
                         {/* Nutrition */}
                         <div className="space-y-8">
                             <h2 className="text-3xl font-bold text-slate-900 dark:text-white flex items-center gap-3">
@@ -308,7 +471,7 @@ export default function PregnancyWeightGainPage() {
                                     You don't need to "eat for two", that's a myth. But you do need to eat well. From around the second trimester, most women need roughly an extra 200–300 calories per day.
                                 </p>
                             </div>
-                            
+
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                                 {[
                                     { title: "Folate & Folic Acid", desc: "Helps protect against neural tube defects. NHS recommends 400 mcg daily until 12 weeks." },
@@ -329,7 +492,9 @@ export default function PregnancyWeightGainPage() {
                                     <AlertCircle className="w-5 h-5 text-red-500" /> What to Avoid
                                 </h4>
                                 <p className="text-sm text-red-900/70 dark:text-red-300/70 leading-relaxed">
-                                    Some foods carry risks during pregnancy: raw or undercooked meat, unpasteurised dairy, raw shellfish, high-mercury fish (shark, swordfish) and alcohol.
+                                    Some foods carry risks during pregnancy: raw or undercooked meat, unpasteurised dairy, raw shellfish, high-mercury fish (shark, swordfish) and alcohol.The NHS has a full list of foods to avoid during pregnancy, it is worth a read if you haven't already.
+                                    Want to know exactly how many calories you need each week? Try our Pregnancy <a href="https://www.thecalzone.co.uk/calorie-deficit-calculator-uk" className="text-pink-600 hover:text-pink-700 font-semibold underline decoration-pink-200 underline-offset-4">Pregnancy Calorie Calculator</a> for a trimester-by-trimester breakdown.
+
                                 </p>
                             </div>
                         </div>

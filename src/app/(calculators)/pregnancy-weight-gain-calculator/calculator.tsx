@@ -92,8 +92,8 @@ export function PregnancyBMIForm() {
 
     return (
         <CalculatorCard
-            title="Pregnancy Weight Gain Calculator"
-            description="Assess your pre-pregnancy BMI and find your healthy weight gain range by week based on NHS and IoM guidelines."
+            title="Pregnancy Weight Gain Calculator UK"
+            description="Not sure how much weight to gain during pregnancy? Use our free Pregnancy Weight Gain Calculator to get a personalized guide based on your BMI and week of pregnancy."
             hasResult={!!result}
         >
             <div className="max-w-3xl mx-auto">

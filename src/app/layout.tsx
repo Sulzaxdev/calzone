@@ -105,28 +105,7 @@ export default function RootLayout({
             gtag('config', 'G-YE0RFNZFM4');
           `}
         </Script>
-        <Script id="json-ld-app-metadata" type="application/ld+json">
-          {`
-            {
-              "@context": "https://schema.org/",
-              "@type": "SoftwareApplication",
-              "name": "CalZone - Calculator Hub For UK",
-              "description": "CalZone is a free UK-based calculator hub offering 1,000+ specialist tools across health, finance, tax, automotive, construction, and more. Trusted by 100,000+ UK users, it delivers fast, accurate results with zero complexity.",
-              "operatingSystem": "Web",
-              "applicationCategory": "SAAS",
-              "offers": {
-                "@type": "Offer",
-                "price": "$",
-                "priceCurrency": "USD"
-              },
-              "downloadUrl": "https://www.thecalzone.co.uk/",
-              "author": {
-                "@type": "Person",
-                "name": "CalZone"
-              }
-            }
-          `}
-        </Script>
+
       </body>
     </html>
   );
