@@ -19,7 +19,7 @@ export type LifeExpectancyResult = {
 
 export function calculateLifeExpectancy(inputs: LifeExpectancyInputs): LifeExpectancyResult {
     // UK Baseline (approx)
-    const baseExpectancy = inputs.gender === "female" ? 83.6 : 79.9;
+    const baseExpectancy = inputs.gender === "female" ? 82.8 : 78.8;
 
     let modifier = 0;
     const insights: string[] = [];
