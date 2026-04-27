@@ -108,6 +108,8 @@ export default function Home() {
             { name: "Concrete Calculator", href: "/concrete-calculator-uk", desc: "Calculate concrete needed", icon: "🏗️", color: "bg-slate-100 text-slate-700 dark:bg-slate-800 dark:text-slate-300" },
             { name: "Redundancy Calc", href: "/redundancy-calculator-uk", desc: "Calculate statutory pay", icon: "📋", color: "bg-orange-50 text-orange-600 dark:bg-orange-500/10 dark:text-orange-400" },
             { name: "Mileage Calculator", href: "/mileage-calculator-uk", desc: "Calculate mileage claim", icon: "📍", color: "bg-red-50 text-red-600 dark:bg-red-500/10 dark:text-red-400" },
+            { name: "Big Three Calc", href: "/sun-moon-rising-calculator", desc: "Sun, Moon, and Rising signs", icon: "✨", color: "bg-indigo-50 text-indigo-600 dark:bg-indigo-500/10 dark:text-indigo-400" },
+            { name: "CGPA to %", href: "/cgpa-to-percentage-calculator", desc: "Academic grade converter", icon: "🎓", color: "bg-blue-50 text-blue-600 dark:bg-blue-500/10 dark:text-blue-400" },
             { name: "Compound Interest", href: "/uk-compound-interest-calculator", desc: "See investment growth", icon: "📈", color: "bg-rose-50 text-rose-600 dark:bg-rose-500/10 dark:text-rose-400" }
           ].map((calc, idx) => (
             <Link
@@ -273,6 +275,34 @@ export default function Home() {
                   { name: "Notice Period", href: "/notice-period-calculator-uk" },
                   { name: "School Age", href: "/school-age-calculator-uk" }
                 ]
+              },
+              {
+                id: "astrology",
+                title: "Astrology",
+                href: "/astrology-calculators",
+                icon: <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"></path><circle cx="12" cy="12" r="4"></circle><path d="m16 16 3 3M8 8 5 5"></path></svg>,
+                links: [
+                  { name: "Big Three Calculator", href: "/sun-moon-rising-calculator" },
+                  { name: "Sun Sign Calculator", href: "/sun-sign-calculator" },
+                  { name: "Moon Sign Calculator", href: "/moon-sign-calculator" },
+                  { name: "Rising Sign", href: "/rising-sign-calculator" },
+                  { name: "Venus Sign", href: "/venus-sign-calculator" },
+                  { name: "North Node", href: "/north-node-calculator" }
+                ]
+              },
+              {
+                id: "education",
+                title: "Education & Grades",
+                href: "/cgpa-to-percentage-calculator",
+                icon: <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M22 10v6M2 10l10-5 10 5-10 5z"></path><path d="M6 12v5c3 3 9 3 12 0v-5"></path></svg>,
+                links: [
+                  { name: "CGPA to Percentage", href: "/cgpa-to-percentage-calculator" },
+                  { name: "GPA Calculator", href: "/gpa-calculator" },
+                  { name: "SGPA to CGPA", href: "/sgpa-to-cgpa-calculator" },
+                  { name: "Marks Percentage", href: "/marks-percentage-calculator" },
+                  { name: "Percentage to CGPA", href: "/percentage-to-cgpa-calculator" },
+                  { name: "Final Grade", href: "/final-grade-calculator" }
+                ]
               }
             ]
               .map((cat) => (
@@ -317,7 +347,7 @@ export default function Home() {
       <section className="container mx-auto px-4 mb-24 max-w-[1400px]">
         {/* Category Pills */}
         <div className="flex flex-wrap justify-center gap-3 mb-12">
-          {["Finance", "Health & Fitness", "Maths", "Construction", "Automotive", "Cooking", "Education", "Time", "Science", "Area", "Volume", "Length", "Mass", "Speed", "Pressure", "Force", "Power", "Density", "Currency", "Gardening", "Sports"].map((tag, i) => (
+          {["Education", "Astrology", "Finance", "Health & Fitness", "Maths", "Construction", "Automotive", "Cooking", "Time", "Science", "Area", "Volume", "Length", "Mass", "Speed", "Pressure", "Force", "Power", "Density", "Currency", "Gardening", "Sports"].map((tag, i) => (
             <button
               key={i}
               className={`px-6 py-2 rounded-full text-sm font-bold border transition-colors shadow-sm ${["Finance", "Health & Fitness", "Maths"].includes(tag)

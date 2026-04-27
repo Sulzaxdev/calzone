@@ -1,4 +1,4 @@
-import { Activity, Scale, Coffee, Moon, TrendingUp, Calculator, Hammer } from "lucide-react";
+import { Activity, Scale, Coffee, Moon, TrendingUp, Calculator, Hammer, Sparkles, GraduationCap } from "lucide-react";
 
 export const categories = [
     {
@@ -182,6 +182,35 @@ export const categories = [
             { name: "Unfair Dismissal", href: "/unfair-dismissal-calculator-uk", desc: "Basic Award statutory estimator" },
             { name: "Personal Injury Comp", href: "/personal-injury-compensation-calculator-uk", desc: "Accident claim & JCG estimator" },
             { name: "Care Home Fees", href: "/care-home-fees-calculator-uk", desc: "Capital limits & funding means test" }
+        ],
+    },
+    {
+        title: "Astrology",
+        icon: <Sparkles className="h-6 w-6 text-primary" />,
+        calculators: [
+            { name: "Sun Sign Calculator", href: "/sun-sign-calculator", desc: "Calculate your core zodiac identity" },
+            { name: "Moon Sign Calculator", href: "/moon-sign-calculator", desc: "Discover your emotional inner self" },
+            { name: "Rising Sign Calculator", href: "/rising-sign-calculator", desc: "Find your outward personality (Ascendant)" },
+            { name: "Sun, Moon, Rising Calc", href: "/sun-moon-rising-calculator", desc: "Find your 'Big Three' astrology signs" },
+            { name: "Venus Sign Calculator", href: "/venus-sign-calculator", desc: "Discover your love and attraction style" },
+            { name: "Chiron Sign Calculator", href: "/chiron-sign-calculator", desc: "Understand your deepest wounds and healing" },
+            { name: "Lilith Sign Calculator", href: "/lilith-sign-calculator", desc: "Explore your hidden raw energy" },
+            { name: "North Node Calculator", href: "/north-node-calculator", desc: "Discover your soul's destiny and purpose" },
+            { name: "Part of Fortune", href: "/part-of-fortune-calculator", desc: "Find where you encounter luck and joy" },
+            { name: "Vertex Calculator", href: "/vertex-calculator", desc: "Understand fated encounters and destiny" },
+        ],
+    },
+    {
+        title: "Education & Grades",
+        icon: <GraduationCap className="h-6 w-6 text-primary" />,
+        calculators: [
+            { name: "CGPA to Percentage", href: "/cgpa-to-percentage-calculator", desc: "Convert CGPA to percentage score" },
+            { name: "SGPA to CGPA", href: "/sgpa-to-cgpa-calculator", desc: "Aggregate semester grades" },
+            { name: "Marks Percentage", href: "/marks-percentage-calculator", desc: "Calculate exam marks percentage" },
+            { name: "Percentage to CGPA", href: "/percentage-to-cgpa-calculator", desc: "Reverse grade conversion" },
+            { name: "GPA Calculator", href: "/gpa-calculator", desc: "Calculate weighted GPA" },
+            { name: "SGPA to Percentage", href: "/sgpa-to-percentage-calculator", desc: "Semester SGPA to %" },
+            { name: "Final Grade", href: "/final-grade-calculator", desc: "Target grade estimator" },
         ],
     },
 ];
