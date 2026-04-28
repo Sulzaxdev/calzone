@@ -1,4 +1,4 @@
-import { BarChart3, Calculator, AlignCenter } from "lucide-react";
+import { BarChart3, Calculator, AlignCenter, Link } from "lucide-react";
 import { AveragePercentageCalculator } from "./calculator";
 import { CalculatorSchema } from "@/components/seo/calculator-schema";
 import { FAQAccordion } from "@/components/ui/faq-accordion";
@@ -59,56 +59,131 @@ export default function AveragePercentagePage() {
                     <AveragePercentageCalculator />
                 </div>
 
-                {/* SEO Content */}
-                <section className="mt-20 max-w-4xl mx-auto space-y-12">
-                    <div className="bg-white/80 dark:bg-card/50 backdrop-blur-md border border-slate-200 dark:border-slate-800 p-8 md:p-12 rounded-3xl shadow-[0_4px_20px_-4px_rgba(0,0,0,0.05)]">
-                        <h2 className="text-3xl font-bold text-slate-900 dark:text-slate-100 mb-8 border-b border-slate-200 dark:border-slate-800 pb-4 flex items-center gap-3">
-                            <BarChart3 className="w-8 h-8 text-purple-500" />
-                            Averaging Percentages the Right Way
-                        </h2>
-
-                        <div className="space-y-8 text-slate-700 dark:text-slate-300">
-                            <p className="text-lg leading-relaxed">
-                                Averaging out a set of numerical percentages follows the same standard "Mean" mathematical formula as averaging regular whole numbers. This is useful for compiling student tests, finding an average quarterly growth metric, or standardizing survey results.
-                            </p>
-
-                            <div className="bg-purple-50 dark:bg-purple-900/20 p-6 rounded-2xl border border-purple-100 dark:border-purple-900/40">
-                                <h3 className="text-xl font-bold text-purple-900 dark:text-purple-200 mb-4 flex items-center gap-2">
-                                    <Calculator className="w-6 h-6 text-purple-500" /> The Formula
-                                </h3>
-                                <p className="mb-4 text-sm text-purple-800 dark:text-purple-300">
-                                    Our calculator uses the arithmetic mean logic:
-                                </p>
-                                <div className="bg-white dark:bg-slate-900 p-4 rounded-xl border border-purple-200 dark:border-purple-800 text-center font-mono font-bold text-lg text-slate-800 dark:text-slate-200">
-                                    Sum of all Percentages ÷ Number of Entries = Average
-                                </div>
-                                <p className="mt-4 text-sm text-purple-800 dark:text-purple-300">
-                                    <strong>Example:</strong> Taking the average of three test scores: 72%, 85%, and 90%.<br />
-                                    1. Add them: 72 + 85 + 90 = 247<br />
-                                    2. Count entries: We have 3 scores.<br />
-                                    3. Divide: 247 ÷ 3 = <strong>82.33% Average!</strong>
-                                </p>
+            {/* --- SEO Deep Content Section --- */}
+            <section className="mt-32 max-w-6xl mx-auto space-y-16 px-4">
+                <div className="bg-white dark:bg-slate-900 rounded-[3.5rem] p-10 md:p-20 border border-slate-200 dark:border-slate-800 shadow-2xl shadow-slate-200/50 dark:shadow-none transition-all">
+                    {/* Header */}
+                    <div className="space-y-8 mb-16">
+                        <div className="flex items-center gap-6">
+                            <div className="w-16 h-16 rounded-3xl bg-purple-100 dark:bg-purple-900/30 flex items-center justify-center shadow-inner border border-purple-200 dark:border-purple-800">
+                                <AlignCenter className="w-8 h-8 text-purple-600" />
                             </div>
+                            <h2 className="text-4xl md:text-6xl font-black tracking-tighter text-slate-900 dark:text-white leading-none">
+                                Statistical Clarity: <br/><span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-indigo-600">Averaging Percentages Right</span>
+                            </h2>
+                        </div>
+                        <p className="text-xl md:text-2xl text-slate-600 dark:text-slate-400 leading-relaxed max-w-4xl font-medium">
+                            Whether you're tracking quarterly growth or student test performance, finding the "mean" percentage is a fundamental analytical task. However, the math behind it can be deceptively simple—or dangerously misleading.
+                        </p>
+                    </div>
 
-                            <div className="space-y-4">
-                                <h3 className="text-2xl font-bold text-slate-800 dark:text-slate-200">Warning: Beware the "Weighted" Trap</h3>
-                                <p className="leading-relaxed">
-                                    While this calculator is perfectly accurate for raw numbers, be extremely careful when averaging percentages that represent real-world populations or sample sizes of vastly different scales.
-                                </p>
-                                <div className="bg-slate-100 dark:bg-slate-900 p-5 rounded-2xl border-l-4 border-orange-500">
-                                    <p className="text-sm">
-                                        <strong>The Pitfall Example:</strong><br />
-                                        If 100% of City A (Population: 10) voted "Yes", and 0% of City B (Population: 1,000,000) voted "Yes". <br />
-                                        The simple average between 100% and 0% is <strong>50%</strong>.<br />
-                                        However, the actual holistic truth is that out of 1,000,010 people, only 10 voted yes, making the true "weighted" average essentially <strong>0.001%</strong>.
+                    {/* Detailed Long-Form Sections */}
+                    <div className="space-y-24">
+                        {/* Section 1: The Arithmetic Mean */}
+                        <div className="space-y-12">
+                            <div className="flex items-center gap-4 border-b border-slate-100 dark:border-slate-800 pb-6">
+                                <span className="text-7xl font-black text-slate-100 dark:text-slate-800 tracking-tighter">01</span>
+                                <h3 className="text-4xl font-black text-slate-900 dark:text-white">The Arithmetic Average</h3>
+                            </div>
+                            <div className="grid lg:grid-cols-2 gap-16">
+                                <div className="space-y-8">
+                                    <p className="text-lg text-slate-600 dark:text-slate-400 leading-relaxed">
+                                        The simple average (arithmetic mean) of percentages is calculated by summing all individual values and dividing by the total count. This approach is perfectly valid when each percentage applies to a "base" or "population" of the same size.
                                     </p>
+                                    <p className="text-lg text-slate-600 dark:text-slate-400 leading-relaxed">
+                                        For example, if you have three test scores out of 100 (80%, 90%, and 70%), the simple average of 80% tells you exactly how you performed relative to the total possible marks. Our calculator makes this process instant, allowing you to add an unlimited number of data points for complex datasets.
+                                    </p>
+                                </div>
+                                <div className="bg-purple-50/50 dark:bg-purple-900/10 p-10 rounded-[3rem] border border-purple-100 dark:border-purple-800/50 flex flex-col justify-center">
+                                    <div className="text-center space-y-4">
+                                        <div className="text-sm font-bold text-slate-500 uppercase tracking-widest font-mono">The Arithmetic Formula</div>
+                                        <div className="text-2xl md:text-3xl font-black text-purple-600 font-mono">
+                                            Mean = <br/>
+                                            <div className="mt-4 border-t-2 border-purple-200 pt-4">
+                                                Σ(Percentage Values)<br/>
+                                                <div className="text-slate-300 my-2">÷</div>
+                                                Number of Entries
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
+
+                        {/* Section 2: The Weighted Average Pitfall */}
+                        <div className="space-y-12">
+                            <div className="flex items-center gap-4 border-b border-slate-100 dark:border-slate-800 pb-6">
+                                <span className="text-7xl font-black text-slate-100 dark:text-slate-800 tracking-tighter">02</span>
+                                <h3 className="text-4xl font-black text-slate-900 dark:text-white">The "Weighted" Danger Zone</h3>
+                            </div>
+                            <div className="prose prose-slate dark:prose-invert max-w-none">
+                                <p className="text-lg text-slate-600 dark:text-slate-400 leading-relaxed">
+                                    A common mistake in statistics is using a simple average when the "weights" of the percentages are different. If you average 100% of a small group with 0% of a massive group, the result (50%) is mathematically correct but practically useless.
+                                </p>
+                                <div className="grid md:grid-cols-2 gap-12 my-12">
+                                    <div className="p-10 rounded-[2.5rem] bg-indigo-50/50 dark:bg-indigo-900/10 border border-indigo-100 dark:border-indigo-800 shadow-sm">
+                                        <h4 className="text-xl font-bold mb-4 text-indigo-700">When to use Simple Average</h4>
+                                        <ul className="text-sm space-y-3 list-none p-0">
+                                            <li className="flex gap-2">✅ <span className="text-slate-600 dark:text-slate-400">All tests have the same total marks.</span></li>
+                                            <li className="flex gap-2">✅ <span className="text-slate-600 dark:text-slate-400">Comparing growth rates of similar companies.</span></li>
+                                            <li className="flex gap-2">✅ <span className="text-slate-600 dark:text-slate-400">Daily survey results with fixed sample sizes.</span></li>
+                                        </ul>
+                                    </div>
+                                    <div className="p-10 rounded-[2.5rem] bg-red-50/50 dark:bg-red-900/10 border border-red-100 dark:border-red-800 shadow-sm">
+                                        <h4 className="text-xl font-bold mb-4 text-red-700">When it fails</h4>
+                                        <ul className="text-sm space-y-3 list-none p-0">
+                                            <li className="flex gap-2">❌ <span className="text-slate-600 dark:text-slate-400">Averaging interest rates on different loan amounts.</span></li>
+                                            <li className="flex gap-2">❌ <span className="text-slate-600 dark:text-slate-400">Combining profit margins of different products.</span></li>
+                                            <li className="flex gap-2">❌ <span className="text-slate-600 dark:text-slate-400">City-wide voting results with varying populations.</span></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        {/* Section 3: Real World Applications */}
+                        <div className="space-y-12">
+                            <div className="flex items-center gap-4 border-b border-slate-100 dark:border-slate-800 pb-6">
+                                <span className="text-7xl font-black text-slate-100 dark:text-slate-800 tracking-tighter">03</span>
+                                <h3 className="text-4xl font-black text-slate-900 dark:text-white">Business & Academic Use</h3>
+                            </div>
+                            <div className="grid md:grid-cols-3 gap-8">
+                                {[
+                                    { title: "Quarterly Growth", content: "Investors use this to see the average monthly ROI or growth rate across a fiscal year." },
+                                    { title: "Academic Tracking", content: "Teachers calculate class averages to determine the difficulty of an exam relative to the cohort." },
+                                    { title: "Survey Normalization", content: "Market researchers average percentage scores to find the general sentiment across demographics." }
+                                ].map((item, i) => (
+                                    <div key={i} className="p-8 rounded-[2.5rem] bg-slate-50 dark:bg-slate-800/50 border border-slate-100 dark:border-slate-800 shadow-inner">
+                                        <h4 className="font-black text-purple-600 mb-4 uppercase text-sm tracking-widest">{item.title}</h4>
+                                        <p className="text-sm text-slate-600 dark:text-slate-400 leading-relaxed">{item.content}</p>
+                                    </div>
+                                ))}
+                            </div>
+                        </div>
+
+                        {/* FAQ Section */}
+                        <div className="pt-20">
+                            <FAQAccordion faqs={faqs} title="Average Percentage Deep Dive FAQs" />
+                        </div>
                     </div>
 
-                    <FAQAccordion faqs={faqs} title="Average Percentage FAQs" />
-                </section>
+                    {/* CTA Footer */}
+                    <div className="mt-24 p-12 rounded-[3.5rem] bg-linear-to-br from-purple-600 to-indigo-700 text-white shadow-2xl relative overflow-hidden text-center md:text-left">
+                        <div className="absolute top-0 right-0 w-96 h-96 bg-white/10 rounded-full -mr-48 -mt-48 blur-3xl" />
+                        <div className="relative z-10 flex flex-col md:flex-row items-center justify-between gap-12">
+                            <div className="space-y-6 max-w-xl">
+                                <h3 className="text-3xl md:text-4xl font-black tracking-tight">Need a Grade Calculation?</h3>
+                                <p className="text-purple-100 text-lg leading-relaxed">
+                                    If you're averaging student grades, you might need a more specialized tool for UK degree classifications.
+                                </p>
+                            </div>
+                            <Link href="/university-grade-calculator-uk" className="px-12 py-6 bg-white text-purple-600 rounded-[2rem] font-black text-xl hover:scale-105 transition-transform shadow-xl whitespace-nowrap">
+                                University Calculator
+                            </Link>
+                        </div>
+                    </div>
+                </div>
+            </section>
             </div>
         </div>
     );

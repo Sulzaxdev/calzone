@@ -304,135 +304,135 @@ export default function SchoolAgeCalculator() {
             </div>
 
             {/* --- SEO Deep Content Section --- */}
-            <div className="container mx-auto px-4 max-w-4xl mt-24 mb-32">
-                <article className="prose prose-slate dark:prose-invert prose-lg max-w-none 
-                    prose-headings:font-black prose-headings:tracking-tight prose-headings:text-slate-900 dark:prose-headings:text-white
-                    prose-p:text-slate-600 dark:prose-p:text-slate-400 prose-p:leading-relaxed prose-p:mb-8
-                    prose-li:text-slate-600 dark:prose-li:text-slate-400 prose-li:mb-2
-                    prose-strong:text-slate-900 dark:prose-strong:text-white
-                    prose-a:text-blue-600 dark:prose-a:text-blue-400 prose-a:font-bold prose-a:no-underline hover:prose-a:underline">
-                    
-                    <h2 className="text-4xl mb-10">The UK School Year System</h2>
-                    
-                    <p>
-                        Navigating the UK education system can feel like learning a secondary language. From "Key Stages" to "Reception" and the critical "August 31st Cut-Off," the terminology is vast and the rules are strict. At <Link href="/"><strong>CalZone</strong></Link>, we believe that understanding your child's academic journey should be as simple as a few clicks. This comprehensive guide, powered by the <Link href="/"><strong>CalZone UK School Age Calculator</strong></Link>, will walk you through every milestone from their first day of nursery to their final A-Level exams.
-                    </p>
-
-                    <p>
-                        The structure of school years, key stages, and transition ages can be confusing, especially if you have recently moved to the UK or have your first pre-school aged child. The English and Welsh system is built around a single, rigid age-boundary: midnight on the 31st of August. This boundary defines which cohort your child belongs to and stays with them until they leave formal education at 18.
-                    </p>
-
-                    <div className="bg-blue-50 dark:bg-blue-900/10 p-8 rounded-3xl border border-blue-100 dark:border-blue-900/30 my-12">
-                        <h4 className="text-blue-900 dark:text-blue-100 mt-0">Pro Tip from <Link href="/">CalZone</Link></h4>
-                        <p className="mb-0">
-                            Always keep your child's birth certificate handy when applying for schools. If you're also tracking their physical development, check out our <Link href="/child-bmi-calculator">Child BMI Calculator</Link> for a holistic view of their health during these growth spurts.
+            <section className="mt-32 max-w-6xl mx-auto space-y-16 px-4">
+                <div className="bg-white dark:bg-slate-900 rounded-[3.5rem] p-10 md:p-20 border border-slate-200 dark:border-slate-800 shadow-2xl shadow-slate-200/50 dark:shadow-none transition-all">
+                    {/* Header */}
+                    <div className="space-y-8 mb-16">
+                        <div className="flex items-center gap-6">
+                            <div className="w-16 h-16 rounded-3xl bg-blue-100 dark:bg-blue-900/30 flex items-center justify-center shadow-inner">
+                                <School className="w-8 h-8 text-blue-600" />
+                            </div>
+                            <h2 className="text-4xl md:text-6xl font-black tracking-tighter text-slate-900 dark:text-white leading-none">
+                                The UK Education <br/><span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-indigo-600">Roadmap: Ages 4 to 18</span>
+                            </h2>
+                        </div>
+                        <p className="text-xl md:text-2xl text-slate-600 dark:text-slate-400 leading-relaxed max-w-4xl font-medium">
+                            Navigating the UK school system requires understanding the critical "August 31st" boundary. This guide breaks down every milestone from Reception to A-Levels.
                         </p>
                     </div>
 
-                    <h3>The September 1st Cut-Off</h3>
-                    <p>
-                        The school year officially runs from September 1st through to August 31st of the following calendar year. This means that a child born on August 31st will start school a full year earlier than a child born essentially the next morning on September 1st. Many parents use <Link href="/"><strong>CalZone</strong></Link> to double-check these dates before starting the application process.
-                    </p>
-                    <p>
-                        Because of this, children born in autumn (Sept, Oct, Nov) are the oldest and most developmentally advanced upon joining Reception, whereas "Summer born" babies (June, July, August) are the youngest. <Link href="/"><strong>CalZone</strong></Link> experts often note that this gap can be noticeable in the early years of primary school.
-                    </p>
+                    {/* Detailed Long-Form Sections */}
+                    <div className="space-y-24">
+                        {/* Section 1: The Cut-Off */}
+                        <div className="space-y-12">
+                            <div className="flex items-center gap-4 border-b border-slate-100 dark:border-slate-800 pb-6">
+                                <span className="text-7xl font-black text-slate-100 dark:text-slate-800 tracking-tighter">01</span>
+                                <h3 className="text-4xl font-black text-slate-900 dark:text-white">The September 1st Rule</h3>
+                            </div>
+                            <div className="grid lg:grid-cols-2 gap-16">
+                                <div className="space-y-8">
+                                    <p className="text-lg text-slate-600 dark:text-slate-400 leading-relaxed">
+                                        In England and Wales, a child's academic cohort is determined by their age on August 31st. This creates a unique dynamic where the "oldest" child in a class (born September 1st) is nearly a full year older than the "youngest" child (born August 31st).
+                                    </p>
+                                    <p className="text-lg text-slate-600 dark:text-slate-400 leading-relaxed">
+                                        This age gap is most noticeable in the early years, particularly in physical development and social maturity. Our calculator uses this precise logic to determine which "Year Group" your child belongs to, helping you plan for admissions deadlines and Key Stage assessments years in advance.
+                                    </p>
+                                </div>
+                                <div className="bg-blue-50/50 dark:bg-blue-900/10 p-10 rounded-[3rem] border border-blue-100 dark:border-blue-800/50 flex flex-col justify-center">
+                                    <div className="space-y-6">
+                                        <div className="flex items-center gap-4">
+                                            <CheckCircle2 className="w-6 h-6 text-blue-600 shrink-0" />
+                                            <span className="font-bold dark:text-white">Reception Start: Age 4 (turning 5)</span>
+                                        </div>
+                                        <div className="flex items-center gap-4">
+                                            <CheckCircle2 className="w-6 h-6 text-blue-600 shrink-0" />
+                                            <span className="font-bold dark:text-white">Year 7 Start: Age 11 (turning 12)</span>
+                                        </div>
+                                        <div className="flex items-center gap-4">
+                                            <CheckCircle2 className="w-6 h-6 text-blue-600 shrink-0" />
+                                            <span className="font-bold dark:text-white">Year 11 (GCSEs): Age 15 (turning 16)</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
 
-                    <h3>Early Years Foundation Stage (EYFS): Ages 3 - 5</h3>
-                    <p>
-                        The journey usually begins before formal schooling. Most children in the UK attend a nursery or preschool from the age of 3, taking advantage of the 15 to 30 hours of free childcare provided by the government. If you're curious about the costs beyond these free hours, the <Link href="/"><strong>CalZone</strong></Link> <Link href="/childcare-cost-calculator-uk">Childcare Cost Calculator</Link> is an essential tool for budgeting.
-                    </p>
-                    <p>
-                        <strong>Reception</strong> is the first official year of primary school. Children start Reception in the September following their 4th birthday. At this stage, <Link href="/"><strong>CalZone</strong></Link> recommends focusing on play-based learning and social integration, as the EYFS curriculum is designed to be gentle and engaging.
-                    </p>
+                        {/* Section 2: Key Stages Breakdown */}
+                        <div className="space-y-12">
+                            <div className="flex items-center gap-4 border-b border-slate-100 dark:border-slate-800 pb-6">
+                                <span className="text-7xl font-black text-slate-100 dark:text-slate-800 tracking-tighter">02</span>
+                                <h3 className="text-4xl font-black text-slate-900 dark:text-white">Key Stages Explained</h3>
+                            </div>
+                            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+                                {[
+                                    { ks: "KS1", years: "Year 1 - 2", focus: "Phonics screening and basic literacy/numeracy." },
+                                    { ks: "KS2", years: "Year 3 - 6", focus: "SATs preparation and core subject expansion." },
+                                    { ks: "KS3", years: "Year 7 - 9", focus: "Subject specialization and GCSE option choices." },
+                                    { ks: "KS4", years: "Year 10 - 11", focus: "GCSE examinations and career planning." }
+                                ].map((item, i) => (
+                                    <div key={i} className="p-8 rounded-3xl bg-slate-50 dark:bg-slate-800 border border-slate-100 dark:border-slate-700 shadow-sm">
+                                        <div className="text-blue-600 font-black text-2xl mb-2">{item.ks}</div>
+                                        <div className="font-bold text-slate-900 dark:text-white mb-4">{item.years}</div>
+                                        <p className="text-sm text-slate-500 leading-relaxed">{item.focus}</p>
+                                    </div>
+                                ))}
+                            </div>
+                        </div>
 
-                    <h3>Key Stage 1 (KS1): Years 1 and 2 (Ages 5 - 7)</h3>
-                    <p>
-                        Key Stage 1 covers the first two years of "proper" primary education. In Year 1, students undergo the Phonics Screening Check to ensure their reading foundations are solid. <Link href="/"><strong>CalZone</strong></Link> users often ask about the intensity of these years; while structured, the focus remains on core literacy and numeracy.
-                    </p>
-                    <p>
-                        At the end of Year 2 (age 7), children take their first "SATs" (Standard Assessment Tests). These assess progress in English and Maths, helping teachers identify where extra support might be needed. <Link href="/"><strong>CalZone</strong></Link> suggests parents not to stress too much about these early tests, as they are primarily for school tracking.
-                    </p>
+                        {/* Section 3: The Summer Born Policy */}
+                        <div className="space-y-12">
+                            <div className="flex items-center gap-4 border-b border-slate-100 dark:border-slate-800 pb-6">
+                                <span className="text-7xl font-black text-slate-100 dark:text-slate-800 tracking-tighter">03</span>
+                                <h3 className="text-4xl font-black text-slate-900 dark:text-white">Summer Born Dilemma</h3>
+                            </div>
+                            <div className="prose prose-slate dark:prose-invert max-w-none">
+                                <p className="text-lg text-slate-600 dark:text-slate-400 leading-relaxed">
+                                    Parents of children born between April 1st and August 31st often worry about their child being the youngest in the class. In England, the government allows parents to request that their "summer-born" child starts Reception a year later than their peers.
+                                </p>
+                                <div className="grid md:grid-cols-2 gap-12 my-12">
+                                    <div className="p-10 rounded-[2.5rem] bg-indigo-50/50 dark:bg-indigo-900/10 border border-indigo-100 dark:border-indigo-800">
+                                        <h4 className="text-xl font-bold mb-4 text-indigo-700">Deferring Entry</h4>
+                                        <p className="text-sm leading-relaxed">
+                                            This means starting school later in the same academic year (e.g., starting in January instead of September). The child remains in their original birth cohort.
+                                        </p>
+                                    </div>
+                                    <div className="p-10 rounded-[2.5rem] bg-indigo-50/50 dark:bg-indigo-900/10 border border-indigo-100 dark:border-indigo-800">
+                                        <h4 className="text-xl font-bold mb-4 text-indigo-700">Delaying Entry</h4>
+                                        <p className="text-sm leading-relaxed">
+                                            This involves starting Reception a full year later. The child joins the cohort below them. This requires approval from the local admission authority.
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
 
-                    <h3>Key Stage 2 (KS2): Years 3 to 6 (Ages 7 - 11)</h3>
-                    <p>
-                        Key Stage 2 is the longest stretch in primary school, often referred to as "Junior" school. During these four years, the curriculum expands to include more science, history, geography, and foreign languages. <Link href="/"><strong>CalZone</strong></Link> data shows that this is when many parents start thinking about the transition to secondary school.
-                    </p>
-                    <p>
-                        In Year 6, students sit their final Primary SATs. These are more formal and recorded nationally. This is also the year of the <strong>11 Plus Exam</strong> for those aiming for grammar schools. If you need to calculate your budget for private tuition during this time, <Link href="/"><strong>CalZone</strong></Link> can help you track your overall household finances with our <Link href="/salary-calculator-uk">UK Salary Calculator</Link>.
-                    </p>
-
-                    <div className="bg-slate-900 dark:bg-white p-8 rounded-3xl my-12 text-white dark:text-slate-900 shadow-xl">
-                        <h3 className="text-white dark:text-slate-900 mt-0">Planning for the Future with <Link href="/">CalZone</Link></h3>
-                        <p className="opacity-90">
-                            The school years fly by. Before you know it, you'll be calculating university costs and future income. <Link href="/"><strong>CalZone</strong></Link> is here for every step, providing tools like the <Link href="/income-tax-calculator-uk">Income Tax Calculator</Link> to keep your family's finances on track as your children grow.
-                        </p>
+                        {/* Section 4: Regional Differences */}
+                        <div className="space-y-12">
+                            <div className="flex items-center gap-4 border-b border-slate-100 dark:border-slate-800 pb-6">
+                                <span className="text-7xl font-black text-slate-100 dark:text-slate-800 tracking-tighter">04</span>
+                                <h3 className="text-4xl font-black text-slate-900 dark:text-white">UK Regional Variations</h3>
+                            </div>
+                            <div className="grid md:grid-cols-3 gap-8 text-center">
+                                <div className="p-8 rounded-3xl bg-white dark:bg-slate-800 border border-slate-100 shadow-sm">
+                                    <div className="text-3xl mb-4">🏴󠁧󠁢󠁳󠁣󠁴󠁿</div>
+                                    <h4 className="font-bold mb-2 dark:text-white">Scotland</h4>
+                                    <p className="text-xs text-slate-500">Uses Primary 1 to 7 and S1 to S6. Cut-off is late February.</p>
+                                </div>
+                                <div className="p-8 rounded-3xl bg-white dark:bg-slate-800 border border-slate-100 shadow-sm">
+                                    <div className="text-3xl mb-4">🏴󠁧󠁢󠁷󠁬󠁳󠁿</div>
+                                    <h4 className="font-bold mb-2 dark:text-white">Wales</h4>
+                                    <p className="text-xs text-slate-500">Similar to England but with a unique focus on the Welsh language and new curriculum standards.</p>
+                                </div>
+                                <div className="p-8 rounded-3xl bg-white dark:bg-slate-800 border border-slate-100 shadow-sm">
+                                    <div className="text-3xl mb-4">🇬🇧</div>
+                                    <h4 className="font-bold mb-2 dark:text-white">Northern Ireland</h4>
+                                    <p className="text-xs text-slate-500">Starts P1 at age 4. Cut-off is July 1st, making it the earliest in the UK.</p>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-
-                    <h3>Key Stage 3 (KS3): Years 7 to 9 (Ages 11 - 14)</h3>
-                    <p>
-                        Moving to Secondary School is a massive milestone. In Year 7, students move between classrooms for different subjects and interact with many specialized teachers. <Link href="/"><strong>CalZone</strong></Link> highlights that this is a period of rapid social and academic growth.
-                    </p>
-                    <p>
-                        In Year 9, students choose their <strong>GCSE Options</strong>. This is a critical decision point where they pick the subjects they will specialize in for the next two years. <Link href="/"><strong>CalZone</strong></Link> advises parents to encourage a balanced mix of mandatory subjects (English, Maths, Science) and personal interests.
-                    </p>
-
-                    <h3>Key Stage 4 (KS4): Years 10 and 11 (Ages 14 - 16)</h3>
-                    <p>
-                        Key Stage 4 is all about the General Certificate of Secondary Education (GCSE). These two years are intensive, culminating in a series of examinations during the summer of Year 11. <Link href="/"><strong>CalZone</strong></Link> users often find that this is when academic pressure peaks for teenagers.
-                    </p>
-                    <p>
-                        GCSE results are graded on a scale of 9 to 1, where 9 is the highest. These grades are crucial for entry into Sixth Form or College. If you're a parent of a student born in late August, <Link href="/"><strong>CalZone</strong></Link> reminds you that they will be sitting these exams as some of the youngest in the country, but research shows that the "August gap" often narrows by this stage.
-                    </p>
-
-                    <h3>Key Stage 5 (KS5): Years 12 and 13 (Ages 16 - 18)</h3>
-                    <p>
-                        After GCSEs, students must remain in education or training until 18. Most choose A-Levels (Advanced Levels) in Year 12 and 13, narrowing their focus to three or four subjects. <Link href="/"><strong>CalZone</strong></Link> notes that this is the primary route to university entry via the UCAS system.
-                    </p>
-                    <p>
-                        Alternatively, students can pursue BTECs or T-Levels, which offer a more vocational and hands-on approach to learning. Whatever the path, <Link href="/"><strong>CalZone</strong></Link> provides the data you need to plan. Use our <Link href="/inflation-adjusted-return-calculator-uk">Investment Return Calculator</Link> to start building a fund for their higher education early on.
-                    </p>
-
-                    <h3>The "Summer Born" Dilemma: Deferring or Delaying Entry</h3>
-                    <p>
-                        Parents of children born between April 1st and August 31st face a unique choice. By law, children don't have to start school until the term after their 5th birthday. <Link href="/"><strong>CalZone</strong></Link> understands the complexity of "deferring" (starting later in the same year) vs. "delaying" (starting Reception a whole year later).
-                    </p>
-                    <p>
-                        While councils must consider these requests, it isn't an automatic right. <Link href="/"><strong>CalZone</strong></Link> recommends starting the conversation with your local authority at least a year in advance if you feel your summer-born child isn't ready for school.
-                    </p>
-
-                    <h3>Differences Across the UK: Scotland, Wales, and NI</h3>
-                    <p>
-                        While our tool focus on the English/Welsh system, it's vital to note that <strong>Scotland</strong> uses Primary 1 (P1) to P7, and the cut-off is February. <strong>Northern Ireland</strong> has its own unique structure as well. <Link href="/"><strong>CalZone</strong></Link> is expanding to include more specific regional sub-calculators soon.
-                    </p>
-                    <p>
-                        In Wales, the curriculum for Wales was recently introduced, focusing more on holistic development and less on rigid testing in the early years. <Link href="/"><strong>CalZone</strong></Link> continues to monitor these policy changes to keep our calculators accurate.
-                    </p>
-
-                    <h3>Special Educational Needs (SEN) and EHCPs</h3>
-                    <p>
-                        Every child's path is different. If your child has additional needs, they may be eligible for an **Education, Health and Care Plan (EHCP)**. This legal document ensures they receive the necessary support to thrive in school. <Link href="/"><strong>CalZone</strong></Link> advocates for early identification and support for all students.
-                    </p>
-                    <p>
-                        Navigating the SEN system can be even more complex than the standard year groups. Many <Link href="/"><strong>CalZone</strong></Link> users recommend connecting with local parent support groups to share experiences on obtaining an EHCP.
-                    </p>
-
-                    <h3>Private vs. State Education in the UK</h3>
-                    <p>
-                        The UK has a strong tradition of both state-funded and independent (private) schools. Private schools often follow a slightly different structure, with "Prep" schools going up to age 13 (Year 8) before students move to "Senior" school. <Link href="/"><strong>CalZone</strong></Link> can help you calculate the long-term cost of private fees versus investing that money for the future.
-                    </p>
-                    <p>
-                        Regardless of the sector, the fundamental age-grade relationships remain similar. <Link href="/"><strong>CalZone</strong></Link> is the perfect companion for parents in both systems, ensuring you never miss a key date or milestone.
-                    </p>
-
-                    <h3>Conclusion: Your Partner in Parenting</h3>
-                    <p>
-                        The UK school system is a marathon, not a sprint. From the first nervous walk into Reception to the final results day in Year 13, <Link href="/"><strong>CalZone</strong></Link> is proud to be part of your family's utility belt. We hope this guide, along with our **UK School Age Calculator**, makes your planning a little easier.
-                    </p>
-                    <p>
-                        Don't forget to explore our other tools like the <Link href="/pregnancy-weight-gain-calculator">Pregnancy Weight Gain Calculator</Link> if you're expecting another addition to the family soon. Stay organized, stay informed, and let <Link href="/"><strong>CalZone</strong></Link> handle the math.
-                    </p>
-                </article>
-            </div>
+                </div>
+            </section>
 
             {/* FAQ Section */}
             <div className="container mx-auto px-4 max-w-4xl mt-24">
