@@ -2,12 +2,16 @@
 
 import { Share2, Facebook, Twitter, Linkedin, Link as LinkIcon } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 export function SocialShare({ title }: { title: string }) {
     const [copied, setCopied] = useState(false);
 
-    const shareUrl = typeof window !== 'undefined' ? window.location.href : '';
+    const [shareUrl, setShareUrl] = useState('');
+
+    useEffect(() => {
+        setShareUrl(window.location.href);
+    }, []);
 
     const handleCopy = () => {
         navigator.clipboard.writeText(shareUrl);
